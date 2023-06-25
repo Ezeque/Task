@@ -32,7 +32,7 @@ public class ProjectController extends ProjectControllerAbstract {
     }
 
     @Override
-    public boolean updateProject(Project project) {
+    public boolean updateProject(Project project) throws SQLException {
         return this.services.update(project);
     }
 }

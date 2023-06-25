@@ -11,6 +11,9 @@ import java.sql.SQLException;
 public abstract class ProjectService {
     public ProjectDAOInterface dao;
 
+    public ProjectService(ProjectDAOInterface dao){
+        this.dao = dao;
+    }
     public abstract boolean validateCreation(Project project);
     public abstract boolean validateSearch(Project project);
     public abstract boolean validateUpdate(Project project);

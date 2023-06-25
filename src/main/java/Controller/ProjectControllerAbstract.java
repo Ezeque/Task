@@ -22,5 +22,5 @@ public abstract class ProjectControllerAbstract {
 
     public abstract Project SearchProject(Project project) throws SQLException;
 
-    public abstract boolean updateProject(Project project);
+    public abstract boolean updateProject(Project project) throws SQLException;
 }
