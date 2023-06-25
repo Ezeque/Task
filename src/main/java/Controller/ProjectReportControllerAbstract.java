@@ -4,7 +4,7 @@ package Controller;
 import Entity.ProjectReport;
 import Service.ProjectReportService;
 
-public abstract class ProjectReportControllerAbstract {
+public abstract class  ProjectReportControllerAbstract {
 
     ProjectReport report;
     ProjectReportService service;
