@@ -12,7 +12,7 @@ public abstract class Project {
         this.name = name;
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
@@ -20,7 +20,7 @@ public abstract class Project {
         return name;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
