@@ -3,7 +3,7 @@ package Controller;
 import Entity.Project;
 import Service.ProjectService;
 
-public abstract class ProjectController {
+public abstract class ProjectControllerAbstract {
     Project project;
     ProjectService services;
 }

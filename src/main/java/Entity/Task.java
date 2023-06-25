@@ -1,10 +1,10 @@
 package Entity;
 
-import Controller.TaskController;
+import Controller.TaskControllerAbstract;
 
 public abstract class Task {
     private String type;
-    private TaskController controller;
+    private TaskControllerAbstract controller;
 
     public String getType() {
         return type;

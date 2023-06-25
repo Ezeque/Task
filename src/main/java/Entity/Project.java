@@ -1,9 +1,9 @@
 package Entity;
 
-import Controller.ProjectController;
+import Controller.ProjectControllerAbstract;
 
 public abstract class Project {
-    public ProjectController controller;
+    public ProjectControllerAbstract controller;
 
     public abstract Object setMetrics();
 }
