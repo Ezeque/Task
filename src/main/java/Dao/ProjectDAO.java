@@ -80,6 +80,7 @@ public class ProjectDAO implements ProjectDAOInterface{
         }
         return null;
     }
+
     public boolean update(Project project, String entityName) throws SQLException{
         String query = "UPDATE project SET " + entityName + " = ?, email = ?, password = ? WHERE id = ?";
         PreparedStatement pst;

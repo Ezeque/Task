@@ -1,14 +1,41 @@
 package Service;
 
 import Dao.DAO;
+import Dao.ProjectDAO;
 import Entity.Project;
 import Entity.User;
 
-public abstract class ProjectService {
-    public DAO dao;
+import java.sql.SQLException;
 
-    public abstract boolean validateCreation(Project   user, String entityName);
-    public abstract boolean validateSearch(Project   user, String entityName);
-    public abstract boolean validateUpdate(Project   user, String entityName);
-    public abstract boolean validateDeletion(Project   user, String entityName);
+public abstract class ProjectService {
+    public ProjectDAO dao;
+
+    public abstract boolean validateCreation(Project project);
+    public abstract boolean validateSearch(Project project);
+    public abstract boolean validateUpdate(Project project);
+    public abstract boolean validateDeletion(Project project);
+    public boolean create(Project project) throws SQLException {
+        if(validateCreation(project)){
+            return this.dao.create(project);
+        }
+        return false;
+    }
+    public Project search(Project   project) throws SQLException {
+        if(validateSearch(project)){
+            return this.dao.getProjectById(project);
+        }
+        return null;
+    }
+    public boolean update(Project   project){
+        if(validateUpdate(project)){
+            return this.dao.update(project);
+        }
+        return false;
+    }
+    public boolean delete(Project   project) throws SQLException {
+        if(validateDeletion(project)){
+            return this.dao.delete(project.getId());
+        }
+        return false;
+    }
 }
