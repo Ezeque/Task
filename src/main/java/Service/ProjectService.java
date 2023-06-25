@@ -2,13 +2,14 @@ package Service;
 
 import Dao.DAO;
 import Dao.ProjectDAO;
+import Dao.ProjectDAOInterface;
 import Entity.Project;
 import Entity.User;
 
 import java.sql.SQLException;
 
 public abstract class ProjectService {
-    public ProjectDAO dao;
+    public ProjectDAOInterface dao;
 
     public abstract boolean validateCreation(Project project);
     public abstract boolean validateSearch(Project project);
@@ -26,7 +27,7 @@ public abstract class ProjectService {
         }
         return null;
     }
-    public boolean update(Project   project){
+    public boolean update(Project   project) throws SQLException {
         if(validateUpdate(project)){
             return this.dao.update(project);
         }
