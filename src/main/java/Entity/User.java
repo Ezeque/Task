@@ -1,6 +1,7 @@
 package Entity;
 
 
+import java.util.Map;
 
 public abstract class User {
     private String name;
@@ -54,6 +55,8 @@ public abstract class User {
     public int getId(){
         return this.id;
     }
+
+    public abstract Map<String, Object> setMetrics();
 
 
 }

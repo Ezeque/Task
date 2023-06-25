@@ -1,5 +1,7 @@
 package Database;
 
+import java.sql.Connection;
+
 public abstract class DatabaseConfiguration {
-    public abstract void connect();
+    public abstract Connection connect();
 }

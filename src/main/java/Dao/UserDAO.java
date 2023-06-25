@@ -16,7 +16,7 @@ public class UserDAO implements UserDaoInterface{
         con = config.connect();
     }
 
-    public User buildUser(User user, ResultSet rs) throws java.sql.SQLException{
+    public User buildUser(User user, ResultSet rs) throws SQLException{
         user.setName(rs.getString("name"));
         user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password"));
@@ -33,8 +33,8 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public boolean create(User user) throws SQLException{
-        String query = "INSERT INTO usuario (nome, email, senha, id) VALUES (?,?,?,?)";
+    public boolean create(User user, String entityName) throws SQLException{
+        String query = "INSERT INTO " + entityName + " (name, email, password, id) VALUES (?,?,?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, user);
@@ -49,8 +49,8 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public User getUserById(User user) throws SQLException{
-        String query = "SELECT * FROM usuario";
+    public User getUserById(User user, String entityName) throws SQLException{
+        String query = "SELECT * FROM " + entityName;
         PreparedStatement ps;
         ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
@@ -66,8 +66,8 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public boolean update(User user) throws SQLException{
-        String query = "UPDATE usuario SET nome = ?, email = ?, senha = ? WHERE id = ?";
+    public boolean update(User user, String entityName) throws SQLException{
+        String query = "UPDATE user SET " + entityName + " = ?, email = ?, password = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, user);
@@ -82,8 +82,8 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public boolean delete(User user) throws SQLException{
-        String string = "DELETE FROM usuario WHERE id = ?";
+    public boolean delete(User user, String entityName) throws SQLException{
+        String string = "DELETE FROM " + entityName + " WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(string);
         pst.setInt(1, user.getId());
