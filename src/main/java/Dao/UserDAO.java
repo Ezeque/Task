@@ -12,7 +12,7 @@ public class UserDAO implements UserDaoInterface{
     Connection con;
     DatabaseConfiguration config;
 
-    public UserDAO(Connection con){
+    public UserDAO(){
         con = config.connect();
     }
 
@@ -94,6 +94,20 @@ public class UserDAO implements UserDaoInterface{
             return true;
         }
 
+        return false;
+    }
+
+    public boolean emailExists(User user, String entityName) throws SQLException{
+        String query = "SELECT email FROM " + entityName + " WHERE email = ?";
+        PreparedStatement pst = con.prepareStatement(query);
+        pst.setString(1, user.getEmail());
+        ResultSet res = pst.executeQuery();
+
+        if (res.next()) {
+            if ( res.getString("email").equals(user.getEmail()) ) {
+                return true;
+            }
+        }
         return false;
     }
 }

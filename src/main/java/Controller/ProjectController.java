@@ -1,9 +1,9 @@
 package Controller;
 
 import Entity.Project;
-import Service.ProjectServices;
+import Service.ProjectService;
 
 public abstract class ProjectController {
     Project project;
-    ProjectServices services;
+    ProjectService services;
 }

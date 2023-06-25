@@ -12,7 +12,7 @@ public class ProjectReportDAO implements ProjectReportDAOInterface{
     Connection con;
     DatabaseConfiguration config;
 
-    public ProjectReportDAO(Connection con){
+    public ProjectReportDAO(){
         con = config.connect();
     }
 
