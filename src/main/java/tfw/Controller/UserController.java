@@ -4,26 +4,23 @@ import tfw.Entity.User;
 import tfw.Service.UserService;
 
 public class UserController extends UserControllerAbstract{
-    public UserController(User user, UserService service) {
-        super(user, service);
-    }
     @Override
-    public boolean create(User user, String entityName){
-        return service.create(user, entityName);
+    public boolean create(User user, UserService service){
+        return service.create(user);
     }
     //    GETS DATA IN DATABASE
     @Override
-    public User getUserById(User user, String entityName){
-        return service.getUserById(user, entityName);
+    public User getUserById(User user, UserService service){
+        return service.getUserById(user);
     }
     //    UPDATE DATA IN DATABASE
     @Override
-    public boolean update(User user, String entityName){
-        return service.update(user, entityName);
+    public boolean update(User user, UserService service){
+        return service.update(user);
     }
     //    DELETE DATA IN DATABASE
     @Override
-    public boolean delete(User user, String entityName){
-        return service.delete(user, entityName);
+    public boolean delete(User user, UserService service){
+        return service.delete(user);
     }
 }

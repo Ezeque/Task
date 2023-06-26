@@ -9,13 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UserDAO implements UserDaoInterface{
-    Connection con;
-    DatabaseConfiguration config;
-
-    public UserDAO(){
-        con = config.connect();
-    }
-
     public User buildUser(User user, ResultSet rs) throws SQLException{
         user.setName(rs.getString("name"));
         user.setEmail(rs.getString("email"));
@@ -33,8 +26,9 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public boolean create(User user, String entityName) throws SQLException{
-        String query = "INSERT INTO " + entityName + " (name, email, password, id) VALUES (?,?,?,?)";
+    public boolean create(User user, DatabaseConfiguration config) throws SQLException{
+        Connection con = config.connect();
+        String query = "INSERT INTO " + config.getTable() + " (name, email, password, id) VALUES (?,?,?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, user);
@@ -49,8 +43,9 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public User getUserById(User user, String entityName) throws SQLException{
-        String query = "SELECT * FROM " + entityName;
+    public User getUserById(User user, DatabaseConfiguration config) throws SQLException{
+        Connection con = config.connect();
+        String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
         ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
@@ -66,8 +61,8 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public boolean update(User user, String entityName) throws SQLException{
-        String query = "UPDATE user SET " + entityName + " = ?, email = ?, password = ? WHERE id = ?";
+    public boolean update(User user) throws SQLException{
+        String query = "UPDATE user SET " + config.getTable() + " = ?, email = ?, password = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, user);
@@ -82,8 +77,9 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public boolean delete(User user, String entityName) throws SQLException{
-        String string = "DELETE FROM " + entityName + " WHERE id = ?";
+    public boolean delete(User user) throws SQLException{
+        Connection con =
+        String string = "DELETE FROM " + config.getTable() + " WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(string);
         pst.setInt(1, user.getId());
@@ -97,8 +93,8 @@ public class UserDAO implements UserDaoInterface{
         return false;
     }
 
-    public boolean emailExists(User user, String entityName) throws SQLException{
-        String query = "SELECT email FROM " + entityName + " WHERE email = ?";
+    public boolean emailExists(User user) throws SQLException{
+        String query = "SELECT email FROM " + config.getTable() + " WHERE email = ?";
         PreparedStatement pst = con.prepareStatement(query);
         pst.setString(1, user.getEmail());
         ResultSet res = pst.executeQuery();

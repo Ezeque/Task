@@ -1,5 +1,7 @@
 package tfw.Service;
 
+import database.DBConfigAluno;
+import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.User;
 import tfw.Dao.UserDAO;
 
@@ -8,16 +10,10 @@ import java.util.regex.Pattern;
 
 
 public abstract class UserService {
-    private UserDAO dao = new UserDAO();
-
-    public UserService(UserDAO dao){
-        this.dao = dao;
-    }
-
-
-    public boolean emailExists(User user, String entityName) throws InvalidEmailException{
+    public boolean emailExists(User user) throws InvalidEmailException{
         try{
-            if(dao.emailExists(user, entityName)){
+            UserDAO dao = new UserDAO();
+            if(dao.emailExists(user)){
                 throw new InvalidEmailException(1);
             }
         }catch(SQLException e){
@@ -35,17 +31,18 @@ public abstract class UserService {
         return true;
     }
 
-    public abstract boolean validateCreation(User user, String entityName);
-    public abstract boolean validateSearch(User user, String entityName);
-    public abstract boolean validateUpdate(User user, String entityName);
-    public abstract boolean validateDeletion(User user, String entityName);
+    public abstract boolean validateCreation(User user);
+    public abstract boolean validateSearch(User user);
+    public abstract boolean validateUpdate(User user);
+    public abstract boolean validateDeletion(User user);
 
 
-    public boolean create(User user, String entityName){
+    public boolean create(User user){
         boolean success = false;
-        if(validateCreation(user, entityName)){
+        if(validateCreation(user)){
             try{
-                success = dao.create(user, entityName);
+                UserDAO dao = new UserDAO();
+                success = dao.create(user);
             }catch(SQLException e){
                 System.out.println(e);
             }
@@ -54,11 +51,12 @@ public abstract class UserService {
         return success;
     }
 
-    public User getUserById(User user, String entityName){
+    public User getUserById(User user){
 
-        if(validateSearch(user, entityName)){
+        if(validateSearch(user)){
             try {
-                user =  dao.getUserById(user, entityName);
+                UserDAO dao = new UserDAO();
+                user =  dao.getUserById(user);
             } catch (SQLException e) {
                 System.out.println(e);
             }
@@ -66,12 +64,13 @@ public abstract class UserService {
         return user;
     }
 
-    public boolean update(User user, String entityName){
+    public boolean update(User user){
         boolean success = false;
 
-        if(validateUpdate(user, entityName)){
+        if(validateUpdate(user)){
             try {
-                success = dao.update(user, entityName);
+                UserDAO dao = new UserDAO();
+                success = dao.update(user);
             } catch (SQLException e) {
                 System.out.println(e);
             }
@@ -80,12 +79,13 @@ public abstract class UserService {
         return success;
     }
 
-    public boolean delete(User user, String entityName){
+    public boolean delete(User user){
         boolean success = false;
 
-        if(validateDeletion(user, entityName)){
+        if(validateDeletion(user)){
             try {
-                success =  dao.delete(user, entityName);
+                UserDAO dao = new UserDAO();
+                success =  dao.delete(user);
             } catch (SQLException e) {
                 System.out.println(e);
             }

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class ProjectController extends ProjectControllerAbstract {
 
     public ProjectController(Project project, ProjectService service) {
-        super(project, service);
+        super();
     }
 
     @Override
@@ -17,22 +17,22 @@ public class ProjectController extends ProjectControllerAbstract {
     }
 
     @Override
-    public boolean deleteProject(Project project) throws SQLException {
-        return this.services.delete(project);
+    public boolean deleteProject(Project project, ProjectService service) throws SQLException {
+        return service.delete(project);
     }
 
     @Override
-    public boolean createProject(Project project) throws SQLException {
-        return this.services.create(project);
+    public boolean createProject(Project project, ProjectService service) throws SQLException {
+        return service.create(project);
     }
 
     @Override
-    public Project SearchProject(Project project) throws SQLException {
-        return this.services.search(project);
+    public Project SearchProject(Project project, ProjectService service) throws SQLException {
+        return service.search(project);
     }
 
     @Override
-    public boolean updateProject(Project project) throws SQLException {
-        return this.services.update(project);
+    public boolean updateProject(Project project, ProjectService service) throws SQLException {
+        return service.update(project);
     }
 }

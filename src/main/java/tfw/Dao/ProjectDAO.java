@@ -9,13 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class ProjectDAO implements ProjectDAOInterface{
-    Connection con;
-    DatabaseConfiguration config;
-
-    public ProjectDAO(DatabaseConfiguration DBConfig){
-        this.config = DBConfig;
-        con = config.connect();
-    }
 
     public Project buildProject(Project project, ResultSet rs) throws SQLException {
         project.setName(rs.getString("name"));
