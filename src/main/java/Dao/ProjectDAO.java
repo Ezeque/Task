@@ -26,12 +26,12 @@ public class ProjectDAO implements ProjectDAOInterface{
 
     public PreparedStatement buildFullStatement(PreparedStatement pst, Project project) throws SQLException{
         pst.setString(1, project.getName());
-        pst.setInt(4, project.getId());
+        pst.setInt(2, project.getId());
         return pst;
     }
 
     public boolean create(Project project) throws SQLException{
-        String query = "INSERT INTO " + config.getTable() + " (name, email, password, id) VALUES (?,?,?,?)";
+        String query = "INSERT INTO " + config.getTable() + " (name, id) VALUES (?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, project);
@@ -60,11 +60,6 @@ public class ProjectDAO implements ProjectDAOInterface{
         return false;
     }
 
-    @Override
-    public boolean update(Project project) {
-        return false;
-    }
-
     public Project getProjectById(Project project) throws SQLException{
         String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
@@ -81,8 +76,8 @@ public class ProjectDAO implements ProjectDAOInterface{
         return null;
     }
 
-    public boolean update(Project project, String entityName) throws SQLException{
-        String query = "UPDATE project SET " + entityName + " = ?, email = ?, password = ? WHERE id = ?";
+    public boolean update(Project project) throws SQLException{
+        String query = "UPDATE project SET " + "name = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, project);
