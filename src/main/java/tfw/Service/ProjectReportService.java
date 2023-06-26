@@ -9,16 +9,16 @@ import java.sql.SQLException;
 public abstract class ProjectReportService {
     private ProjectReportDAO dao = new ProjectReportDAO();
 
-    public abstract boolean validateCreation(ProjectReport report, String entityName);
-    public abstract boolean validateSearch(ProjectReport report, String entityName);
-    public abstract boolean validateUpdate(ProjectReport report, String entityName);
-    public abstract boolean validateDeletion(ProjectReport report, String entityName);
+    public abstract boolean validateCreation(ProjectReport report);
+    public abstract boolean validateSearch(ProjectReport report);
+    public abstract boolean validateUpdate(ProjectReport report);
+    public abstract boolean validateDeletion(ProjectReport report);
 
-    public boolean create(ProjectReport report, String entityName){
+    public boolean create(ProjectReport report){
         boolean success = false;
-        if(validateCreation(report, entityName)){
+        if(validateCreation(report)){
             try{
-                success = dao.create(report, entityName);
+                success = dao.create(report);
             }catch(SQLException e){
                 System.out.println(e);
             }
@@ -27,11 +27,11 @@ public abstract class ProjectReportService {
         return success;
     }
 
-    public ProjectReport getReportById(ProjectReport report, String entityName){
+    public ProjectReport getReportById(ProjectReport report){
 
-        if(validateSearch(report, entityName)){
+        if(validateSearch(report)){
             try {
-                report =  dao.getReportById(report, entityName);
+                report =  dao.getReportById(report);
             } catch (SQLException e) {
                 System.out.println(e);
             }
@@ -39,11 +39,11 @@ public abstract class ProjectReportService {
         return report;
     }
 
-    public ProjectReport getReportByProjectId(ProjectReport report, String entityName){
+    public ProjectReport getReportByProjectId(ProjectReport report){
 
-        if(validateSearch(report, entityName)){
+        if(validateSearch(report)){
             try {
-                report =  dao.getReportByProjectId(report, entityName);
+                report =  dao.getReportByProjectId(report);
             } catch (SQLException e) {
                 System.out.println(e);
             }
@@ -51,12 +51,12 @@ public abstract class ProjectReportService {
         return report;
     }
 
-    public boolean update(ProjectReport report, String entityName){
+    public boolean update(ProjectReport report){
         boolean success = false;
 
-        if(validateUpdate(report, entityName)){
+        if(validateUpdate(report)){
             try {
-                success = dao.update(report, entityName);
+                success = dao.update(report);
             } catch (SQLException e) {
                 System.out.println(e);
             }
@@ -65,12 +65,12 @@ public abstract class ProjectReportService {
         return success;
     }
 
-    public boolean delete(ProjectReport report, String entityName){
+    public boolean delete(ProjectReport report){
         boolean success = false;
 
-        if(validateDeletion(report, entityName)){
+        if(validateDeletion(report)){
             try {
-                success =  dao.delete(report, entityName);
+                success =  dao.delete(report);
             } catch (SQLException e) {
                 System.out.println(e);
             }

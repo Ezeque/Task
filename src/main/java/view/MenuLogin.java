@@ -7,6 +7,9 @@ import service.AlunoService;
 import java.util.Scanner;
 
 public class MenuLogin implements MenuInterface {
+    private AlunoController controller = new AlunoController();
+    private AlunoService service = new AlunoService();
+
     @Override
     public void show(int opcao) {
         Scanner scanner = new Scanner(System.in);
@@ -18,9 +21,7 @@ public class MenuLogin implements MenuInterface {
             System.out.println("Senha: ");
             String senha = scanner.nextLine();
             Aluno aluno = new Aluno(login, email, senha, 1);
-            AlunoService service = new AlunoService();
-            AlunoController controller = new AlunoController(aluno, service);
-            controller.create(aluno);
+            controller.create(aluno, service);
         }
     }
 }

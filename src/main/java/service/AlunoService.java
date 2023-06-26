@@ -7,12 +7,12 @@ import tfw.Service.UserService;
 
 public class AlunoService extends UserService {
     public AlunoService(UserDAO dao) {
-        super(dao);
+
     }
     public AlunoService() {
-        DatabaseConfiguration configuration
+        DatabaseConfiguration configuration;
         UserDAO dao = new UserDAO();
-        super(dao); }
+         }
 
     @Override
     public boolean validateCreation(User user) {

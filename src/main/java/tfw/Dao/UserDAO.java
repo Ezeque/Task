@@ -9,6 +9,13 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class UserDAO implements UserDaoInterface{
+
+    Connection con;
+    DatabaseConfiguration config;
+
+    public UserDAO(){
+        con = config.connect();
+    }
     public User buildUser(User user, ResultSet rs) throws SQLException{
         user.setName(rs.getString("name"));
         user.setEmail(rs.getString("email"));
@@ -26,7 +33,7 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public boolean create(User user, DatabaseConfiguration config) throws SQLException{
+    public boolean create(User user) throws SQLException{
         Connection con = config.connect();
         String query = "INSERT INTO " + config.getTable() + " (name, email, password, id) VALUES (?,?,?,?)";
         PreparedStatement pst;
@@ -43,7 +50,7 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public User getUserById(User user, DatabaseConfiguration config) throws SQLException{
+    public User getUserById(User user) throws SQLException{
         Connection con = config.connect();
         String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
@@ -62,6 +69,7 @@ public class UserDAO implements UserDaoInterface{
 
     @Override
     public boolean update(User user) throws SQLException{
+        Connection con = config.connect();
         String query = "UPDATE user SET " + config.getTable() + " = ?, email = ?, password = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
@@ -78,7 +86,6 @@ public class UserDAO implements UserDaoInterface{
 
     @Override
     public boolean delete(User user) throws SQLException{
-        Connection con =
         String string = "DELETE FROM " + config.getTable() + " WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(string);

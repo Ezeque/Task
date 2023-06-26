@@ -28,8 +28,8 @@ public class ProjectReportDAO implements ProjectReportDAOInterface{
         report.setProject_id(rs.getInt("project_id"));
         return report;
     }
-    public boolean create(ProjectReport report, String entityName)  throws SQLException{
-        String query = "INSERT INTO " + entityName + " (project_id, id) VALUES (?,?)";
+    public boolean create(ProjectReport report)  throws SQLException{
+        String query = "INSERT INTO " + config.getTable() + " (project_id, id) VALUES (?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, report);
@@ -43,8 +43,8 @@ public class ProjectReportDAO implements ProjectReportDAOInterface{
     }
 
     //    GETS DATA IN DATABASE
-    public ProjectReport getReportById(ProjectReport report, String entityName) throws SQLException{
-        String query = "SELECT * FROM " + entityName;
+    public ProjectReport getReportById(ProjectReport report) throws SQLException{
+        String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
         ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
@@ -59,8 +59,8 @@ public class ProjectReportDAO implements ProjectReportDAOInterface{
 
         return null;
     }
-    public ProjectReport getReportByProjectId(ProjectReport report, String entityName) throws SQLException{
-        String query = "SELECT * FROM " + entityName;
+    public ProjectReport getReportByProjectId(ProjectReport report) throws SQLException{
+        String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
         ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
@@ -77,8 +77,8 @@ public class ProjectReportDAO implements ProjectReportDAOInterface{
         return null;
     }
     //    UPDATE DATA IN DATABASE
-    public boolean update(ProjectReport report, String entityName) throws SQLException{
-        String query = "UPDATE " + entityName + " SET project_id = ? WHERE id = ?";
+    public boolean update(ProjectReport report) throws SQLException{
+        String query = "UPDATE " + config.getTable() + " SET project_id = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, report);
@@ -92,7 +92,7 @@ public class ProjectReportDAO implements ProjectReportDAOInterface{
         return false;
     }
     //    DELETE DATA IN DATABASE
-    public boolean delete(ProjectReport report, String entityName) throws SQLException{
+    public boolean delete(ProjectReport report) throws SQLException{
         return false;
     }
 }
