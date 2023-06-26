@@ -2,12 +2,14 @@ package tfw.Entity;
 
 import tfw.Controller.ProjectControllerAbstract;
 
+import java.util.Map;
+
 public abstract class Project {
     private String name;
     private int id;
     private ProjectControllerAbstract controller;
 
-    public void Project(int id, String name){
+    public Project(int id, String name){
         this.id = id;
         this.name = name;
     }
@@ -27,6 +29,6 @@ public abstract class Project {
     public void setName(String name) {
         this.name = name;
     }
-
-    public abstract Object setMetrics();
+//RETURNS AN OBJECT CONTAINING THE METRICS USED TO MAKE A REPORT
+    public abstract Map<String, Object> setMetrics();
 }

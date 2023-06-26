@@ -6,6 +6,12 @@ public abstract class DatabaseConfiguration {
     String username;
     String password;
     String table;
+
+    public DatabaseConfiguration(String username, String password, String table){
+        this.username = username;
+        this.password = password;
+        this.table = table;
+    }
     public abstract Connection connect();
 
     public String getPassword() {

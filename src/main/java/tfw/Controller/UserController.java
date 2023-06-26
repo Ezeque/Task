@@ -1,9 +1,12 @@
 package tfw.Controller;
 
 import tfw.Entity.User;
+import tfw.Service.UserService;
 
 public class UserController extends UserControllerAbstract{
-
+    public UserController(User user, UserService service) {
+        super(user, service);
+    }
     @Override
     public boolean create(User user, String entityName){
         return service.create(user, entityName);

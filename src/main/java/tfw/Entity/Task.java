@@ -8,6 +8,11 @@ public abstract class Task {
     private String type;
     private TaskControllerAbstract controller;
 
+    public Task(String name, String type){
+        this.name = name;
+        this.type = type;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

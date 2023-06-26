@@ -10,6 +10,10 @@ import java.util.regex.Pattern;
 public abstract class UserService {
     private UserDAO dao = new UserDAO();
 
+    public UserService(UserDAO dao){
+        this.dao = dao;
+    }
+
 
     public boolean emailExists(User user, String entityName) throws InvalidEmailException{
         try{
