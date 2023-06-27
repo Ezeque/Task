@@ -19,6 +19,13 @@ public class UserController extends UserControllerAbstract{
     public User getUserById(User user){
         return this.service.getUserById(user);
     }
+
+    public User getUserByName(User user){
+        return this.service.getUserByName(user);
+    }
+    public User login(User user){
+        return this.service.login(user);
+    }
     //    UPDATE DATA IN DATABASE
     @Override
     public boolean update(User user){

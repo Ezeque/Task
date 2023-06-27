@@ -1,5 +1,6 @@
 package tfw.Dao;
 
+import entity.Aluno;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.User;
 
@@ -99,6 +100,26 @@ public class UserDAO implements UserDaoInterface{
         }
 
         return false;
+    }
+
+    @Override
+    public User login(User user) throws SQLException{
+        String string = "SELECT * FROM " + config.getTable() + " WHERE name = ? AND password = ?";
+        PreparedStatement pst;
+        pst = con.prepareStatement(string);
+        pst.setString(1, user.getName());
+        pst.setString(2, user.getPassword());
+
+        ResultSet res = pst.executeQuery();
+
+        if(res.next()){
+            int id = res.getInt("id");
+            String nome = res.getString("name");
+            String email = res.getString("email");
+            String senha = res.getString("password");
+            return new Aluno(nome,email,senha,id);
+        }
+        return null;
     }
 
     public boolean emailExists(User user) throws SQLException{

@@ -1,6 +1,7 @@
 package tfw.Database;
 
 import java.sql.Connection;
+import java.sql.SQLException;
 
 public abstract class DatabaseConfiguration {
     String username;
