@@ -28,10 +28,23 @@ public class AlunoService extends UserService {
     }
 
     @Override
-    public boolean validateUpdate(User user) {
+    public boolean validateSearchByName(User user) {
+        if(user.getName().length() > 1){
+            return true;
+        }
         return false;
     }
 
+    public boolean validateLogin(User user) {
+        if(user.getName().length() > 1 && user.getPassword().length() > 1){
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public boolean validateUpdate(User user) {
+        return false;
+    }
     @Override
     public boolean validateDeletion(User user) {
         return false;
