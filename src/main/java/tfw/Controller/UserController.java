@@ -6,23 +6,27 @@ import tfw.Service.UserService;
 
 public class UserController extends UserControllerAbstract{
 
+    public UserController(UserService service) {
+        super(service);
+    }
+
     @Override
-    public boolean create(User user, UserService service){
-        return service.create(user);
+    public boolean create(User user){
+        return this.service.create(user);
     }
     //    GETS DATA IN DATABASE
     @Override
-    public User getUserById(User user, UserService service){
-        return service.getUserById(user);
+    public User getUserById(User user){
+        return this.service.getUserById(user);
     }
     //    UPDATE DATA IN DATABASE
     @Override
-    public boolean update(User user, UserService service){
-        return service.update(user);
+    public boolean update(User user){
+        return this.service.update(user);
     }
     //    DELETE DATA IN DATABASE
     @Override
-    public boolean delete(User user, UserService service){
-        return service.delete(user);
+    public boolean delete(User user){
+        return this.service.delete(user);
     }
 }

@@ -5,13 +5,17 @@ import tfw.Service.TaskService;
 import tfw.Service.UserService;
 
 public abstract class UserControllerAbstract {
-    public abstract boolean create(User user, UserService service);
+    UserService service;
+    public UserControllerAbstract(UserService service){
+        this.service = service;
+    }
+    public abstract boolean create(User user);
     //    GETS DATA IN DATABASE
-    public abstract User getUserById(User user, UserService service);
+    public abstract User getUserById(User user);
     //    UPDATE DATA IN DATABASE
-    public abstract boolean update(User user, UserService service);
+    public abstract boolean update(User user);
     //    DELETE DATA IN DATABASE
-    public abstract boolean delete(User user, UserService service);
+    public abstract boolean delete(User user);
 
 
 }
