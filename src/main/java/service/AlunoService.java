@@ -1,18 +1,17 @@
 package service;
 
+import database.DBConfigAluno;
 import tfw.Dao.UserDAO;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.User;
 import tfw.Service.UserService;
 
 public class AlunoService extends UserService {
-    public AlunoService(UserDAO dao) {
 
+    public AlunoService(DBConfigAluno dbConfig) {
+        super(dbConfig);
     }
-    public AlunoService() {
-        DatabaseConfiguration configuration;
-        UserDAO dao = new UserDAO();
-         }
+
 
     @Override
     public boolean validateCreation(User user) {

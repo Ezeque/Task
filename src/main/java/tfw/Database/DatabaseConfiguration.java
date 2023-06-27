@@ -5,13 +5,16 @@ import java.sql.Connection;
 public abstract class DatabaseConfiguration {
     String username;
     String password;
+    String schema;
     String table;
 
-    public DatabaseConfiguration(String username, String password, String table){
+    public DatabaseConfiguration(String username, String password, String table, String schema){
         this.username = username;
         this.password = password;
+        this.schema = schema;
         this.table = table;
     }
+
     public abstract Connection connect();
 
     public String getPassword() {
@@ -21,6 +24,7 @@ public abstract class DatabaseConfiguration {
     public String getTable() {
         return table;
     }
+    public String getSchema(){return schema;}
 
     public String getUsername() {
         return username;

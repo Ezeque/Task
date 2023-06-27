@@ -13,8 +13,9 @@ public class UserDAO implements UserDaoInterface{
     Connection con;
     DatabaseConfiguration config;
 
-    public UserDAO(){
-        con = config.connect();
+    public UserDAO(DatabaseConfiguration config){
+        this.config = config;
+        this.con = config.connect();
     }
     public User buildUser(User user, ResultSet rs) throws SQLException{
         user.setName(rs.getString("name"));

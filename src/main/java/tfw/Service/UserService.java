@@ -10,9 +10,14 @@ import java.util.regex.Pattern;
 
 
 public abstract class UserService {
+    private DatabaseConfiguration dbconfig;
+    public UserService(DatabaseConfiguration dbconfig){
+        this.dbconfig = dbconfig;
+    }
+
     public boolean emailExists(User user) throws InvalidEmailException{
         try{
-            UserDAO dao = new UserDAO();
+            UserDAO dao = new UserDAO(this.dbconfig);
             if(dao.emailExists(user)){
                 throw new InvalidEmailException(1);
             }
@@ -41,7 +46,7 @@ public abstract class UserService {
         boolean success = false;
         if(validateCreation(user)){
             try{
-                UserDAO dao = new UserDAO();
+                UserDAO dao = new UserDAO(this.dbconfig);
                 success = dao.create(user);
             }catch(SQLException e){
                 System.out.println(e);
@@ -55,7 +60,7 @@ public abstract class UserService {
 
         if(validateSearch(user)){
             try {
-                UserDAO dao = new UserDAO();
+                UserDAO dao = new UserDAO(this.dbconfig);
                 user =  dao.getUserById(user);
             } catch (SQLException e) {
                 System.out.println(e);
@@ -69,7 +74,7 @@ public abstract class UserService {
 
         if(validateUpdate(user)){
             try {
-                UserDAO dao = new UserDAO();
+                UserDAO dao = new UserDAO(this.dbconfig);
                 success = dao.update(user);
             } catch (SQLException e) {
                 System.out.println(e);
@@ -84,7 +89,7 @@ public abstract class UserService {
 
         if(validateDeletion(user)){
             try {
-                UserDAO dao = new UserDAO();
+                UserDAO dao = new UserDAO(this.dbconfig);
                 success =  dao.delete(user);
             } catch (SQLException e) {
                 System.out.println(e);

@@ -1,15 +1,18 @@
 package database;
 
+import db.DBConnection;
+import db.DBDriver;
 import tfw.Database.DatabaseConfiguration;
 
 import java.sql.Connection;
 
 public class DBConfigPlano extends DatabaseConfiguration {
-    public DBConfigPlano(String username, String password, String table) {
-        super(username, password, table);
+    public DBConfigPlano() {
+        super("root", "V3r3@dor3sMYSQL", "projeto", "planit");
     }
     @Override
     public Connection connect() {
-        return null;
+        Connection con = new DBConnection().getConnection(DBDriver.MYSQL, this.getSchema(), this.getUsername(), this.getPassword());
+        return con;
     }
 }
