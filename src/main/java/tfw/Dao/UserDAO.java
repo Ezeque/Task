@@ -5,20 +5,21 @@ import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.User;
 
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserDAO implements UserDaoInterface{
+public class UserDAO implements UserDaoInterface {
 
     Connection con;
     DatabaseConfiguration config;
 
-    public UserDAO(DatabaseConfiguration config){
+    public UserDAO(DatabaseConfiguration config) {
         this.config = config;
         this.con = config.connect();
     }
-    public User buildUser(User user, ResultSet rs) throws SQLException{
+
+    public User buildUser(User user, ResultSet rs) throws SQLException {
         user.setName(rs.getString("name"));
         user.setEmail(rs.getString("email"));
         user.setPassword(rs.getString("password"));
@@ -26,7 +27,7 @@ public class UserDAO implements UserDaoInterface{
         return user;
     }
 
-    public PreparedStatement buildFullStatement(PreparedStatement pst, User user) throws SQLException{
+    public PreparedStatement buildFullStatementUpdate(PreparedStatement pst, User user) throws SQLException {
         pst.setString(1, user.getName());
         pst.setString(2, user.getEmail());
         pst.setString(3, user.getPassword());
@@ -34,13 +35,20 @@ public class UserDAO implements UserDaoInterface{
         return pst;
     }
 
+    public PreparedStatement buildFullStatementCreate(PreparedStatement pst, User user) throws SQLException {
+        pst.setString(1, user.getName());
+        pst.setString(2, user.getEmail());
+        pst.setString(3, user.getPassword());
+        return pst;
+    }
+
     @Override
-    public boolean create(User user) throws SQLException{
+    public boolean create(User user) throws SQLException {
         Connection con = config.connect();
-        String query = "INSERT INTO " + config.getTable() + " (name, email, password, id) VALUES (?,?,?,?)";
+        String query = "INSERT INTO " + config.getTable() + " (name, email, password) VALUES (?,?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
-        pst = buildFullStatement(pst, user);
+        pst = buildFullStatementCreate(pst, user);
 
         int res = pst.executeUpdate();
 
@@ -52,7 +60,7 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public User getUserById(User user) throws SQLException{
+    public User getUserById(User user) throws SQLException {
         Connection con = config.connect();
         String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
@@ -61,7 +69,7 @@ public class UserDAO implements UserDaoInterface{
 
         while (rs.next()) {
             User returnUser = buildUser(user, rs);
-            if(returnUser.getId() == user.getId()) {
+            if (returnUser.getId() == user.getId()) {
                 return returnUser;
             }
 
@@ -70,16 +78,16 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public boolean update(User user) throws SQLException{
+    public boolean update(User user) throws SQLException {
         Connection con = config.connect();
         String query = "UPDATE user SET " + config.getTable() + " = ?, email = ?, password = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
-        pst = buildFullStatement(pst, user);
+        pst = buildFullStatementUpdate(pst, user);
 
         int res = pst.executeUpdate();
 
-        if(res == 1){
+        if (res == 1) {
             return true;
         }
 
@@ -87,7 +95,7 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public boolean delete(User user) throws SQLException{
+    public boolean delete(User user) throws SQLException {
         String string = "DELETE FROM " + config.getTable() + " WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(string);
@@ -95,7 +103,7 @@ public class UserDAO implements UserDaoInterface{
 
         int res = pst.executeUpdate();
 
-        if(res == 1){
+        if (res == 1) {
             return true;
         }
 
@@ -103,7 +111,7 @@ public class UserDAO implements UserDaoInterface{
     }
 
     @Override
-    public User login(User user) throws SQLException{
+    public User login(User user) throws SQLException {
         String string = "SELECT * FROM " + config.getTable() + " WHERE name = ? AND password = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(string);
@@ -112,24 +120,24 @@ public class UserDAO implements UserDaoInterface{
 
         ResultSet res = pst.executeQuery();
 
-        if(res.next()){
+        if (res.next()) {
             int id = res.getInt("id");
             String nome = res.getString("name");
             String email = res.getString("email");
             String senha = res.getString("password");
-            return new Aluno(nome,email,senha,id);
+            return new Aluno(nome, email, senha, id);
         }
         return null;
     }
 
-    public boolean emailExists(User user) throws SQLException{
+    public boolean emailExists(User user) throws SQLException {
         String query = "SELECT email FROM " + config.getTable() + " WHERE email = ?";
         PreparedStatement pst = con.prepareStatement(query);
         pst.setString(1, user.getEmail());
         ResultSet res = pst.executeQuery();
 
         if (res.next()) {
-            if ( res.getString("email").equals(user.getEmail()) ) {
+            if (res.getString("email").equals(user.getEmail())) {
                 return true;
             }
         }
