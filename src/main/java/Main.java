@@ -1,9 +1,9 @@
-import view.MenuPrincipal;
-import view.MenuPrincipalInterface;
+import view.MenuLoginInterface;
+import view.MenuLogin;
 
 public class Main {
     public static void main(String[] args){
-        MenuPrincipalInterface menuPrincipal = new MenuPrincipal();
-        menuPrincipal.show();
+        MenuLoginInterface menuLogin = new MenuLogin();
+        menuLogin.show();
     }
 }

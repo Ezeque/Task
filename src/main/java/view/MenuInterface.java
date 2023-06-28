@@ -1,5 +1,7 @@
 package view;
 
+import entity.Aluno;
+
 public interface MenuInterface {
-    public void show(int opcao);
+    public void show(Aluno aluno);
 }

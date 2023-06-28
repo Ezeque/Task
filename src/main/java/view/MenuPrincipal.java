@@ -1,27 +1,15 @@
 package view;
 
+import entity.Aluno;
+
 import java.util.Scanner;
 
-public class MenuPrincipal implements MenuPrincipalInterface {
+public class MenuPrincipal implements MenuInterface {
     boolean isLogged;
-
-    public MenuPrincipal(){
-        this.isLogged = false;
-    }
     @Override
-    public void show() {
+    public void show(Aluno aluno) {
         Scanner scanner = new Scanner(System.in);
-        int opcao;
-        if(isLogged){
-            scanner = new Scanner(System.in);
-            System.out.println(" 1) Acessar Treino \n 2) Gerar Relatório \n 3) Alterar Usuário");
-            opcao = scanner.nextInt();
-        }
-        else {
-            System.out.println(" 1) Login \n 2) Cadastrar-se");
-            opcao = scanner.nextInt();
-            MenuInterface menuLogin = new MenuLogin();
-            menuLogin.show(opcao);
-        }
+        System.out.println(" 1) Acessar Treino \n 2) Relatórios \n 3) Sair");
+        int opcao = scanner.nextInt();
     }
 }
