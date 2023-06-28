@@ -25,9 +25,13 @@ public abstract class TaskService {
     public abstract boolean validateDeletion(Task task);
 
     public boolean create(Task task) throws SQLException {
-        TaskDAO dao = new TaskDAO(this.dbConfig);
-        if (validateCreation(task)) {
-            return dao.create(task);
+        try {
+            TaskDAO dao = new TaskDAO(this.dbConfig);
+            if (validateCreation(task)) {
+                return dao.create(task);
+            }
+        } catch (SQLException e) {
+            System.out.println(e);
         }
         return false;
     }

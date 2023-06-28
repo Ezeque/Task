@@ -33,6 +33,12 @@ public abstract class Task {
         this.userID = userId;
     }
 
+    public Task(String name, String type, int userId) {
+        this.name = name;
+        this.type = type;
+        this.userID = userId;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -55,5 +61,21 @@ public abstract class Task {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public int getProjectID() {
+        return projectID;
+    }
+
+    public void setProjectID(int projectID) {
+        this.projectID = projectID;
     }
 }
