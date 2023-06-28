@@ -1,12 +1,16 @@
 package tfw.Controller;
 
 import tfw.Entity.Task;
-import tfw.Service.ProjectService;
 import tfw.Service.TaskService;
 
 import java.sql.SQLException;
 
 public abstract class TaskControllerAbstract {
+    TaskService service;
+
+    public TaskControllerAbstract(TaskService service) {
+        this.service = service;
+    }
 
     public abstract void PrintTask(Task task, TaskService service);
 

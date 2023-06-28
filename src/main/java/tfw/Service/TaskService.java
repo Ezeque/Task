@@ -1,43 +1,67 @@
 package tfw.Service;
 
-import tfw.Dao.TaskDAOInterface;
+import tfw.Dao.TaskDAO;
+import tfw.Database.DatabaseConfiguration;
+import tfw.Entity.ConcreteTask;
 import tfw.Entity.Task;
+import tfw.Entity.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public abstract class TaskService {
-    Task task;
-    TaskDAOInterface dao;
+    DatabaseConfiguration dbConfig;
 
-    public TaskService(TaskDAOInterface dao){
-        this.dao = dao;
+    public TaskService(DatabaseConfiguration dbConfig) {
+        this.dbConfig = dbConfig;
     }
 
     public abstract boolean validateCreation(Task task);
+
     public abstract boolean validateSearch(Task task);
+
     public abstract boolean validateUpdate(Task task);
+
     public abstract boolean validateDeletion(Task task);
+
     public boolean create(Task task) throws SQLException {
-        if(validateCreation(task)){
-            return this.dao.create(task);
+        TaskDAO dao = new TaskDAO(this.dbConfig);
+        if (validateCreation(task)) {
+            return dao.create(task);
         }
         return false;
     }
-    public Task search(Task   task) throws SQLException {
-        if(validateSearch(task)){
-            return this.dao.getTaskById(task);
+
+    public Task search(Task task) throws SQLException {
+        TaskDAO dao = new TaskDAO(this.dbConfig);
+        if (validateSearch(task)) {
+            return dao.getTaskById(task);
         }
         return null;
     }
+
+    public ArrayList<ConcreteTask> searchAllTasks(User user) throws SQLException {
+        TaskDAO dao = new TaskDAO(this.dbConfig);
+        if (validateAllTaskSearch(user)) {
+            return dao.getTasksByUser(user);
+        }
+        return null;
+    }
+
+    protected abstract boolean validateAllTaskSearch(User user);
+
     public boolean update(Task task) throws SQLException {
-        if(validateUpdate(task)){
-            return this.dao.update(task);
+        TaskDAO dao = new TaskDAO(this.dbConfig);
+        if (validateUpdate(task)) {
+            return dao.update(task);
         }
         return false;
     }
+
     public boolean delete(Task task) throws SQLException {
-        if(validateDeletion(task)){
-            return this.dao.delete(task.getId());
+        TaskDAO dao = new TaskDAO(this.dbConfig);
+        if (validateDeletion(task)) {
+            return dao.delete(task.getId());
         }
         return false;
     }
