@@ -1,7 +1,7 @@
 package view;
 
-import tfw.Entity.User;
+import java.sql.SQLException;
 
 public interface MenuLoginInterface {
-    public void show();
+    public void show() throws SQLException;
 }

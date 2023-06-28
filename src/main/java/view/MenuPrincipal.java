@@ -2,13 +2,14 @@ package view;
 
 import entity.Aluno;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MenuPrincipal implements MenuInterface {
     boolean isLogged;
 
     @Override
-    public void show(Aluno aluno) {
+    public void show(Aluno aluno) throws SQLException {
         boolean sair = false;
         MenuInterface menu;
         Scanner scanner = new Scanner(System.in);

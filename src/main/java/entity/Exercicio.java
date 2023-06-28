@@ -1,9 +1,9 @@
 package entity;
 
-import tfw.Entity.Task;
+import tfw.Entity.ConcreteTask;
 
-public class Exercicio extends Task {
-    public Exercicio(String name, String type) {
-        super(name, type);
+public class Exercicio extends ConcreteTask {
+    public Exercicio(int id, String name, String type) {
+        super(id, name, type);
     }
 }

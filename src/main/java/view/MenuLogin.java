@@ -5,6 +5,7 @@ import entity.Aluno;
 import service.AlunoService;
 import tfw.Controller.UserController;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class MenuLogin implements MenuLoginInterface {
@@ -13,7 +14,7 @@ public class MenuLogin implements MenuLoginInterface {
     Aluno alunoLogado;
     boolean isLogged = false;
 
-    public MenuLogin(){
+    public MenuLogin() {
         DBConfigAluno dbConfig = new DBConfigAluno();
         AlunoService service = new AlunoService(dbConfig);
         this.controller = new UserController(service);
@@ -21,45 +22,47 @@ public class MenuLogin implements MenuLoginInterface {
 
     @Override
     public void show() {
-        while(true){
+        while (true) {
             Scanner scanner = new Scanner(System.in);
             int opcao;
-            if(isLogged == true){
+            if (isLogged == true) {
                 MenuInterface menuPrincipal = new MenuPrincipal();
-                menuPrincipal.show(alunoLogado);
-            }
-            else {
+                try {
+                    menuPrincipal.show(alunoLogado);
+                } catch (SQLException e) {
+                    System.out.println(e);
+                }
+            } else {
                 System.out.println(" 1) Login \n 2) Cadastrar-se");
                 opcao = scanner.nextInt();
                 MenuLoginInterface menuLogin = new MenuLogin();
-                if(opcao == 1){
+                if (opcao == 1) {
                     fazerLogin();
                 }
-                if(opcao == 2){
+                if (opcao == 2) {
                     cadastrar();
                 }
             }
         }
     }
 
-    private void fazerLogin(){
+    private void fazerLogin() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Login: ");
         String login = scanner.nextLine();
         System.out.println("Senha: ");
 
         String senha = scanner.nextLine();
-        Aluno aluno = new Aluno(login,"", senha,1);
+        Aluno aluno = new Aluno(login, "", senha, 1);
         alunoLogado = (Aluno) controller.login(aluno);
-        if(alunoLogado != null){
+        if (alunoLogado != null) {
             isLogged = true;
-        }
-        else {
+        } else {
             System.out.println("Usuário Inexistente");
         }
     }
 
-    public void cadastrar(){
+    public void cadastrar() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Login: ");
         String login = scanner.nextLine();

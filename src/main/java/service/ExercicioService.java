@@ -1,12 +1,13 @@
 package service;
 
-import tfw.Dao.TaskDAOInterface;
+import database.DBConfigExercicio;
 import tfw.Entity.Task;
+import tfw.Entity.User;
 import tfw.Service.TaskService;
 
 public class ExercicioService extends TaskService {
-    public ExercicioService(TaskDAOInterface dao) {
-        super(dao);
+    public ExercicioService(DBConfigExercicio dbConfig) {
+        super(dbConfig);
     }
 
     @Override
@@ -27,5 +28,10 @@ public class ExercicioService extends TaskService {
     @Override
     public boolean validateDeletion(Task task) {
         return false;
+    }
+
+    @Override
+    protected boolean validateAllTaskSearch(User user) {
+        return true;
     }
 }
