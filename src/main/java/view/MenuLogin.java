@@ -51,7 +51,12 @@ public class MenuLogin implements MenuLoginInterface {
         String senha = scanner.nextLine();
         Aluno aluno = new Aluno(login,"", senha,1);
         alunoLogado = (Aluno) controller.login(aluno);
-        isLogged = true;
+        if(alunoLogado != null){
+            isLogged = true;
+        }
+        else {
+            System.out.println("Usuário Inexistente");
+        }
     }
 
     public void cadastrar(){
