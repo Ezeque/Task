@@ -12,6 +12,9 @@ public class ExercicioService extends TaskService {
 
     @Override
     public boolean validateCreation(Task task) {
+        if (task.getName().length() > 0 && task.getType().length() > 0) {
+            return true;
+        }
         return false;
     }
 
