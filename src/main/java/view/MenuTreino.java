@@ -24,7 +24,7 @@ public class MenuTreino implements MenuInterface {
     @Override
     public void show(Aluno aluno) throws SQLException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(" 1) Visualizar Treino \n 2) Modificar Treino");
+        System.out.println(" 1) Visualizar Treino \n 2) Modificar Treino \n 3) Deletar Treino");
         int opcao = scanner.nextInt();
         switch (opcao) {
             case 1:
@@ -32,6 +32,13 @@ public class MenuTreino implements MenuInterface {
                 break;
             case 2:
                 modificarTreino(aluno);
+                break;
+            case 3:
+                deletarExercicio(aluno);
+                break;
+            default:
+                System.out.println("Opção Inválida");
+                break;
         }
     }
 
@@ -104,6 +111,37 @@ public class MenuTreino implements MenuInterface {
                     String membro = scanner.nextLine();
                     exercicio.setType(membro);
                     controller.updateTask(exercicio, service);
+                    break;
+                default:
+                    System.out.println("Opçao Inválida");
+                    break;
+            }
+        } else {
+            System.out.println("Não há exercícios cadastrados para " + aluno.getName());
+        }
+        System.out.println("\n");
+    }
+
+    public void deletarExercicio(Aluno aluno) throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<ConcreteTask> exercicios = controller.getAllUserTasks(aluno);
+        if (exercicios != null) {
+            System.out.println("\n Selecione um Exercício: \n");
+            for (ConcreteTask exercicio : exercicios) {
+                System.out.println("[" + exercicios.indexOf(exercicio) + "] " + exercicio.getName() + " - " + exercicio.getType());
+            }
+            int opcao = scanner.nextInt();
+            ConcreteTask exercicio = exercicios.get(opcao);
+            System.out.println("Tem certeza que deseja deletar " + exercicio.getName() + "?");
+            System.out.println("[1] Sim");
+            System.out.println("[2] Não");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+            switch (opcao) {
+                case 1:
+                    controller.deleteTask(exercicio, service);
+                    break;
+                case 2:
                     break;
                 default:
                     System.out.println("Opçao Inválida");

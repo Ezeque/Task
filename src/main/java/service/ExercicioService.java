@@ -33,7 +33,7 @@ public class ExercicioService extends TaskService {
 
     @Override
     public boolean validateDeletion(Task task) {
-        return false;
+        return true;
     }
 
     @Override
