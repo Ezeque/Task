@@ -9,8 +9,12 @@ public abstract class Project {
     private int id;
     private ProjectControllerAbstract controller;
 
-    public Project(int id, String name){
+    public Project(int id, String name) {
         this.id = id;
+        this.name = name;
+    }
+
+    public Project(String name) {
         this.name = name;
     }
 
@@ -29,6 +33,7 @@ public abstract class Project {
     public void setName(String name) {
         this.name = name;
     }
-//RETURNS AN OBJECT CONTAINING THE METRICS USED TO MAKE A REPORT
+
+    //RETURNS AN OBJECT CONTAINING THE METRICS USED TO MAKE A REPORT
     public abstract Map<String, Object> setMetrics();
 }
