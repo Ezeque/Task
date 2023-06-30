@@ -46,6 +46,7 @@ public class MenuLogin implements MenuLoginInterface {
         }
     }
 
+    //  EXIBE O MENU DE LOGIN DE USUÁRIOS
     private void fazerLogin() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Login: ");
@@ -62,6 +63,7 @@ public class MenuLogin implements MenuLoginInterface {
         }
     }
 
+    // EXIBE O MENU DE REGISTRO DE USUÁRIOS
     public void cadastrar() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Login: ");

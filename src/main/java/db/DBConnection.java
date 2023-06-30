@@ -18,6 +18,7 @@ public class DBConnection {
         return con;
     }
 
+    //    RECUPERA A CONEXÃO COM O BANCO DE DADOS USANDO OS DADOS ESPECIFICADOS
     public String getConnectionUrl(String driver, String dbname, String user, String pwd) {
         if (driver.equals(DBDriver.MYSQL)) {
             return "jdbc:mysql://localhost/" + dbname + "?user=" + user + "&password=" + pwd;

@@ -21,6 +21,7 @@ public class MenuTreino implements MenuInterface {
         this.controller = new TaskController(service);
     }
 
+    // APRESENTA AS OPÇÕES RELACIONADAS AO TREINO
     @Override
     public void show(Aluno aluno) throws SQLException {
         Scanner scanner = new Scanner(System.in);
@@ -42,6 +43,7 @@ public class MenuTreino implements MenuInterface {
         }
     }
 
+    //   MOSTRA O TREINO DO USUÁRIO
     private void visualizarTreino(Aluno aluno) throws SQLException {
         ArrayList<ConcreteTask> exercicios = controller.getAllUserTasks(aluno);
         if (exercicios != null) {
@@ -54,6 +56,7 @@ public class MenuTreino implements MenuInterface {
         }
     }
 
+    // CUIDA DA APRESENTAÇÃO DE MODIFICAÇÃO DE TREINO AO USUÁRIO
     private void modificarTreino(Aluno aluno) {
         Scanner scanner = new Scanner(System.in);
         System.out.println(" 1) Criar Exercício \n 2) Editar Exercício \n 3) Excluir Exercício");
@@ -72,6 +75,7 @@ public class MenuTreino implements MenuInterface {
         }
     }
 
+    // APRESENTA A CRIAÇÃO DE EXERCÍCIOS AO USUÁRIO
     private void criarExercicio(Aluno aluno) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println(" Nome: ");
@@ -82,6 +86,7 @@ public class MenuTreino implements MenuInterface {
         controller.createTask(exercicio, service);
     }
 
+    // APRESENTA A CRIAÇÃO DE EXERCÍCIOS AO USUÁRIO
     public void editarExercicio(Aluno aluno) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         ArrayList<ConcreteTask> exercicios = controller.getAllUserTasks(aluno);
@@ -120,6 +125,7 @@ public class MenuTreino implements MenuInterface {
         }
     }
 
+    // APRESENTA A DELEÇÃO DE EXERCÍCIOS AO USUÁRIO
     public void deletarExercicio(Aluno aluno) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         ArrayList<ConcreteTask> exercicios = controller.getAllUserTasks(aluno);

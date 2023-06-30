@@ -8,6 +8,7 @@ import java.util.Scanner;
 public class MenuPrincipal implements MenuInterface {
     boolean isLogged;
 
+    // EXIBE AS PRINCIPAIS FUNÇÕES DO SISTEMA
     @Override
     public void show(Aluno aluno) throws SQLException {
         boolean sair = false;
