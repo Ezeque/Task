@@ -35,6 +35,13 @@ public class TaskDAO implements TaskDAOInterface {
         return pst;
     }
 
+    public PreparedStatement buildFullStatementUpdate(PreparedStatement pst, Task task) throws SQLException {
+        pst.setString(1, task.getName());
+        pst.setString(2, task.getType());
+        pst.setInt(3, task.getId());
+        return pst;
+    }
+
     public PreparedStatement buildFullStatementTasksByUser(PreparedStatement pst, User user) throws SQLException {
         pst.setInt(1, user.getId());
         return pst;
@@ -88,29 +95,30 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     public ArrayList<ConcreteTask> getTasksByUser(User user) throws SQLException {
-        ArrayList<Task> tasks = new ArrayList<Task>();
-        String query = "SELECT * FROM " + config.getTable() + " WHERE id = ?";
+        ArrayList<ConcreteTask> tasks = new ArrayList<ConcreteTask>();
+        String query = "SELECT * FROM " + config.getTable() + " WHERE userId = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatementTasksByUser(pst, user);
 
         ResultSet res = pst.executeQuery();
-
-        if (res.next()) {
+        while (res.next()) {
             int id = res.getInt("id");
             String name = res.getString("name");
             String type = res.getString("type");
             tasks.add(new ConcreteTask(id, name, type));
         }
-
+        if (tasks.size() > 0) {
+            return tasks;
+        }
         return null;
     }
 
     public boolean update(Task task) throws SQLException {
-        String query = "UPDATE task SET " + "name = ?, type = ? WHERE id = ?";
+        String query = "UPDATE " + config.getTable() + " SET " + "name = ?, type = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
-        pst = buildFullStatement(pst, task);
+        pst = buildFullStatementUpdate(pst, task);
 
         int res = pst.executeUpdate();
 
