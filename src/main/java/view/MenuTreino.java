@@ -38,17 +38,19 @@ public class MenuTreino implements MenuInterface {
     private void visualizarTreino(Aluno aluno) throws SQLException {
         ArrayList<ConcreteTask> exercicios = controller.getAllUserTasks(aluno);
         if (exercicios != null) {
+            System.out.println("\n Exercícios: \n");
             for (ConcreteTask exercicio : exercicios) {
-                System.out.println(exercicio.getName() + "\n");
+                System.out.println(exercicio.getName() + " - " + exercicio.getType());
             }
         } else {
             System.out.println("Não há exercícios cadastrados para " + aluno.getName());
         }
+        System.out.println("\n");
     }
 
     private void modificarTreino(Aluno aluno) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(" 1) Criar Exercício \n 2) Edita Exercício \n 3) Excluir Exercício");
+        System.out.println(" 1) Criar Exercício \n 2) Editar Exercício \n 3) Excluir Exercício");
         int opcao = scanner.nextInt();
         try {
             switch (opcao) {
@@ -56,6 +58,7 @@ public class MenuTreino implements MenuInterface {
                     criarExercicio(aluno);
                     break;
                 case 2:
+                    editarExercicio(aluno);
                     break;
             }
         } catch (SQLException e) {
@@ -71,5 +74,44 @@ public class MenuTreino implements MenuInterface {
         String membro = scanner.nextLine();
         Exercicio exercicio = new Exercicio(nome, membro, aluno.getId());
         controller.createTask(exercicio, service);
+    }
+
+    public void editarExercicio(Aluno aluno) throws SQLException {
+        Scanner scanner = new Scanner(System.in);
+        ArrayList<ConcreteTask> exercicios = controller.getAllUserTasks(aluno);
+        if (exercicios != null) {
+            System.out.println("\n Selecione um Exercício: \n");
+            for (ConcreteTask exercicio : exercicios) {
+                System.out.println("[" + exercicios.indexOf(exercicio) + "] " + exercicio.getName() + " - " + exercicio.getType());
+            }
+            int opcao = scanner.nextInt();
+            ConcreteTask exercicio = exercicios.get(opcao);
+            System.out.println(exercicio.getName() + ": ");
+            System.out.println("[1] Mudar Nome");
+            System.out.println("[2] Mudar Membro");
+            opcao = scanner.nextInt();
+            scanner.nextLine();
+            switch (opcao) {
+                case 1:
+                    System.out.println("Informe um novo nome:");
+                    String nome;
+                    nome = scanner.nextLine();
+                    exercicio.setName(nome);
+                    controller.updateTask(exercicio, service);
+                    break;
+                case 2:
+                    System.out.println("Informe um novo membro:");
+                    String membro = scanner.nextLine();
+                    exercicio.setType(membro);
+                    controller.updateTask(exercicio, service);
+                    break;
+                default:
+                    System.out.println("Opçao Inválida");
+                    break;
+            }
+        } else {
+            System.out.println("Não há exercícios cadastrados para " + aluno.getName());
+        }
+        System.out.println("\n");
     }
 }
