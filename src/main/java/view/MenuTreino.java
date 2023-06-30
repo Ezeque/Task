@@ -45,14 +45,13 @@ public class MenuTreino implements MenuInterface {
     private void visualizarTreino(Aluno aluno) throws SQLException {
         ArrayList<ConcreteTask> exercicios = controller.getAllUserTasks(aluno);
         if (exercicios != null) {
-            System.out.println("\n Exercícios: \n");
+            System.out.println("Exercícios:");
             for (ConcreteTask exercicio : exercicios) {
                 System.out.println(exercicio.getName() + " - " + exercicio.getType());
             }
         } else {
             System.out.println("Não há exercícios cadastrados para " + aluno.getName());
         }
-        System.out.println("\n");
     }
 
     private void modificarTreino(Aluno aluno) {
@@ -87,7 +86,7 @@ public class MenuTreino implements MenuInterface {
         Scanner scanner = new Scanner(System.in);
         ArrayList<ConcreteTask> exercicios = controller.getAllUserTasks(aluno);
         if (exercicios != null) {
-            System.out.println("\n Selecione um Exercício: \n");
+            System.out.println("Selecione um Exercício:");
             for (ConcreteTask exercicio : exercicios) {
                 System.out.println("[" + exercicios.indexOf(exercicio) + "] " + exercicio.getName() + " - " + exercicio.getType());
             }
@@ -119,14 +118,13 @@ public class MenuTreino implements MenuInterface {
         } else {
             System.out.println("Não há exercícios cadastrados para " + aluno.getName());
         }
-        System.out.println("\n");
     }
 
     public void deletarExercicio(Aluno aluno) throws SQLException {
         Scanner scanner = new Scanner(System.in);
         ArrayList<ConcreteTask> exercicios = controller.getAllUserTasks(aluno);
         if (exercicios != null) {
-            System.out.println("\n Selecione um Exercício: \n");
+            System.out.println("Selecione um Exercício:");
             for (ConcreteTask exercicio : exercicios) {
                 System.out.println("[" + exercicios.indexOf(exercicio) + "] " + exercicio.getName() + " - " + exercicio.getType());
             }
@@ -150,6 +148,5 @@ public class MenuTreino implements MenuInterface {
         } else {
             System.out.println("Não há exercícios cadastrados para " + aluno.getName());
         }
-        System.out.println("\n");
     }
 }
