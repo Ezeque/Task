@@ -18,6 +18,10 @@ public abstract class Project {
         this.name = name;
     }
 
+    public Project() {
+
+    }
+
     public int getId() {
         return id;
     }
