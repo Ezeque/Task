@@ -5,8 +5,23 @@ import tfw.Entity.Project;
 import java.util.Map;
 
 public class Plano extends Project {
-    public Plano(int id, String name) {
+    int diasPermitidos;
+    int valor;
+
+    public Plano() {
+        super();
+    }
+
+    public Plano(int id, String name, int valor, int diasPermitidos) {
         super(id, name);
+        this.valor = valor;
+        this.diasPermitidos = diasPermitidos;
+    }
+
+    public Plano(String name, int valor, int diasPermitidos) {
+        super(name);
+        this.valor = valor;
+        this.diasPermitidos = diasPermitidos;
     }
 
     @Override

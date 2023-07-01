@@ -14,7 +14,7 @@ public class MenuPrincipal implements MenuInterface {
         boolean sair = false;
         MenuInterface menu;
         Scanner scanner = new Scanner(System.in);
-        System.out.println(" 1) Acessar Treino \n 2) Relatórios \n 3) Sair");
+        System.out.println(" 1) Acessar Treino \n 2) Relatórios \n 3) Plano \n 4) Sair");
         while (!sair) {
             int opcao = scanner.nextInt();
             switch (opcao) {
@@ -29,6 +29,9 @@ public class MenuPrincipal implements MenuInterface {
                     sair = true;
                     break;
                 case 3:
+                    menu = new MenuPlano();
+                    menu.show(aluno);
+                case 4:
                     sair = true;
                     break;
                 default:
