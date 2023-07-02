@@ -1,5 +1,6 @@
 package view;
 
+import controller.AlunoController;
 import database.DBConfigAluno;
 import entity.Aluno;
 import service.AlunoService;
@@ -75,5 +76,8 @@ public class MenuLogin implements MenuLoginInterface {
         alunoLogado = new Aluno(login, email, senha, 1);
         controller.create(alunoLogado);
         isLogged = true;
+        DBConfigAluno dbConfigAluno = new DBConfigAluno();
+        AlunoService alunoService = new AlunoService(dbConfigAluno);
+        AlunoController alunoController = new AlunoController(alunoService);
     }
 }
