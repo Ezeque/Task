@@ -11,8 +11,8 @@ import java.sql.SQLException;
 
 public class UserDAO implements UserDaoInterface {
 
-    Connection con;
-    DatabaseConfiguration config;
+    protected Connection con;
+    protected DatabaseConfiguration config;
 
     public UserDAO(DatabaseConfiguration config) {
         this.config = config;

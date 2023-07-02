@@ -6,7 +6,7 @@ import tfw.Service.TaskService;
 import java.sql.SQLException;
 
 public abstract class TaskControllerAbstract {
-    TaskService service;
+    protected TaskService service;
 
     public TaskControllerAbstract(TaskService service) {
         this.service = service;
