@@ -1,5 +1,7 @@
 package dao;
 
+import entity.Aluno;
+import entity.Plano;
 import tfw.Dao.UserDAO;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.Project;
@@ -19,7 +21,7 @@ public class alunoDAO extends UserDAO {
         return pst;
     }
 
-    public boolean savePlano(User aluno, Project plano) throws SQLException {
+    public boolean savePlano(Aluno aluno, Plano plano) throws SQLException {
         String query = "UPDATE " + config.getTable() + " SET " + "planId = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
@@ -28,6 +30,7 @@ public class alunoDAO extends UserDAO {
         int res = pst.executeUpdate();
 
         if (res == 1) {
+            aluno.setPlano(plano);
             return true;
         }
 

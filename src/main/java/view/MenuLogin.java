@@ -3,6 +3,8 @@ package view;
 import controller.AlunoController;
 import database.DBConfigAluno;
 import entity.Aluno;
+import entity.Plano;
+import entity.PlanoBasico;
 import service.AlunoService;
 import tfw.Controller.UserController;
 
@@ -22,7 +24,7 @@ public class MenuLogin implements MenuLoginInterface {
     }
 
     @Override
-    public void show() {
+    public void show() throws SQLException {
         while (true) {
             Scanner scanner = new Scanner(System.in);
             int opcao;
@@ -65,7 +67,7 @@ public class MenuLogin implements MenuLoginInterface {
     }
 
     // EXIBE O MENU DE REGISTRO DE USUÁRIOS
-    public void cadastrar() {
+    public void cadastrar() throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Login: ");
         String login = scanner.nextLine();
@@ -79,5 +81,7 @@ public class MenuLogin implements MenuLoginInterface {
         DBConfigAluno dbConfigAluno = new DBConfigAluno();
         AlunoService alunoService = new AlunoService(dbConfigAluno);
         AlunoController alunoController = new AlunoController(alunoService);
+        Plano planoBasico = new PlanoBasico();
+        alunoController.savePlano(planoBasico, (Aluno) alunoController.getUserByName(alunoLogado));
     }
 }
