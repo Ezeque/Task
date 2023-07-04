@@ -1,9 +1,13 @@
 package view;
 
+import controller.TreinoController;
 import database.DBConfigExercicio;
+import database.DBConfigTreino;
 import entity.Aluno;
 import entity.Exercicio;
+import entity.Treino;
 import service.ExercicioService;
+import service.TreinoService;
 import tfw.Controller.TaskController;
 import tfw.Entity.ConcreteTask;
 
@@ -25,7 +29,7 @@ public class MenuTreino implements MenuInterface {
     @Override
     public void show(Aluno aluno) throws SQLException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(" 1) Visualizar Treino \n 2) Modificar Treino \n 3) Deletar Treino");
+        System.out.println(" 1) Visualizar Treino \n 2) Modificar Treino \n 3) Deletar Treino \n 4) Criar Treino");
         int opcao = scanner.nextInt();
         switch (opcao) {
             case 1:
@@ -36,6 +40,9 @@ public class MenuTreino implements MenuInterface {
                 break;
             case 3:
                 deletarExercicio(aluno);
+                break;
+            case 4:
+                criarTreino(aluno);
                 break;
             default:
                 System.out.println("Opção Inválida");
@@ -154,5 +161,18 @@ public class MenuTreino implements MenuInterface {
         } else {
             System.out.println("Não há exercícios cadastrados para " + aluno.getName());
         }
+    }
+
+    public void criarTreino(Aluno aluno) throws SQLException {
+        DBConfigTreino configTreino = new DBConfigTreino();
+        TreinoService treinoService = new TreinoService(configTreino);
+        TreinoController treinoController = new TreinoController(treinoService);
+        Scanner scanner = new Scanner(System.in);
+        String nome;
+        System.out.println("Insira o Nome do Treino:");
+        nome = scanner.nextLine();
+        ArrayList<Exercicio> exercicios = new ArrayList<Exercicio>();
+        Treino treino = new Treino(nome, exercicios);
+        treinoController.create(treino, aluno);
     }
 }

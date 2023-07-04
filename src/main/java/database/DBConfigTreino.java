@@ -6,9 +6,13 @@ import tfw.Database.DatabaseConfiguration;
 
 import java.sql.Connection;
 
-public class DBConfigPlano extends DatabaseConfiguration {
-    public DBConfigPlano() {
-        super("ezequiel", "", "plano", "planit", "mysql");
+public class DBConfigTreino extends DatabaseConfiguration {
+    public DBConfigTreino() {
+        super("ezequiel", "", "treino", "planit", "mysql");
+    }
+
+    public DBConfigTreino(String host) {
+        super("ezequiel", "", "treino", "planit", "mysql", host);
     }
 
     @Override

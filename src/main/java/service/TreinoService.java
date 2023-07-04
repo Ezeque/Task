@@ -1,22 +1,22 @@
 package service;
 
-import dao.PlanoDAO;
-import database.DBConfigPlano;
+import dao.TreinoDAO;
+import database.DBConfigTreino;
 import entity.Aluno;
-import entity.Plano;
 import tfw.Entity.Project;
 import tfw.Service.ProjectService;
 
 import java.sql.SQLException;
 
-public class PlanoService extends ProjectService {
-    public PlanoService(DBConfigPlano config) {
+public class TreinoService extends ProjectService {
+
+    public TreinoService(DBConfigTreino config) {
         super(config);
     }
 
     @Override
     public boolean validateCreation(Project project) {
-        return false;
+        return true;
     }
 
     @Override
@@ -26,19 +26,19 @@ public class PlanoService extends ProjectService {
 
     @Override
     public boolean validateUpdate(Project project) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean validateDeletion(Project project) {
-        return false;
+        return true;
     }
 
-    public Plano search(Plano plano, Aluno aluno) throws SQLException {
-        if (validateSearch(plano)) {
-            PlanoDAO dao = new PlanoDAO(config);
-            return dao.getProjectByAluno(plano, aluno);
+    public boolean create(Project project, Aluno aluno) throws SQLException {
+        if (validateCreation(project)) {
+            TreinoDAO dao = new TreinoDAO(config);
+            return dao.create(project, aluno);
         }
-        return null;
+        return false;
     }
 }
