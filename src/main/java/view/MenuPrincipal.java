@@ -31,6 +31,7 @@ public class MenuPrincipal implements MenuInterface {
                 case 3:
                     menu = new MenuPlano();
                     menu.show(aluno);
+                    break;
                 case 4:
                     sair = true;
                     break;

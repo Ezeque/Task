@@ -1,12 +1,16 @@
 package service;
 
-import tfw.Dao.ProjectDAOInterface;
+import dao.PlanoDAO;
+import database.DBConfigPlano;
+import entity.Plano;
 import tfw.Entity.Project;
 import tfw.Service.ProjectService;
 
+import java.sql.SQLException;
+
 public class PlanoService extends ProjectService {
-    public PlanoService(ProjectDAOInterface dao) {
-        super(dao);
+    public PlanoService(DBConfigPlano config) {
+        super(config);
     }
 
     @Override
@@ -16,7 +20,7 @@ public class PlanoService extends ProjectService {
 
     @Override
     public boolean validateSearch(Project project) {
-        return false;
+        return true;
     }
 
     @Override
@@ -27,5 +31,13 @@ public class PlanoService extends ProjectService {
     @Override
     public boolean validateDeletion(Project project) {
         return false;
+    }
+
+    public Plano search(Plano plano) throws SQLException {
+        if (validateSearch(plano)) {
+            PlanoDAO dao = new PlanoDAO(config);
+            return dao.getProjectById(plano);
+        }
+        return null;
     }
 }

@@ -28,4 +28,30 @@ public class Plano extends Project {
     public Map<String, Object> setMetrics() {
         return null;
     }
+
+    public int getValor() {
+        return this.valor;
+    }
+
+    public int getDiasPermitidos() {
+        return diasPermitidos;
+    }
+
+    public void setDiasPermitidos(int diasPermitidos) {
+        this.diasPermitidos = diasPermitidos;
+    }
+
+    public void setValor(int valor) {
+        this.valor = valor;
+    }
+
+    @Override
+    public void setName(String name) {
+        super.setName(name);
+    }
+
+    @Override
+    public void setId(int id) {
+        super.setId(id);
+    }
 }
