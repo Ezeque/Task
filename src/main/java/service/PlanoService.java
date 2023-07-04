@@ -2,6 +2,7 @@ package service;
 
 import dao.PlanoDAO;
 import database.DBConfigPlano;
+import entity.Aluno;
 import entity.Plano;
 import tfw.Entity.Project;
 import tfw.Service.ProjectService;
@@ -33,10 +34,10 @@ public class PlanoService extends ProjectService {
         return false;
     }
 
-    public Plano search(Plano plano) throws SQLException {
+    public Plano search(Plano plano, Aluno aluno) throws SQLException {
         if (validateSearch(plano)) {
             PlanoDAO dao = new PlanoDAO(config);
-            return dao.getProjectById(plano);
+            return dao.getProjectByAluno(plano, aluno);
         }
         return null;
     }

@@ -2,12 +2,11 @@ package view;
 
 import controller.PlanoController;
 import database.DBConfigPlano;
-import entity.Aluno;
-import entity.Plano;
-import entity.PlanoBasico;
+import entity.*;
 import service.PlanoService;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuPlano implements MenuInterface {
@@ -27,11 +26,26 @@ public class MenuPlano implements MenuInterface {
         int opcao = scanner.nextInt();
         switch (opcao) {
             case 1: {
-                Plano plano = new PlanoBasico();
-                plano = (Plano) controller.SearchPlano(plano, service);
+                Plano plano = new Plano();
+                plano = controller.SearchPlanoAluno(plano, service, aluno);
                 System.out.println(plano.getName());
                 System.out.println("Valor: " + plano.getValor());
                 System.out.println("Quantidade de Dias Permitidos: " + plano.getDiasPermitidos());
+                break;
+            }
+            case 2: {
+                ArrayList<Plano> planos = new ArrayList<Plano>(3);
+                planos.add(new PlanoBasico());
+                planos.add(new PlanoPlus());
+                planos.add(new PlanoPremium());
+                Plano planoAtual = controller.SearchPlanoAluno(new Plano(), service, aluno);
+                System.out.println("Qual Plano Deseja Assinar? \n");
+                for (Plano plano :
+                        planos) {
+                    if (plano.getId() != planoAtual.getId()) {
+                        System.out.println("[" + planos.indexOf(plano) + "] " + "Plano " + plano.getName());
+                    }
+                }
             }
         }
     }

@@ -2,6 +2,7 @@ package controller;
 
 import dao.PlanoDAO;
 import database.DBConfigPlano;
+import entity.Aluno;
 import entity.Plano;
 import service.PlanoService;
 import tfw.Controller.ProjectController;
@@ -20,7 +21,7 @@ public class PlanoController extends ProjectController {
         this.service = new PlanoService(config);
     }
 
-    public Plano SearchPlano(Plano project, PlanoService service) throws SQLException {
-        return service.search(project);
+    public Plano SearchPlanoAluno(Plano project, PlanoService service, Aluno aluno) throws SQLException {
+        return service.search(project, aluno);
     }
 }

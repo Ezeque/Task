@@ -3,8 +3,6 @@ package view;
 import controller.AlunoController;
 import database.DBConfigAluno;
 import entity.Aluno;
-import entity.Plano;
-import entity.PlanoBasico;
 import service.AlunoService;
 import tfw.Controller.UserController;
 
@@ -50,7 +48,7 @@ public class MenuLogin implements MenuLoginInterface {
     }
 
     //  EXIBE O MENU DE LOGIN DE USUÁRIOS
-    private void fazerLogin() {
+    private void fazerLogin() throws SQLException {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Login: ");
         String login = scanner.nextLine();
@@ -58,7 +56,10 @@ public class MenuLogin implements MenuLoginInterface {
 
         String senha = scanner.nextLine();
         Aluno aluno = new Aluno(login, "", senha, 1);
-        alunoLogado = (Aluno) controller.login(aluno);
+        DBConfigAluno configAluno = new DBConfigAluno();
+        AlunoService alunoService = new AlunoService(configAluno);
+        AlunoController alunoController = new AlunoController(alunoService);
+        alunoLogado = (Aluno) alunoController.login(aluno);
         if (alunoLogado != null) {
             isLogged = true;
         } else {
@@ -67,7 +68,7 @@ public class MenuLogin implements MenuLoginInterface {
     }
 
     // EXIBE O MENU DE REGISTRO DE USUÁRIOS
-    public void cadastrar() throws SQLException {
+    public void cadastrar() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Login: ");
         String login = scanner.nextLine();
@@ -81,7 +82,5 @@ public class MenuLogin implements MenuLoginInterface {
         DBConfigAluno dbConfigAluno = new DBConfigAluno();
         AlunoService alunoService = new AlunoService(dbConfigAluno);
         AlunoController alunoController = new AlunoController(alunoService);
-        Plano planoBasico = new PlanoBasico();
-        alunoController.savePlano(planoBasico, (Aluno) alunoController.getUserByName(alunoLogado));
     }
 }

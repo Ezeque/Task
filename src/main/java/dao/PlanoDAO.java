@@ -1,5 +1,6 @@
 package dao;
 
+import entity.Aluno;
 import entity.Plano;
 import tfw.Dao.ProjectDAO;
 import tfw.Database.DatabaseConfiguration;
@@ -21,11 +22,12 @@ public class PlanoDAO extends ProjectDAO {
         return project;
     }
 
-    public Plano getProjectById(Plano plano) throws SQLException {
+    public Plano getProjectByAluno(Plano plano, Aluno aluno) throws SQLException {
 
-        String query = "SELECT * FROM " + config.getTable();
+        String query = "SELECT * FROM " + config.getTable() + " WHERE ID = ?";
         PreparedStatement ps;
         ps = con.prepareStatement(query);
+        ps.setInt(1, aluno.getPlanId());
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
