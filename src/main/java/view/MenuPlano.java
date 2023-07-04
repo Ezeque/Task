@@ -1,8 +1,11 @@
 package view;
 
+import controller.AlunoController;
 import controller.PlanoController;
+import database.DBConfigAluno;
 import database.DBConfigPlano;
 import entity.*;
+import service.AlunoService;
 import service.PlanoService;
 
 import java.sql.SQLException;
@@ -21,6 +24,7 @@ public class MenuPlano implements MenuInterface {
 
     @Override
     public void show(Aluno aluno) throws SQLException {
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
         Scanner scanner = new Scanner(System.in);
         System.out.println(" 1) Ver Plano \n 2) Mudar Plano");
         int opcao = scanner.nextInt();
@@ -28,7 +32,7 @@ public class MenuPlano implements MenuInterface {
             case 1: {
                 Plano plano = new Plano();
                 plano = controller.SearchPlanoAluno(plano, service, aluno);
-                System.out.println(plano.getName());
+                System.out.println("Plano " + plano.getName());
                 System.out.println("Valor: " + plano.getValor());
                 System.out.println("Quantidade de Dias Permitidos: " + plano.getDiasPermitidos());
                 break;
@@ -43,10 +47,22 @@ public class MenuPlano implements MenuInterface {
                 for (Plano plano :
                         planos) {
                     if (plano.getId() != planoAtual.getId()) {
-                        System.out.println("[" + planos.indexOf(plano) + "] " + "Plano " + plano.getName());
+                        System.out.println("[" + (planos.indexOf(plano)) + "] " + "Plano " + plano.getName());
                     }
                 }
+                opcao = scanner.nextInt();
+                System.out.println("Tem Certeza Que Deseja Assinar o Plano " + planos.get(opcao).getName() + "?");
+                System.out.println("[1] Sim\n[2] Não");
+                int confirmacao = scanner.nextInt();
+                if (confirmacao == 1) {
+                    DBConfigAluno configAluno = new DBConfigAluno();
+                    AlunoService alunoService = new AlunoService(configAluno);
+                    AlunoController alunoController = new AlunoController(alunoService);
+                    alunoController.savePlano(planos.get(opcao), aluno);
+                }
+                break;
             }
         }
+        menuPrincipal.show(aluno);
     }
 }
