@@ -1,16 +1,16 @@
 package tfw.Service;
 
-import database.DBConfigPlano;
 import tfw.Dao.ProjectDAO;
 import tfw.Dao.ProjectDAOInterface;
+import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.Project;
 
 import java.sql.SQLException;
 
 public abstract class ProjectService {
-    public DBConfigPlano config;
+    public DatabaseConfiguration config;
 
-    public ProjectService(DBConfigPlano config) {
+    public ProjectService(DatabaseConfiguration config) {
         this.config = config;
     }
 
