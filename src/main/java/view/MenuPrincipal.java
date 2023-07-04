@@ -5,6 +5,8 @@ import entity.Aluno;
 import java.sql.SQLException;
 import java.util.Scanner;
 
+import static java.lang.System.exit;
+
 public class MenuPrincipal implements MenuInterface {
     boolean isLogged;
 
@@ -33,7 +35,7 @@ public class MenuPrincipal implements MenuInterface {
                     menu.show(aluno);
                     break;
                 case 4:
-                    sair = true;
+                    exit(0);
                     break;
                 default:
                     System.out.println("Opção Invalida!");
