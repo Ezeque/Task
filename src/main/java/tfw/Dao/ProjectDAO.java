@@ -8,12 +8,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProjectDAO implements ProjectDAOInterface{
-    Connection con;
-    DatabaseConfiguration config;
+public class ProjectDAO implements ProjectDAOInterface {
+    protected Connection con;
+    protected DatabaseConfiguration config;
 
-    public ProjectDAO(){
-        con = config.connect();
+    public ProjectDAO(DatabaseConfiguration config) {
+        this.config = config;
+        this.con = config.connect();
     }
 
     public Project buildProject(Project project, ResultSet rs) throws SQLException {
@@ -22,13 +23,13 @@ public class ProjectDAO implements ProjectDAOInterface{
         return project;
     }
 
-    public PreparedStatement buildFullStatement(PreparedStatement pst, Project project) throws SQLException{
+    public PreparedStatement buildFullStatement(PreparedStatement pst, Project project) throws SQLException {
         pst.setString(1, project.getName());
         pst.setInt(2, project.getId());
         return pst;
     }
 
-    public boolean create(Project project) throws SQLException{
+    public boolean create(Project project) throws SQLException {
         String query = "INSERT INTO " + config.getTable() + " (name, id) VALUES (?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
@@ -42,6 +43,7 @@ public class ProjectDAO implements ProjectDAOInterface{
 
         return false;
     }
+
     @Override
     public boolean delete(int id) throws SQLException {
         String string = "DELETE FROM " + config.getTable() + " WHERE id = ?";
@@ -51,14 +53,14 @@ public class ProjectDAO implements ProjectDAOInterface{
 
         int res = pst.executeUpdate();
 
-        if(res == 1){
+        if (res == 1) {
             return true;
         }
 
         return false;
     }
 
-    public Project getProjectById(Project project) throws SQLException{
+    public Project getProjectById(Project project) throws SQLException {
         String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
         ps = con.prepareStatement(query);
@@ -66,7 +68,7 @@ public class ProjectDAO implements ProjectDAOInterface{
 
         while (rs.next()) {
             Project returnProject = buildProject(project, rs);
-            if(returnProject.getId() == project.getId()) {
+            if (returnProject.getId() == project.getId()) {
                 return returnProject;
             }
 
@@ -74,7 +76,7 @@ public class ProjectDAO implements ProjectDAOInterface{
         return null;
     }
 
-    public boolean update(Project project) throws SQLException{
+    public boolean update(Project project) throws SQLException {
         String query = "UPDATE project SET " + "name = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
@@ -82,7 +84,7 @@ public class ProjectDAO implements ProjectDAOInterface{
 
         int res = pst.executeUpdate();
 
-        if(res == 1){
+        if (res == 1) {
             return true;
         }
 

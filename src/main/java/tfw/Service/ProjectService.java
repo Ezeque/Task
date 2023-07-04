@@ -1,41 +1,55 @@
 package tfw.Service;
 
+import database.DBConfigPlano;
+import tfw.Dao.ProjectDAO;
 import tfw.Dao.ProjectDAOInterface;
 import tfw.Entity.Project;
 
 import java.sql.SQLException;
 
 public abstract class ProjectService {
-    public ProjectDAOInterface dao;
+    public DBConfigPlano config;
 
-    public ProjectService(ProjectDAOInterface dao){
-        this.dao = dao;
+    public ProjectService(DBConfigPlano config) {
+        this.config = config;
     }
+
     public abstract boolean validateCreation(Project project);
+
     public abstract boolean validateSearch(Project project);
+
     public abstract boolean validateUpdate(Project project);
+
     public abstract boolean validateDeletion(Project project);
+
     public boolean create(Project project) throws SQLException {
-        if(validateCreation(project)){
-            return this.dao.create(project);
+        if (validateCreation(project)) {
+            ProjectDAOInterface dao = new ProjectDAO(config);
+            return dao.create(project);
         }
         return false;
     }
-    public Project search(Project   project) throws SQLException {
-        if(validateSearch(project)){
-            return this.dao.getProjectById(project);
+
+    public Project search(Project project) throws SQLException {
+        if (validateSearch(project)) {
+            ProjectDAOInterface dao = new ProjectDAO(config);
+            return dao.getProjectById(project);
         }
         return null;
     }
-    public boolean update(Project   project) throws SQLException {
-        if(validateUpdate(project)){
-            return this.dao.update(project);
+
+    public boolean update(Project project) throws SQLException {
+        if (validateUpdate(project)) {
+            ProjectDAOInterface dao = new ProjectDAO(config);
+            return dao.update(project);
         }
         return false;
     }
-    public boolean delete(Project   project) throws SQLException {
-        if(validateDeletion(project)){
-            return this.dao.delete(project.getId());
+
+    public boolean delete(Project project) throws SQLException {
+        if (validateDeletion(project)) {
+            ProjectDAOInterface dao = new ProjectDAO(config);
+            return dao.delete(project.getId());
         }
         return false;
     }
