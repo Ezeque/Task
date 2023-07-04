@@ -1,6 +1,7 @@
 package tfw.Service;
 
 import tfw.Dao.UserReportDAO;
+import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.UserReport;
 
 import java.sql.SQLException;
@@ -8,6 +9,11 @@ import java.sql.SQLException;
 public abstract class UserReportService {
 
     private UserReportDAO dao = new UserReportDAO();
+
+    private DatabaseConfiguration dbconfig;
+    public UserReportService(DatabaseConfiguration dbconfig){
+        this.dbconfig = dbconfig;
+    }
 
     public abstract boolean validateCreation(UserReport report);
     public abstract boolean validateSearch(UserReport report);
