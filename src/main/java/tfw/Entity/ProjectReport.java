@@ -17,7 +17,7 @@ public abstract class ProjectReport {
         this.id = id;
     }
 
-    public void setProject_id(int project_id){
+    public void setProjectId(int project_id){
         this.project_id = project_id;
     }
 

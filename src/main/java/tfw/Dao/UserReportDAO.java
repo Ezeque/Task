@@ -1,35 +1,35 @@
 package tfw.Dao;
 
 import tfw.Database.DatabaseConfiguration;
-import tfw.Entity.ProjectReport;
+import tfw.Entity.UserReport;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ProjectReportDAO implements ProjectReportDAOInterface{
+public class UserReportDAO implements UserReportDAOInterface{
     Connection con;
     DatabaseConfiguration config;
 
-    public ProjectReportDAO(){
+    public UserReportDAO(){
         con = config.connect();
     }
 
-    public PreparedStatement buildFullStatement(PreparedStatement pst, ProjectReport report) throws SQLException{
-        pst.setInt(1, report.getProjectId());
+    public PreparedStatement buildFullStatement(PreparedStatement pst, UserReport report) throws SQLException {
+        pst.setInt(1, report.getUserId());
         pst.setInt(2, report.getId());
         return pst;
 
     }
 
-    public ProjectReport buildReport(ProjectReport report, ResultSet rs) throws SQLException{
+    public UserReport buildReport(UserReport report, ResultSet rs) throws SQLException{
         report.setId(rs.getInt("id"));
-        report.setProjectId(rs.getInt("project_id"));
+        report.setUserId(rs.getInt("user_id"));
         return report;
     }
-    public boolean create(ProjectReport report)  throws SQLException{
-        String query = "INSERT INTO " + config.getTable() + " (project_id, id) VALUES (?,?)";
+    public boolean create(UserReport report)  throws SQLException{
+        String query = "INSERT INTO " + config.getTable() + " (user_id, id) VALUES (?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, report);
@@ -43,14 +43,14 @@ public class ProjectReportDAO implements ProjectReportDAOInterface{
     }
 
     //    GETS DATA IN DATABASE
-    public ProjectReport getReportById(ProjectReport report) throws SQLException{
+    public UserReport getReportById(UserReport report) throws SQLException{
         String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
         ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            ProjectReport returnReport = buildReport(report, rs);
+            UserReport returnReport = buildReport(report, rs);
             if(returnReport.getId() == report.getId()) {
                 return returnReport;
             }
@@ -59,16 +59,16 @@ public class ProjectReportDAO implements ProjectReportDAOInterface{
 
         return null;
     }
-    public ProjectReport getReportByProjectId(ProjectReport report) throws SQLException{
+    public UserReport getReportByUserId(UserReport report) throws SQLException{
         String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
         ps = con.prepareStatement(query);
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            ProjectReport returnReport = buildReport(report, rs);
+            UserReport returnReport = buildReport(report, rs);
 
-            if(returnReport.getProjectId() == report.getProjectId()) {
+            if(returnReport.getUserId() == report.getUserId()) {
                 return returnReport;
             }
 
@@ -77,8 +77,8 @@ public class ProjectReportDAO implements ProjectReportDAOInterface{
         return null;
     }
     //    UPDATE DATA IN DATABASE
-    public boolean update(ProjectReport report) throws SQLException{
-        String query = "UPDATE " + config.getTable() + " SET project_id = ? WHERE id = ?";
+    public boolean update(UserReport report) throws SQLException{
+        String query = "UPDATE " + config.getTable() + " SET user_id = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, report);
@@ -92,7 +92,7 @@ public class ProjectReportDAO implements ProjectReportDAOInterface{
         return false;
     }
     //    DELETE DATA IN DATABASE
-    public boolean delete(ProjectReport report) throws SQLException{
+    public boolean delete(UserReport report) throws SQLException{
         return false;
     }
 }
