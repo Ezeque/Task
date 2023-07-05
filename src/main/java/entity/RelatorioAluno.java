@@ -12,7 +12,7 @@ public class RelatorioAluno extends UserReport {
         super(id_aluno);
     }
 
-    void setStructure(Map<String, Integer> metrics){
+    public void setStructure(Map<String, Integer> metrics){
         this.structure =  "==================================================================\n" +
                 "\t\t\tRelatório de Usuario\n" +
                 "==================================================================\n" +
@@ -23,8 +23,11 @@ public class RelatorioAluno extends UserReport {
 
     }
 
-    void show(Map<String, Integer> metrics){
+    public void getMetrics(Map<String, Integer> metrics){
         this.setStructure(metrics);
+    }
+
+    public void show(){
         System.out.println(this.structure);
     }
 }

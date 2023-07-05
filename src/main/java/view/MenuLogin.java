@@ -11,6 +11,7 @@ import service.RelatorioAlunoService;
 import tfw.Controller.UserController;
 
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MenuLogin implements MenuLoginInterface {
@@ -91,6 +92,12 @@ public class MenuLogin implements MenuLoginInterface {
         RelatorioAlunoController relatorioController = new RelatorioAlunoController(relatorioService);
         RelatorioAluno relatorio = new RelatorioAluno(alunoCadastrado.getId());
         relatorioController.saveRelatorio(relatorio);
+
+        //setar métricas do relatorio
+        RelatorioAluno relatorioBusca = new RelatorioAluno(alunoCadastrado.getId());
+        RelatorioAluno relatorioAluno = (RelatorioAluno) relatorioController.getReportByUserId(relatorioBusca);
+        Map<String, Integer> metricas = alunoCadastrado.setMetrics();
+        relatorioController.adicionarMetricas(relatorioAluno, metricas);
 
         //
         isLogged = true;

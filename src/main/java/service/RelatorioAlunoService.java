@@ -2,16 +2,18 @@ package service;
 
 import dao.RelatorioAlunoDAO;
 import database.DBConfigRelatorioAluno;
+import entity.Aluno;
 import entity.RelatorioAluno;
 import tfw.Entity.UserReport;
 import tfw.Service.UserReportService;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 public class RelatorioAlunoService extends UserReportService {
 
-    public RelatorioAlunoService(DBConfigRelatorioAluno dbConfig) {
-        super(dbConfig);
+    public RelatorioAlunoService(DBConfigRelatorioAluno config) {
+        super(config);
     }
 
     @Override
@@ -40,5 +42,31 @@ public class RelatorioAlunoService extends UserReportService {
     @Override
     public boolean validateDeletion(UserReport report) {
         return true;
+    }
+
+    public RelatorioAluno search(RelatorioAluno relatorio, int id_aluno){
+        if (validateSearch(relatorio)) {
+            RelatorioAlunoDAO dao = new RelatorioAlunoDAO(config);
+            RelatorioAluno returnRelatorio = new RelatorioAluno(0);
+            try{
+                returnRelatorio = (RelatorioAluno) dao.getReportByUserId(relatorio, id_aluno);
+            }
+            catch(SQLException e){
+                System.out.println(e);
+            }
+            return returnRelatorio;
+        }
+        return null;
+    }
+
+    public boolean adicionarMetricas(RelatorioAluno relatorio, Map<String, Integer> metricas){
+        RelatorioAlunoDAO dao = new RelatorioAlunoDAO(config);
+        boolean success = false;
+        try{
+            success = dao.adicionarMetricas(relatorio, metricas);
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return success;
     }
 }

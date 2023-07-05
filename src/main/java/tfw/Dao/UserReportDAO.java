@@ -61,7 +61,7 @@ public class UserReportDAO implements UserReportDAOInterface{
 
         return null;
     }
-    public UserReport getReportByUserId(UserReport report) throws SQLException{
+    public UserReport getReportByUserId(UserReport report, int user_id) throws SQLException{
         String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
         ps = con.prepareStatement(query);
@@ -70,7 +70,7 @@ public class UserReportDAO implements UserReportDAOInterface{
         while (rs.next()) {
             UserReport returnReport = buildReport(report, rs);
 
-            if(returnReport.getUserId() == report.getUserId()) {
+            if(returnReport.getUserId() == user_id) {
                 return returnReport;
             }
 

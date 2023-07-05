@@ -2,10 +2,15 @@ package controller;
 
 import dao.RelatorioAlunoDAO;
 import database.DBConfigRelatorioAluno;
+import entity.Aluno;
+import entity.Plano;
 import entity.RelatorioAluno;
 import service.RelatorioAlunoService;
 import tfw.Controller.UserReportController;
 import tfw.Service.UserReportService;
+
+import java.sql.SQLException;
+import java.util.Map;
 
 public class RelatorioAlunoController extends UserReportController {
 
@@ -23,4 +28,13 @@ public class RelatorioAlunoController extends UserReportController {
     public boolean saveRelatorio(RelatorioAluno report){
         return  this.service.validateCreation(report);
     }
+
+    public RelatorioAluno SearchRelatorioAluno(RelatorioAluno relatorio, RelatorioAlunoService service, Aluno aluno) {
+        return service.search(relatorio, aluno.getId());
+    }
+
+    public boolean adicionarMetricas(RelatorioAluno relatorio, Map<String, Integer> metricas){
+        return service.adicionarMetricas(relatorio, metricas);
+    }
+
 }

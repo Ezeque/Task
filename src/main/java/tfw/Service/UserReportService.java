@@ -10,10 +10,10 @@ public abstract class UserReportService {
 
     private UserReportDAO dao;
 
-    private DatabaseConfiguration dbconfig;
+    public DatabaseConfiguration config;
     public UserReportService(DatabaseConfiguration dbconfig){
-        this.dbconfig = dbconfig;
-        this.dao = new UserReportDAO(this.dbconfig);
+        this.config = dbconfig;
+        this.dao = new UserReportDAO(this.config);
     }
 
     public abstract boolean validateCreation(UserReport report);
@@ -46,11 +46,11 @@ public abstract class UserReportService {
         return report;
     }
 
-    public UserReport getReportByUserId(UserReport report){
+    public UserReport getReportByUserId(UserReport report, int user_id){
 
         if(validateSearch(report)){
             try {
-                report =  dao.getReportByUserId(report);
+                report =  dao.getReportByUserId(report, user_id);
             } catch (SQLException e) {
                 System.out.println(e);
             }
