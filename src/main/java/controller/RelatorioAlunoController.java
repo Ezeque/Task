@@ -37,4 +37,8 @@ public class RelatorioAlunoController extends UserReportController {
         return service.adicionarMetricas(relatorio, metricas);
     }
 
+    public Map<String, Integer> getMetrics(RelatorioAluno relatorio){
+        return service.getMetrics(relatorio);
+    }
+
 }

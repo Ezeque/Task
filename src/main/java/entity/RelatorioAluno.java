@@ -23,7 +23,7 @@ public class RelatorioAluno extends UserReport {
 
     }
 
-    public void getMetrics(Map<String, Integer> metrics){
+    public void setMetrics(Map<String, Integer> metrics){
         this.setStructure(metrics);
     }
 

@@ -6,6 +6,8 @@ import entity.Aluno;
 import entity.RelatorioAluno;
 import service.RelatorioAlunoService;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 public class MenuRelatorios implements MenuInterface {
@@ -25,6 +27,9 @@ public class MenuRelatorios implements MenuInterface {
             service = new RelatorioAlunoService(config);
              controller = new RelatorioAlunoController(service);
             relatorio =  controller.SearchRelatorioAluno(relatorio, service, aluno);
+            Map<String, Integer> metrics = new HashMap<>();
+            metrics = controller.getMetrics(relatorio);
+            relatorio.setMetrics(metrics);
             relatorio.show();
         }
     }

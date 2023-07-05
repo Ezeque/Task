@@ -8,6 +8,7 @@ import tfw.Entity.UserReport;
 import tfw.Service.UserReportService;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class RelatorioAlunoService extends UserReportService {
@@ -68,5 +69,16 @@ public class RelatorioAlunoService extends UserReportService {
             System.out.println(e);
         }
         return success;
+    }
+
+    public Map<String, Integer> getMetrics(RelatorioAluno relatorio){
+        Map<String, Integer> metrics = new HashMap<>();
+        try{
+            RelatorioAlunoDAO dao = new RelatorioAlunoDAO(config);
+            metrics = dao.getMetrics(relatorio);
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+        return metrics;
     }
 }
