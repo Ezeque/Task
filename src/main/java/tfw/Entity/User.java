@@ -60,7 +60,7 @@ public abstract class User {
         return this.id;
     }
 
-    public abstract Map<String, Object> setMetrics();
+    public abstract Map<String, Integer> setMetrics();
 
 
 }

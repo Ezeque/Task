@@ -8,7 +8,7 @@ import java.sql.Connection;
 
 public class DBConfigExercicio extends DatabaseConfiguration {
     public DBConfigExercicio() {
-        super("ezequiel", "", "exercicio", "planit", "mysql");
+        super("root", "V3r3@dor3sMYSQL", "exercicio", "planit", "mysql");
     }
 
     @Override

@@ -9,11 +9,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserReportDAO implements UserReportDAOInterface{
-    Connection con;
-    DatabaseConfiguration config;
+    protected Connection con;
+    protected DatabaseConfiguration config;
 
-    public UserReportDAO(){
-        con = config.connect();
+    public UserReportDAO(DatabaseConfiguration config){
+
+        this.config = config;
+        this.con = config.connect();
     }
 
     public PreparedStatement buildFullStatement(PreparedStatement pst, UserReport report) throws SQLException {

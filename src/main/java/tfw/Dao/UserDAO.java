@@ -42,6 +42,7 @@ public class UserDAO implements UserDaoInterface {
         return pst;
     }
 
+
     @Override
     public boolean create(User user) throws SQLException {
         Connection con = config.connect();

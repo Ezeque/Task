@@ -23,6 +23,9 @@ public class UserController extends UserControllerAbstract{
     public User getUserByName(User user){
         return this.service.getUserByName(user);
     }
+    public User getUserByEmail(User user){
+        return this.service.getUserByEmail(user);
+    }
     public User login(User user){
         return this.service.login(user);
     }

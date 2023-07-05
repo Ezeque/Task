@@ -8,11 +8,12 @@ import java.sql.SQLException;
 
 public abstract class UserReportService {
 
-    private UserReportDAO dao = new UserReportDAO();
+    private UserReportDAO dao;
 
     private DatabaseConfiguration dbconfig;
     public UserReportService(DatabaseConfiguration dbconfig){
         this.dbconfig = dbconfig;
+        this.dao = new UserReportDAO(this.dbconfig);
     }
 
     public abstract boolean validateCreation(UserReport report);

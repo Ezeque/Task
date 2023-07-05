@@ -2,6 +2,7 @@ package entity;
 
 import tfw.Entity.User;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Aluno extends User {
@@ -17,8 +18,13 @@ public class Aluno extends User {
     }
 
     @Override
-    public Map<String, Object> setMetrics() {
-        return null;
+    public Map<String, Integer> setMetrics() {
+        Map<String, Integer> metrics = new HashMap<>();
+        metrics.put("media_de_exercicios_treino", 0);
+        metrics.put("n_treinos", 0);
+        metrics.put("dias_seguidos", 0);
+
+        return metrics;
     }
 
     public void setPlano(Plano plano) {

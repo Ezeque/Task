@@ -2,8 +2,15 @@ package tfw.Controller;
 
 
 import tfw.Entity.UserReport;
+import tfw.Service.UserReportService;
 
 public class UserReportController extends UserReportControllerAbstract{
+
+    UserReportService service;
+
+    public UserReportController(UserReportService service){
+        this.service = service;
+    }
     @Override
     public boolean create(UserReport report){
         return service.create(report);

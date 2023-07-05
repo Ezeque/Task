@@ -8,11 +8,11 @@ import java.sql.Connection;
 
 public class DBConfigTreino extends DatabaseConfiguration {
     public DBConfigTreino() {
-        super("ezequiel", "", "treino", "planit", "mysql");
+        super("root", "V3r3@dor3sMYSQL", "treino", "planit", "mysql");
     }
 
     public DBConfigTreino(String host) {
-        super("ezequiel", "", "treino", "planit", "mysql", host);
+        super("root", "V3r3@dor3sMYSQL", "treino", "planit", "mysql", host);
     }
 
     @Override

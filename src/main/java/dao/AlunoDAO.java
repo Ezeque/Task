@@ -1,7 +1,10 @@
 package dao;
 
+import database.DBConfigAluno;
+import database.DBConfigRelatorioAluno;
 import entity.Aluno;
 import entity.Plano;
+import entity.RelatorioAluno;
 import tfw.Dao.UserDAO;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.Project;
@@ -37,6 +40,7 @@ public class AlunoDAO extends UserDAO {
 
         return false;
     }
+
 
     public Plano getProjectByAluno(Plano plano, Aluno aluno) throws SQLException {
 

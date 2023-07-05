@@ -1,9 +1,13 @@
 package view;
 
 import controller.AlunoController;
+import controller.RelatorioAlunoController;
 import database.DBConfigAluno;
+import database.DBConfigRelatorioAluno;
 import entity.Aluno;
+import entity.RelatorioAluno;
 import service.AlunoService;
+import service.RelatorioAlunoService;
 import tfw.Controller.UserController;
 
 import java.sql.SQLException;
@@ -69,6 +73,7 @@ public class MenuLogin implements MenuLoginInterface {
 
     // EXIBE O MENU DE REGISTRO DE USUÁRIOS
     public void cadastrar() {
+        //cria o usuario
         Scanner scanner = new Scanner(System.in);
         System.out.println("Login: ");
         String login = scanner.nextLine();
@@ -78,6 +83,16 @@ public class MenuLogin implements MenuLoginInterface {
         String senha = scanner.nextLine();
         alunoLogado = new Aluno(login, email, senha, 1);
         controller.create(alunoLogado);
+
+        //adiciona o relatorio do usuario
+        Aluno alunoCadastrado = (Aluno) controller.getUserByName(alunoLogado);
+        DBConfigRelatorioAluno relatorioConfig = new DBConfigRelatorioAluno();
+        RelatorioAlunoService relatorioService = new RelatorioAlunoService(relatorioConfig);
+        RelatorioAlunoController relatorioController = new RelatorioAlunoController(relatorioService);
+        RelatorioAluno relatorio = new RelatorioAluno(alunoCadastrado.getId());
+        relatorioController.saveRelatorio(relatorio);
+
+        //
         isLogged = true;
         DBConfigAluno dbConfigAluno = new DBConfigAluno();
         AlunoService alunoService = new AlunoService(dbConfigAluno);

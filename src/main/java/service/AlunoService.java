@@ -40,6 +40,14 @@ public class AlunoService extends UserService {
         return false;
     }
 
+    @Override
+    public boolean validateSearchByEmail(User user) {
+        if (user.getEmail().length() > 1) {
+            return true;
+        }
+        return false;
+    }
+
     public boolean validateLogin(User user) {
         if (user.getName().length() > 1 && user.getPassword().length() > 1) {
             return true;

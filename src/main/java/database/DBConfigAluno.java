@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class DBConfigAluno extends DatabaseConfiguration {
 
     public DBConfigAluno() {
-        super("ezequiel", "", "aluno", "planit", "mysql");
+        super("root", "V3r3@dor3sMYSQL", "aluno", "planit", "mysql");
     }
     @Override
     public Connection connect(){

@@ -39,6 +39,7 @@ public abstract class UserService {
     public abstract boolean validateCreation(User user);
     public abstract boolean validateSearch(User user);
     public abstract boolean validateSearchByName(User user);
+    public abstract boolean validateSearchByEmail(User user);
     public abstract boolean validateLogin(User user);
     public abstract boolean validateUpdate(User user);
     public abstract boolean validateDeletion(User user);
@@ -74,6 +75,19 @@ public abstract class UserService {
     public User getUserByName(User user){
 
         if(validateSearchByName(user)){
+            try {
+                UserDAO dao = new UserDAO(this.dbconfig);
+                user =  dao.getUserById(user);
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        return user;
+    }
+
+    public User getUserByEmail(User user){
+
+        if(validateSearchByEmail(user)){
             try {
                 UserDAO dao = new UserDAO(this.dbconfig);
                 user =  dao.getUserById(user);
