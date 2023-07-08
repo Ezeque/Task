@@ -1,8 +1,8 @@
 package Dao;
 
 import Database.DatabaseConfiguration;
+import Entity.ConcreteUser;
 import Entity.User;
-import entity.Aluno;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -126,7 +126,7 @@ public class UserDAO implements UserDaoInterface {
             String nome = res.getString("name");
             String email = res.getString("email");
             String senha = res.getString("password");
-            return new Aluno(nome, email, senha, id);
+            return new ConcreteUser(nome, email, senha, id);
         }
         return null;
     }
