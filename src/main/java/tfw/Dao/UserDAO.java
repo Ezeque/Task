@@ -147,17 +147,14 @@ public class UserDAO implements UserDaoInterface {
 
     public User getUserByName(User user) throws SQLException {
         Connection con = config.connect();
-        String query = "SELECT * FROM " + config.getTable();
-        PreparedStatement ps;
-        ps = con.prepareStatement(query);
+        String query = "SELECT * FROM " + config.getTable() + " WHERE name = ?;";
+        PreparedStatement ps = con.prepareStatement(query);
+        ps.setString(1, user.getName());
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
             User returnUser = buildUser(user, rs);
-            if (returnUser.getName() == user.getName()) {
-                return returnUser;
-            }
-
+            return returnUser;
         }
         return null;
     }
