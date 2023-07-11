@@ -144,4 +144,21 @@ public class UserDAO implements UserDaoInterface {
         }
         return false;
     }
+
+    public User getUserByName(User user) throws SQLException {
+        Connection con = config.connect();
+        String query = "SELECT * FROM " + config.getTable();
+        PreparedStatement ps;
+        ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            User returnUser = buildUser(user, rs);
+            if (returnUser.getName() == user.getName()) {
+                return returnUser;
+            }
+
+        }
+        return null;
+    }
 }

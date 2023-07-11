@@ -18,4 +18,6 @@ public interface UserDaoInterface {
     public boolean delete(User user) throws SQLException;
 
     User login(User user) throws SQLException;
+
+    public User getUserByName(User user) throws SQLException;
 }
