@@ -17,6 +17,10 @@ public class Login implements Menu {
         switch (opcao) {
             case 1:
                 login();
+                break;
+            case 2:
+                signIn();
+                break;
         }
     }
 
@@ -24,14 +28,27 @@ public class Login implements Menu {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Login:");
         String login = scanner.nextLine();
-        System.out.println("Email:");
-        String email = scanner.nextLine();
         System.out.println("Senha:");
         String senha = scanner.nextLine();
-        Usuario user = new Usuario(login, email, senha);
+        Usuario user = new Usuario(login, "", senha);
         DBConfigUsuario config = new DBConfigUsuario();
         UserService service = new UsuarioService(config);
         UserController controller = new UserController(service);
         controller.login(user);
+    }
+
+    public void signIn() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Login:");
+        String login = scanner.nextLine();
+        System.out.println("Email:");
+        String email = scanner.nextLine();
+        System.out.println("Senha:");
+        String senha = scanner.nextLine();
+        Usuario user = new Usuario(login, "", senha);
+        DBConfigUsuario config = new DBConfigUsuario();
+        UserService service = new UsuarioService(config);
+        UserController controller = new UserController(service);
+        controller.create(user);
     }
 }
