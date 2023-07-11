@@ -1,9 +1,9 @@
 import view.Login;
-import view.Menu;
+import view.MenuLogin;
 
 public class Main {
     public static void main(String[] args) {
-        Menu login = new Login();
+        MenuLogin login = new Login();
         login.show();
     }
 }

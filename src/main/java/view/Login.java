@@ -8,7 +8,7 @@ import tfw.Service.UserService;
 
 import java.util.Scanner;
 
-public class Login implements Menu {
+public class Login implements MenuLogin {
     @Override
     public void show() {
         Scanner scanner = new Scanner(System.in);
@@ -35,6 +35,9 @@ public class Login implements Menu {
         UserService service = new UsuarioService(config);
         UserController controller = new UserController(service);
         controller.login(user);
+        user = (Usuario) controller.getUserByName(user);
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.show(user);
     }
 
     public void signIn() {
@@ -50,5 +53,8 @@ public class Login implements Menu {
         UserService service = new UsuarioService(config);
         UserController controller = new UserController(service);
         controller.create(user);
+        user = (Usuario) controller.getUserByName(user);
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.show(user);
     }
 }

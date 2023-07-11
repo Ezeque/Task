@@ -1,5 +1,7 @@
 package view;
 
+import entity.Usuario;
+
 public interface Menu {
-    public void show();
+    public void show(Usuario usuario);
 }
