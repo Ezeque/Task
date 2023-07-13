@@ -4,7 +4,7 @@ import tfw.Entity.User;
 import tfw.Service.UserService;
 
 public abstract class UserControllerAbstract {
-    UserService service;
+    protected UserService service;
 
     public UserControllerAbstract(UserService service) {
         this.service = service;

@@ -5,8 +5,22 @@ import tfw.Entity.User;
 import java.util.Map;
 
 public class Funcionario extends User {
+
+    private int gerente;
     public Funcionario(){
 
+    }
+
+    public int getStatus(){
+        return gerente;
+    }
+
+    public boolean eGerente(){
+        return gerente == 1;
+    }
+
+    public void setStatus(int gerente){
+        this.gerente = gerente;
     }
     public Funcionario(String name, String email, String password, int id) {
         super(name, email, password, id);

@@ -100,4 +100,28 @@ public class FuncionarioService extends UserService {
     public boolean validateDeletion(User user) {
         return true;
     }
+
+    public boolean setStatus(Funcionario funcionario){
+        boolean success = false;
+
+        try{
+            success = dao.setStatus(funcionario);
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+
+        return success;
+    }
+
+    public int getStatus(Funcionario funcionario){
+        int status = -1;
+
+        try{
+            status = dao.getStatus(funcionario);
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+
+        return status;
+    }
 }

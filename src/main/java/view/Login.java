@@ -1,5 +1,6 @@
 package view;
 
+import Controller.FuncionarioController;
 import database.DBConfigFuncionario;
 import entity.Funcionario;
 import service.FuncionarioService;
@@ -12,13 +13,14 @@ import java.util.Scanner;
 public class Login implements MenuLogin {
     DBConfigFuncionario config = new DBConfigFuncionario();
     UserService service = new FuncionarioService(config);
-    UserController controller = new UserController(service);
-    User funcionarioLogado;
+    FuncionarioController controller = new FuncionarioController(service);
+    Funcionario funcionarioLogado;
+    Scanner scanner = new Scanner(System.in);
+
     @Override
     public void show() {
         boolean login = false;
         while(!login){
-            Scanner scanner = new Scanner(System.in);
             System.out.println("Bem vindo ao SuportMaster!");
             System.out.println("Possui cadastro? (s/n)");
             String opcao = scanner.nextLine();
@@ -27,7 +29,7 @@ public class Login implements MenuLogin {
                     login = login();
                     break;
                 case "n":
-                    signIn();
+                    signUp();
                     break;
             }
         }
@@ -35,7 +37,6 @@ public class Login implements MenuLogin {
 
     public boolean login() {
         boolean success = false;
-        Scanner scanner = new Scanner(System.in);
 
         System.out.println("Login:");
         String login = scanner.nextLine();
@@ -45,20 +46,24 @@ public class Login implements MenuLogin {
 
         Funcionario user = new Funcionario(login, "", senha);
 
-        this.funcionarioLogado = controller.login(user);
-        if(funcionarioLogado == null){
+        User userLogado = controller.login(user);
+
+        if(userLogado == null){
             return false;
         }
+
+        this.funcionarioLogado = controller.UserToFuncionario(userLogado);
+        funcionarioLogado.setStatus(controller.getStatus(user));
+        
         user = (Funcionario) controller.getUserByName(user);
         MenuPrincipal menu = new MenuPrincipal();
         menu.show(user);
         return true;
     }
 
-    public void signIn() {
-        Scanner scanner = new Scanner(System.in);
-
+    public Funcionario usuarioSignUp(){
         System.out.println("Login:");
+        scanner.nextLine();
         String login = scanner.nextLine();
 
         System.out.println("Email:");
@@ -68,10 +73,46 @@ public class Login implements MenuLogin {
         String senha = scanner.nextLine();
 
         Funcionario user = new Funcionario(login, "", senha);
+        return user;
+    }
 
+    public void gerenteSignUp(){
+
+        Funcionario user = usuarioSignUp();
         controller.create(user);
+
         user = (Funcionario) controller.getUserByName(user);
+        controller.setStatus(user, 1);
+
         MenuPrincipal menu = new MenuPrincipal();
         menu.show(user);
+    }
+
+    public void funcionarioSignUp(){
+        Funcionario user = usuarioSignUp();
+
+        controller.create(user);
+
+        user = (Funcionario) controller.getUserByName(user);
+        controller.setStatus(user, 0);
+
+        MenuPrincipal menu = new MenuPrincipal();
+        menu.show(user);
+    }
+
+
+    public void signUp() {
+        System.out.println("Qual tipo de conta deseja cadastrar?");
+        System.out.println("[1] Gerente");
+        System.out.println("[2] Funcionario");
+        int opcao = scanner.nextInt();
+
+        if(opcao == 1){
+            this.gerenteSignUp();
+        }
+        else{
+            this.funcionarioSignUp();
+        }
+
     }
 }

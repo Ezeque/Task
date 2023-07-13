@@ -9,7 +9,7 @@ public class MenuPrincipal implements Menu {
     public void show(Funcionario funcionario) {
         Scanner scanner = new Scanner(System.in);
         Menu menu;
-        System.out.println(funcionario.getName() + "\n");
+        System.out.println("Bem vindo(a) " + funcionario.getName() + "!\n");
         System.out.println("1) Projetos \n2) Perfil \n3) Sair");
         int opcao = scanner.nextInt();
         switch (opcao) {
