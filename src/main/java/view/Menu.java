@@ -1,7 +1,7 @@
 package view;
 
-import entity.Usuario;
+import entity.Funcionario;
 
 public interface Menu {
-    public void show(Usuario usuario);
+    public void show(Funcionario funcionario);
 }

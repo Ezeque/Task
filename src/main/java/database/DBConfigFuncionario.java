@@ -4,9 +4,9 @@ import tfw.Database.DatabaseConfiguration;
 
 import java.sql.Connection;
 
-public class DBConfigUsuario extends DatabaseConfiguration {
-    public DBConfigUsuario() {
-        super("ezequiel", "", "usuario", "planit", "mysql");
+public class DBConfigFuncionario extends DatabaseConfiguration {
+    public DBConfigFuncionario() {
+        super("root", "V3r3@dor3sMYSQL", "funcionario", "planit", "mysql");
     }
 
     @Override
