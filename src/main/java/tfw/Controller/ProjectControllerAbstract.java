@@ -6,6 +6,12 @@ import tfw.Service.ProjectService;
 import java.sql.SQLException;
 
 public abstract class ProjectControllerAbstract {
+    ProjectService service;
+
+    public ProjectControllerAbstract(ProjectService service) {
+        this.service = service;
+    }
+
     public abstract void PrintProject(Project project);
 
     public abstract boolean deleteProject(Project project, ProjectService service) throws SQLException;

@@ -7,8 +7,8 @@ import java.sql.SQLException;
 
 public class ProjectController extends ProjectControllerAbstract {
 
-    public ProjectController() {
-        super();
+    public ProjectController(ProjectService service) {
+        super(service);
     }
 
     @Override
