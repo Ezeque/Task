@@ -4,7 +4,6 @@ import Controller.FuncionarioController;
 import database.DBConfigFuncionario;
 import entity.Funcionario;
 import service.FuncionarioService;
-import tfw.Controller.UserController;
 import tfw.Entity.User;
 import tfw.Service.UserService;
 
@@ -54,10 +53,16 @@ public class Login implements MenuLogin {
 
         this.funcionarioLogado = controller.UserToFuncionario(userLogado);
         funcionarioLogado.setStatus(controller.getStatus(user));
-        
-        user = (Funcionario) controller.getUserByName(user);
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.show(user);
+
+        if(funcionarioLogado.eGerente()){
+            MenuGerente menu = new MenuGerente();
+            menu.show(funcionarioLogado);
+        }
+        else{
+            MenuFuncionario menu = new MenuFuncionario();
+            menu.show(funcionarioLogado);
+        }
+
         return true;
     }
 
@@ -72,7 +77,7 @@ public class Login implements MenuLogin {
         System.out.println("Senha:");
         String senha = scanner.nextLine();
 
-        Funcionario user = new Funcionario(login, "", senha);
+        Funcionario user = new Funcionario(login, email, senha);
         return user;
     }
 
@@ -84,8 +89,11 @@ public class Login implements MenuLogin {
         user = (Funcionario) controller.getUserByName(user);
         controller.setStatus(user, 1);
 
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.show(user);
+        this.funcionarioLogado = controller.UserToFuncionario(user);
+        funcionarioLogado.setStatus(controller.getStatus(user));
+
+        MenuGerente menu = new MenuGerente();
+        menu.show(funcionarioLogado);
     }
 
     public void funcionarioSignUp(){
@@ -96,8 +104,12 @@ public class Login implements MenuLogin {
         user = (Funcionario) controller.getUserByName(user);
         controller.setStatus(user, 0);
 
-        MenuPrincipal menu = new MenuPrincipal();
-        menu.show(user);
+        this.funcionarioLogado = controller.UserToFuncionario(user);
+        funcionarioLogado.setStatus(controller.getStatus(user));
+
+
+        MenuFuncionario menu = new MenuFuncionario();
+        menu.show(funcionarioLogado);
     }
 
 
