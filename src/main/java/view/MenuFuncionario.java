@@ -14,8 +14,8 @@ public class MenuFuncionario implements Menu {
         int opcao = scanner.nextInt();
         switch (opcao) {
             case 1:
-                menu = new MenuSetor(funcionario);
-                menu.show(funcionario);
+//                menu = new MenuSetores(funcionario);
+//                menu.show(funcionario);
                 break;
             case 2:
 //                menu = new MenuFuncionario(funcionario);
