@@ -1,6 +1,5 @@
 package tfw.Service;
 
-import dao.ProjetoDAO;
 import entity.Usuario;
 import tfw.Dao.ProjectDAO;
 import tfw.Dao.ProjectDAOInterface;
@@ -59,7 +58,7 @@ public abstract class ProjectService {
 
     public ArrayList<Project> getProjects(Usuario user) {
         try {
-            ProjetoDAO dao = new ProjetoDAO(config);
+            ProjectDAO dao = new ProjectDAO(config);
             return dao.getUserProjects(user);
         } catch (SQLException e) {
             System.out.println(e);

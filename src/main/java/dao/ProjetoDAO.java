@@ -24,7 +24,7 @@ public class ProjetoDAO extends ProjectDAO {
         String query = "INSERT INTO " + config.getTable() + " (name, id, userId) VALUES (?,?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
-        pst = buildFullStatement(pst, project);
+        pst = buildFullStatement(pst, project, user);
 
         int res = pst.executeUpdate();
 

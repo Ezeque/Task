@@ -1,8 +1,12 @@
 package service;
 
+import dao.ProjetoDAO;
+import entity.Usuario;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.Project;
 import tfw.Service.ProjectService;
+
+import java.sql.SQLException;
 
 public class ProjetoService extends ProjectService {
     public ProjetoService(DatabaseConfiguration config) {
@@ -27,5 +31,13 @@ public class ProjetoService extends ProjectService {
     @Override
     public boolean validateDeletion(Project project) {
         return true;
+    }
+
+    public boolean create(Project project, Usuario user) throws SQLException {
+        if (validateCreation(project)) {
+            ProjetoDAO dao = new ProjetoDAO(config);
+            return dao.create(project, user);
+        }
+        return false;
     }
 }
