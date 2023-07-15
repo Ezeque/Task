@@ -1,12 +1,15 @@
 package tfw.Dao;
 
+import entity.Usuario;
 import tfw.Database.DatabaseConfiguration;
+import tfw.Entity.ConcreteProject;
 import tfw.Entity.Project;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ProjectDAO implements ProjectDAOInterface {
     protected Connection con;
@@ -74,6 +77,21 @@ public class ProjectDAO implements ProjectDAOInterface {
 
         }
         return null;
+    }
+
+    public ArrayList<Project> getUserProjects(Usuario user) throws SQLException {
+        ArrayList<Project> projetos = new ArrayList<Project>();
+        String query = "SELECT * FROM " + config.getTable() + " WHERE userId = ?";
+        PreparedStatement ps;
+        ps = con.prepareStatement(query);
+        ps.setInt(1, user.getId());
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Project returnProject = new ConcreteProject(rs.getString(2), rs.getInt(4));
+            projetos.add(returnProject);
+        }
+        return projetos;
     }
 
     public boolean update(Project project) throws SQLException {
