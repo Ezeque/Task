@@ -1,11 +1,14 @@
 package tfw.Service;
 
+import dao.ProjetoDAO;
+import entity.Usuario;
 import tfw.Dao.ProjectDAO;
 import tfw.Dao.ProjectDAOInterface;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.Project;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public abstract class ProjectService {
     public DatabaseConfiguration config;
@@ -52,5 +55,15 @@ public abstract class ProjectService {
             return dao.delete(project.getId());
         }
         return false;
+    }
+
+    public ArrayList<Project> getProjects(Usuario user) {
+        try {
+            ProjetoDAO dao = new ProjetoDAO(config);
+            return dao.getUserProjects(user);
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        }
     }
 }

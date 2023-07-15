@@ -6,7 +6,7 @@ import tfw.Service.ProjectService;
 import java.sql.SQLException;
 
 public abstract class ProjectControllerAbstract {
-    ProjectService service;
+    protected ProjectService service;
 
     public ProjectControllerAbstract(ProjectService service) {
         this.service = service;
