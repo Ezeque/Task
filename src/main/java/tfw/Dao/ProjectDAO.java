@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class ProjectDAO implements ProjectDAOInterface {
     protected Connection con;
@@ -77,7 +78,7 @@ public class ProjectDAO implements ProjectDAOInterface {
     }
 
     public boolean update(Project project) throws SQLException {
-        String query = "UPDATE project SET " + "name = ? WHERE id = ?";
+        String query = "UPDATE " + config.getTable() + " SET  name = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, project);
@@ -89,5 +90,20 @@ public class ProjectDAO implements ProjectDAOInterface {
         }
 
         return false;
+    }
+
+    public ArrayList<Project> getAll(Project project) throws SQLException{
+        String query = "SELECT * FROM " + config.getTable();
+        ArrayList<Project> projects = new ArrayList<Project>();
+        PreparedStatement ps;
+        ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()){
+            Project returnProject = buildProject(project, rs);
+            projects.add(returnProject);
+        }
+
+        return projects;
     }
 }
