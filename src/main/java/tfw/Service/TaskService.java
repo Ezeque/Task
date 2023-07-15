@@ -3,6 +3,7 @@ package tfw.Service;
 import tfw.Dao.TaskDAO;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.ConcreteTask;
+import tfw.Entity.Project;
 import tfw.Entity.Task;
 import tfw.Entity.User;
 
@@ -68,5 +69,15 @@ public abstract class TaskService {
             return dao.delete(task.getId());
         }
         return false;
+    }
+
+    public ArrayList<ConcreteTask> searchAllProjectTasks(Project project) {
+        TaskDAO dao = new TaskDAO(this.dbConfig);
+        try {
+            return dao.getTasksByProject(project);
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+        return null;
     }
 }

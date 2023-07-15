@@ -1,6 +1,7 @@
 package tfw.Controller;
 
 import tfw.Entity.ConcreteTask;
+import tfw.Entity.Project;
 import tfw.Entity.Task;
 import tfw.Entity.User;
 import tfw.Service.TaskService;
@@ -35,6 +36,10 @@ public class TaskController extends TaskControllerAbstract {
 
     public ArrayList<ConcreteTask> getAllUserTasks(User user) throws SQLException {
         return service.searchAllTasks(user);
+    }
+
+    public ArrayList<ConcreteTask> getAllProjectTasks(Project project) throws SQLException {
+        return service.searchAllProjectTasks(project);
     }
 
     @Override

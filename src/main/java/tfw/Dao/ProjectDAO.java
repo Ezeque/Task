@@ -88,7 +88,7 @@ public class ProjectDAO implements ProjectDAOInterface {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            Project returnProject = new ConcreteProject(rs.getString(2), rs.getInt(4));
+            Project returnProject = new ConcreteProject(rs.getInt("id"), rs.getString("name"), rs.getInt("userId"));
             projetos.add(returnProject);
         }
         return projetos;

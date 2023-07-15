@@ -2,11 +2,17 @@ package view;
 
 import controller.ProjetoController;
 import database.DBConfigProjeto;
+import database.DBConfigTarefa;
 import entity.Usuario;
 import service.ProjetoService;
+import service.TarefaService;
+import tfw.Controller.TaskController;
 import tfw.Entity.ConcreteProject;
+import tfw.Entity.ConcreteTask;
 import tfw.Entity.Project;
+import tfw.Entity.Task;
 import tfw.Service.ProjectService;
+import tfw.Service.TaskService;
 
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -47,6 +53,9 @@ public class MenuProjetos implements Menu {
                 menuPrincipal.show(usuario);
             } else if (opcao == index - 1) {
                 criarProjeto(usuario);
+            } else if (opcao < index - 1) {
+                Project projeto = projetos.get(opcao);
+                gerenciarProjeto(projeto);
             }
         } else {
             System.out.println("Não há projetos para esse usuário. Deseja criar um novo projeto? \n1) Sim \n2) Não");
@@ -55,6 +64,34 @@ public class MenuProjetos implements Menu {
                 case 1:
                     criarProjeto(usuario);
             }
+        }
+    }
+
+    private void gerenciarProjeto(Project projeto) {
+        int opcao;
+        Scanner scanner = new Scanner(System.in);
+        System.out.println(projeto.getName() + ":");
+        DBConfigTarefa config = new DBConfigTarefa();
+        TaskService service = new TarefaService(config);
+        TaskController controller = new TaskController(service);
+        try {
+            MenuTarefas menuTarefas = new MenuTarefas(service);
+            ArrayList<ConcreteTask> tarefas = controller.getAllProjectTasks(projeto);
+            if (tarefas != null) {
+                for (Task tarefa :
+                        tarefas) {
+                    System.out.println("[" + tarefas.indexOf(tarefa) + "] " + tarefa.getName());
+                }
+            } else {
+                System.out.println("Não há tarefas neste projeto. Deseja criar uma nova tarefa? \n1) Sim \n2) Não");
+                opcao = scanner.nextInt();
+                switch (opcao) {
+                    case 1:
+                        menuTarefas.criarTarefa(projeto);
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 

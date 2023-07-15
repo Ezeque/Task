@@ -5,6 +5,14 @@ public class ConcreteTask extends Task {
         super(name, type);
     }
 
+    public ConcreteTask(String name, int userID) {
+        super(name, userID);
+    }
+
+    public ConcreteTask(int projectID, String name) {
+        super(projectID, name);
+    }
+
     public ConcreteTask(int id, String name, String type) {
         super(id, name, type);
     }

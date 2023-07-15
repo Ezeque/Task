@@ -12,7 +12,7 @@ public class TarefaService extends TaskService {
 
     @Override
     public boolean validateCreation(Task task) {
-        return false;
+        return true;
     }
 
     @Override

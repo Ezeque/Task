@@ -2,6 +2,7 @@ package tfw.Dao;
 
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.ConcreteTask;
+import tfw.Entity.Project;
 import tfw.Entity.Task;
 import tfw.Entity.User;
 
@@ -32,6 +33,7 @@ public class TaskDAO implements TaskDAOInterface {
         pst.setString(2, task.getType());
         pst.setInt(3, task.getId());
         pst.setInt(4, task.getUserID());
+        pst.setInt(5, task.getProjectID());
         return pst;
     }
 
@@ -47,8 +49,13 @@ public class TaskDAO implements TaskDAOInterface {
         return pst;
     }
 
+    public PreparedStatement buildFullStatementTasksByProject(PreparedStatement pst, Project project) throws SQLException {
+        pst.setInt(1, project.getId());
+        return pst;
+    }
+
     public boolean create(Task task) throws SQLException {
-        String query = "INSERT INTO " + config.getTable() + " (name, type, id, userId) VALUES (?,?,?,?)";
+        String query = "INSERT INTO " + config.getTable() + " (name, type, id, userId, project_id) VALUES (?,?,?,?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, task);
@@ -127,5 +134,26 @@ public class TaskDAO implements TaskDAOInterface {
         }
 
         return false;
+    }
+
+    @Override
+    public ArrayList<ConcreteTask> getTasksByProject(Project project) throws SQLException {
+        ArrayList<ConcreteTask> tasks = new ArrayList<ConcreteTask>();
+        String query = "SELECT * FROM " + config.getTable() + " WHERE project_id = ?";
+        PreparedStatement pst;
+        pst = con.prepareStatement(query);
+        pst = buildFullStatementTasksByProject(pst, project);
+
+        ResultSet res = pst.executeQuery();
+        while (res.next()) {
+            int id = res.getInt("id");
+            String name = res.getString("name");
+            String type = res.getString("type");
+            tasks.add(new ConcreteTask(id, name, type));
+        }
+        if (tasks.size() > 0) {
+            return tasks;
+        }
+        return null;
     }
 }

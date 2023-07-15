@@ -34,6 +34,16 @@ public abstract class Task {
         this.userID = userId;
     }
 
+    public Task(String name, int userID) {
+        this.name = name;
+        this.userID = projectID;
+    }
+
+    public Task(int projectID, String name) {
+        this.name = name;
+        this.projectID = projectID;
+    }
+
     public Task(String name, String type, int userId) {
         this.name = name;
         this.type = type;
