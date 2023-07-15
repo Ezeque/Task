@@ -7,6 +7,7 @@ import tfw.Entity.User;
 import tfw.Service.UserService;
 
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 
 public class FuncionarioService extends UserService {
     FuncionarioDAO dao;
@@ -123,5 +124,17 @@ public class FuncionarioService extends UserService {
         }
 
         return status;
+    }
+
+    public boolean adicionarFuncionarioSetor(Funcionario funcionario, int setor_id){
+        boolean success = false;
+
+        try{
+            success = dao.adicionarFuncionarioSetor(funcionario, setor_id);
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+
+        return true;
     }
 }

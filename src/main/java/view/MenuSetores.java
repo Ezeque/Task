@@ -107,7 +107,12 @@ public class MenuSetores implements Menu{
 
         int opcao = scanner.nextInt();
         if(opcao < funcionarios.size()){
-            //chama funcao de adicionar usuario a projeto em UsuarioController
+            if(funcController.adicionarFuncionarioSetor(funcionarios.get(opcao), setor.getId())){
+                System.out.println("Funcionario adicionado com sucesso!");
+            }
+            else{
+                System.out.println("Não foi possível adicionar o funcionário");
+            }
         }
 
 

@@ -31,6 +31,22 @@ public class FuncionarioDAO extends UserDAO {
         return false;
     }
 
+    public boolean adicionarFuncionarioSetor(Funcionario funcionario, int id_setor) throws SQLException{
+        Connection con = config.connect();
+        String query = "UPDATE " + config.getTable() + " SET id_setor = ? WHERE id = ?";
+        PreparedStatement pst;
+        pst = con.prepareStatement(query);
+        pst.setInt(1, id_setor);
+        pst.setInt(2, funcionario.getId());
+        int res = pst.executeUpdate();
+
+        if (res == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
     public int getStatus(Funcionario funcionario) throws SQLException {
         Connection con = config.connect();
         String query = "SELECT * FROM " + config.getTable() + " WHERE name = ?;";

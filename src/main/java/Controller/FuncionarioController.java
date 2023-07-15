@@ -62,5 +62,9 @@ public class FuncionarioController extends UserController {
         return funcionarios;
     }
 
+    public boolean adicionarFuncionarioSetor(Funcionario funcionario, int setor_id){
+        return funcService.adicionarFuncionarioSetor(funcionario, setor_id);
+    }
+
 
 }
