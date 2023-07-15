@@ -2,12 +2,14 @@ package tfw.Dao;
 
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.ConcreteUser;
+import tfw.Entity.Project;
 import tfw.Entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserDAO implements UserDaoInterface {
 
@@ -157,5 +159,20 @@ public class UserDAO implements UserDaoInterface {
             return returnUser;
         }
         return null;
+    }
+
+    public ArrayList<User> getAll(User user) throws SQLException{
+        String query = "SELECT * FROM " + config.getTable();
+        ArrayList<User> users = new ArrayList<User>();
+        PreparedStatement ps;
+        ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()){
+            User returnUser = buildUser(user, rs);
+            users.add(returnUser);
+        }
+
+        return users;
     }
 }

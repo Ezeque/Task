@@ -3,6 +3,7 @@ package tfw.Dao;
 import tfw.Entity.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface UserDaoInterface {
     //    CREATES ENTRIES IN DATABASE
@@ -20,4 +21,6 @@ public interface UserDaoInterface {
     User login(User user) throws SQLException;
 
     public User getUserByName(User user) throws SQLException;
+
+    public ArrayList<User> getAll(User user) throws SQLException;
 }

@@ -3,6 +3,8 @@ package tfw.Controller;
 import tfw.Entity.User;
 import tfw.Service.UserService;
 
+import java.util.ArrayList;
+
 public abstract class UserControllerAbstract {
     protected UserService service;
 
@@ -20,6 +22,8 @@ public abstract class UserControllerAbstract {
 
     //    DELETE DATA IN DATABASE
     public abstract boolean delete(User user);
+
+    public abstract ArrayList<User> getAllUsers(User user);
 
 
 }

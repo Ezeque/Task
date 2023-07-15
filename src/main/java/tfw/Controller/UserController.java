@@ -1,7 +1,10 @@
 package tfw.Controller;
 
+import tfw.Entity.Project;
 import tfw.Entity.User;
 import tfw.Service.UserService;
+
+import java.util.ArrayList;
 
 public class UserController extends UserControllerAbstract {
 
@@ -42,5 +45,10 @@ public class UserController extends UserControllerAbstract {
     @Override
     public boolean delete(User user) {
         return this.service.delete(user);
+    }
+
+    @Override
+    public ArrayList<User> getAllUsers(User user){
+        return service.getAllUsers(user);
     }
 }

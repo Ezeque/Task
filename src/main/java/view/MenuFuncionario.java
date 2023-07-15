@@ -10,16 +10,14 @@ public class MenuFuncionario implements Menu {
         Scanner scanner = new Scanner(System.in);
         Menu menu;
         System.out.println("Bem vindo(a) " + funcionario.getName() + "!\n");
-        System.out.println("1) Tarefas \n2) Perfil \n3) Sair");
+        System.out.println("1) Chamado \n2) Perfil \n3) Sair");
         int opcao = scanner.nextInt();
         switch (opcao) {
             case 1:
-//                menu = new MenuSetores(funcionario);
-//                menu.show(funcionario);
+                //chamar menu chamados
                 break;
             case 2:
-//                menu = new MenuFuncionario(funcionario);
-//                menu.show(funcionario);
+                //chamar menu Perfil
                 break;
             case 3:
                 System.exit(0);
