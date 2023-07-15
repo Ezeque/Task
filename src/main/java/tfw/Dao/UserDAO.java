@@ -161,7 +161,7 @@ public class UserDAO implements UserDaoInterface {
         return null;
     }
 
-    public ArrayList<User> getAll(User user) throws SQLException{
+    public ArrayList<User> getAll() throws SQLException{
         String query = "SELECT * FROM " + config.getTable();
         ArrayList<User> users = new ArrayList<User>();
         PreparedStatement ps;
@@ -169,8 +169,24 @@ public class UserDAO implements UserDaoInterface {
         ResultSet rs = ps.executeQuery();
 
         while(rs.next()){
-            User returnUser = buildUser(user, rs);
+            User returnUser = new ConcreteUser(rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getInt("id"), rs.getInt("id_setor"));
             users.add(returnUser);
+        }
+
+        return users;
+    }
+
+    public ArrayList<User> getAllUsersByProjectId(int project_id) throws SQLException{
+        String query = "SELECT * FROM " + config.getTable();
+        ArrayList<User> users = new ArrayList<>();
+        PreparedStatement ps;
+        ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()){
+            User returnUser = new ConcreteUser(rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getInt("id"), rs.getInt("id_setor"));
+            if(returnUser.getIdSetor() == project_id) users.add(returnUser);
+
         }
 
         return users;

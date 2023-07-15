@@ -2,6 +2,7 @@ package Controller;
 
 import database.DBConfigFuncionario;
 import entity.Funcionario;
+import entity.Setor;
 import service.FuncionarioService;
 import tfw.Controller.UserController;
 import tfw.Database.DatabaseConfiguration;
@@ -47,6 +48,7 @@ public class FuncionarioController extends UserController {
         funcionario.setId(user.getId());
         funcionario.setPassword(user.getPassword());
         funcionario.setEmail(user.getEmail());
+        funcionario.setIdSetor(user.getIdSetor());
 
         return funcionario;
     }
@@ -65,6 +67,7 @@ public class FuncionarioController extends UserController {
     public boolean adicionarFuncionarioSetor(Funcionario funcionario, int setor_id){
         return funcService.adicionarFuncionarioSetor(funcionario, setor_id);
     }
+
 
 
 }

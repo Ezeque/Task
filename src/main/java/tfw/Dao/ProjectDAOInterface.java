@@ -1,6 +1,7 @@
 package tfw.Dao;
 
 import tfw.Entity.Project;
+import tfw.Entity.User;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -14,5 +15,6 @@ public interface ProjectDAOInterface {
 
     public boolean update(Project project) throws SQLException;
 
-    public ArrayList<Project> getAll(Project project) throws SQLException;
+    public ArrayList<Project> getAll() throws SQLException;
+
 }

@@ -38,7 +38,7 @@ public class ProjectController extends ProjectControllerAbstract {
     }
 
     @Override
-    public ArrayList<Project> getAllProjects(Project project){
-        return service.getAllProjecs(project);
+    public ArrayList<Project> getAllProjects(){
+        return service.getAllProjecs();
     }
 }

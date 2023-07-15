@@ -71,11 +71,11 @@ public abstract class ProjectService {
         return false;
     }
 
-    public ArrayList<Project> getAllProjecs(Project project){
+    public ArrayList<Project> getAllProjecs(){
         ArrayList<Project> projects = new ArrayList<Project>();
         ProjectDAOInterface dao = new ProjectDAO(config);
         try{
-            projects = dao.getAll(project);
+            projects = dao.getAll();
         }catch(SQLException e){
             System.out.println(e);
         }

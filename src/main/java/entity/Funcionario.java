@@ -42,4 +42,11 @@ public class Funcionario extends User {
     public Map<String, Integer> setMetrics() {
         return null;
     }
+
+    public void printFuncionario(){
+        System.out.println("Nome: " + getName());
+        System.out.println("Email: " + getEmail());
+        if(gerente == 1) System.out.println("É Gerente: sim");
+        if(gerente == 9) System.out.println("É Gerente: não");
+    }
 }

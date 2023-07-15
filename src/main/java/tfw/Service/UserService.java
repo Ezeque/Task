@@ -152,14 +152,29 @@ public abstract class UserService {
         return null;
     }
 
-    public ArrayList<User> getAllUsers(User user){
+    public ArrayList<User> getAllUsers(){
         ArrayList<User> users = new ArrayList<User>();
         UserDaoInterface dao = new UserDAO(dbconfig);
+
         try{
-            users = dao.getAll(user);
+            users = dao.getAll();
         }catch(SQLException e){
             System.out.println(e);
         }
+
+        return users;
+    }
+
+    public ArrayList<User> getAllUsersByProjectId(int project_id){
+        ArrayList<User> users = new ArrayList<>();
+        UserDaoInterface dao = new UserDAO(dbconfig);
+
+        try{
+            users = dao.getAllUsersByProjectId(project_id);
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+
         return users;
     }
 }

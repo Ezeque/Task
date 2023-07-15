@@ -23,5 +23,5 @@ public abstract class ProjectControllerAbstract {
 
     public abstract boolean updateProject(Project project);
 
-    public abstract ArrayList<Project> getAllProjects(Project project);
+    public abstract ArrayList<Project> getAllProjects();
 }

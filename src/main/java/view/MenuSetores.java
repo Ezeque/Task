@@ -71,7 +71,7 @@ public class MenuSetores implements Menu{
         boolean sair = false;
 
         while(!sair){
-            System.out.println("1) Adicionar Chamado \n2) Adicionar Funcionario \n3) Sair");
+            System.out.println("1) Adicionar Chamado \n2) Adicionar Funcionario \n3) Visualizar Funcionários do Setor \n4) Sair");
 
             int opcao = scanner.nextInt();
             switch (opcao){
@@ -82,6 +82,9 @@ public class MenuSetores implements Menu{
                     this.addFuncionario(setor);
                     break;
                 case 3:
+                    this.viewFuncionariosSetor(setor);
+                    break;
+                case 4:
                     sair = true;
                     break;
             }
@@ -92,12 +95,33 @@ public class MenuSetores implements Menu{
 
     }
 
+    public void viewFuncionariosSetor(Setor setor){
+        ArrayList<User> users = new ArrayList<>();
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        users = funcController.getAllUsersByProjectId(setor.getId());
+        funcionarios = funcController.usersToFuncionarios(users);
+        
+        if(funcionarios.size() == 0){
+            System.out.println("Não há funcionários neste setor!");
+            return;
+        }
+        System.out.println("\t\t\t[Funcionários]");
+        for(int i=0; i<funcionarios.size(); i++){
+            System.out.println(i + ") " + funcionarios.get(i).getName());
+        }
+        System.out.println(funcionarios.size() + ") Sair");
+        int opcao = scanner.nextInt();
+        if(opcao < funcionarios.size()){
+            funcionarios.get(opcao).printFuncionario();
+        }
+        System.out.println();
+    }
+
     public void addFuncionario(Setor setor){
         System.out.println("Selecione o funcionario que deseja adicionar ao setor");
         ArrayList<Funcionario> funcionarios = new ArrayList<Funcionario>();
         ArrayList<User>  users = new ArrayList<User>();
-        Funcionario funcionario = new Funcionario();
-        users = funcController.getAllUsers(funcionario);
+        users = funcController.getAllUsers();
         funcionarios = funcController.usersToFuncionarios(users);
 
         for(int i=0; i<funcionarios.size(); i++){
@@ -119,21 +143,27 @@ public class MenuSetores implements Menu{
     }
 
     public void viewSetores(){
-        Setor setor = new Setor("");
         ArrayList<Setor> setores = new ArrayList<Setor>();
         ArrayList<Project> projetos = new ArrayList<Project>();
-        projetos = controller.getAllProjects(setor);
+        projetos = controller.getAllProjects();
         setores = controller.projectsToSetores(projetos);
 
+        if(setores.size() == 0){
+            System.out.println("Nenhum setor foi criado.");
+            return;
+        }
+        System.out.println("\t\t\t[Setores]");
         for(int i=0; i<setores.size(); i++){
             System.out.println(i + ") " + setores.get(i).getName());
         }
         System.out.println(setores.size() + ") Sair");
 
         int opcao = scanner.nextInt();
+
         if(opcao < setores.size()){
             this.showOptions(setores.get(opcao));
         }
+
 
     }
 

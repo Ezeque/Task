@@ -7,11 +7,23 @@ import java.util.Map;
 public abstract class Project {
     private String name;
     private int id;
+    protected int userId;
     private ProjectControllerAbstract controller;
 
     public Project(int id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public Project(int id, String name, int userId) {
+        this.id = id;
+        this.name = name;
+        this.userId = userId;
+    }
+
+    public Project(String name, int userId) {
+        this.name = name;
+        this.userId = userId;
     }
 
     public Project(String name) {

@@ -1,5 +1,6 @@
 package tfw.Dao;
 
+import tfw.Entity.Project;
 import tfw.Entity.User;
 
 import java.sql.SQLException;
@@ -22,5 +23,7 @@ public interface UserDaoInterface {
 
     public User getUserByName(User user) throws SQLException;
 
-    public ArrayList<User> getAll(User user) throws SQLException;
+    public ArrayList<User> getAll() throws SQLException;
+
+    public ArrayList<User> getAllUsersByProjectId(int project_id) throws SQLException;
 }

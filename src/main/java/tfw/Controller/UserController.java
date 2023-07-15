@@ -48,7 +48,12 @@ public class UserController extends UserControllerAbstract {
     }
 
     @Override
-    public ArrayList<User> getAllUsers(User user){
-        return service.getAllUsers(user);
+    public ArrayList<User> getAllUsers(){
+        return service.getAllUsers();
+    }
+
+    @Override
+    public ArrayList<User> getAllUsersByProjectId(int project_id){
+        return service.getAllUsersByProjectId(project_id);
     }
 }

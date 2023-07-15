@@ -1,5 +1,6 @@
 package tfw.Controller;
 
+import tfw.Entity.Project;
 import tfw.Entity.User;
 import tfw.Service.UserService;
 
@@ -23,7 +24,9 @@ public abstract class UserControllerAbstract {
     //    DELETE DATA IN DATABASE
     public abstract boolean delete(User user);
 
-    public abstract ArrayList<User> getAllUsers(User user);
+    public abstract ArrayList<User> getAllUsers();
+
+    public abstract ArrayList<User> getAllUsersByProjectId(int project_id);
 
 
 }
