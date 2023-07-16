@@ -92,11 +92,17 @@ public class MenuProjetos implements Menu {
                 System.out.println(index + ") Sair");
                 opcao = scanner.nextInt();
                 if (opcao < index - 2) {
-                    tarefas.get(opcao);
+                    Task tarefa = tarefas.get(opcao);
+                    menuTarefas.gerenciarTarefa(tarefa);
+                    gerenciarProjeto(projeto);
                 } else if (opcao == index - 2) {
                     menuTarefas.criarTarefa(projeto);
+                    gerenciarProjeto(projeto);
+                    show(usuario);
                 } else if (opcao == index - 1) {
                     this.controller.deleteProject(projeto, this.service);
+                    gerenciarProjeto(projeto);
+                    show(usuario);
                 }
             } else {
                 System.out.println("Não há tarefas neste projeto. Deseja criar uma nova tarefa? \n1) Sim \n2) Não");
