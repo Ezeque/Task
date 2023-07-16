@@ -20,8 +20,10 @@ public abstract class ProjectControllerAbstract {
     public abstract boolean createProject(Project project);
 
     public abstract Project SearchProject(Project project);
+    public abstract Project getProjectByName(Project project);
 
     public abstract boolean updateProject(Project project);
 
     public abstract ArrayList<Project> getAllProjects();
+
 }

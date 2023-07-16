@@ -10,6 +10,7 @@ public interface ProjectDAOInterface {
     public boolean create(Project project) throws SQLException;
 
     public Project getProjectById(Project project) throws SQLException;
+    public Project getProjectByName(Project project) throws SQLException;
 
     public boolean delete(int id) throws SQLException;
 

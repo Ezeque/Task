@@ -33,6 +33,11 @@ public class ProjectController extends ProjectControllerAbstract {
     }
 
     @Override
+    public Project getProjectByName(Project project){
+        return service.getProjectByName(project);
+    }
+
+    @Override
     public boolean updateProject(Project project){
         return service.update(project);
     }
@@ -41,4 +46,5 @@ public class ProjectController extends ProjectControllerAbstract {
     public ArrayList<Project> getAllProjects(){
         return service.getAllProjecs();
     }
+
 }

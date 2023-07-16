@@ -14,31 +14,31 @@ public class TaskController extends TaskControllerAbstract {
     }
 
     @Override
-    public void PrintTask(Task task, TaskService service) {
+    public void PrintTask(Task task) {
         System.out.println(task.getName());
     }
 
     @Override
-    public boolean deleteTask(Task task, TaskService service) throws SQLException {
+    public boolean deleteTask(Task task){
         return service.delete(task);
     }
 
     @Override
-    public boolean createTask(Task task, TaskService service) throws SQLException {
+    public boolean createTask(Task task){
         return service.create(task);
     }
 
     @Override
-    public Task SearchTask(Task task, TaskService service) throws SQLException {
+    public Task SearchTask(Task task){
         return service.search(task);
     }
 
-    public ArrayList<ConcreteTask> getAllUserTasks(User user) throws SQLException {
+    public ArrayList<ConcreteTask> getAllUserTasks(User user){
         return service.searchAllTasks(user);
     }
 
     @Override
-    public boolean updateTask(Task task, TaskService service) throws SQLException {
+    public boolean updateTask(Task task){
         return service.update(task);
     }
 }

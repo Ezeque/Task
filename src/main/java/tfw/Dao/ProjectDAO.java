@@ -79,6 +79,21 @@ public class ProjectDAO implements ProjectDAOInterface {
         return null;
     }
 
+    public Project getProjectByName(Project project) throws SQLException {
+        String query = "SELECT * FROM " + config.getTable();
+        PreparedStatement ps;
+        ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Project returnProject = buildProject(project, rs);
+            if (returnProject.getName().equals(project.getName())) {
+                return returnProject;
+            }
+
+        }
+        return null;
+    }
     public boolean update(Project project) throws SQLException {
         String query = "UPDATE " + config.getTable() + " SET  name = ? WHERE id = ?";
         PreparedStatement pst;

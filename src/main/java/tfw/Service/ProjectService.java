@@ -47,6 +47,18 @@ public abstract class ProjectService {
         return null;
     }
 
+    public Project getProjectByName(Project project){
+        if (validateSearch(project)) {
+            ProjectDAOInterface dao = new ProjectDAO(config);
+            try {
+                return dao.getProjectByName(project);
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        return null;
+    }
+
     public boolean update(Project project){
         if (validateUpdate(project)) {
             ProjectDAOInterface dao = new ProjectDAO(config);
@@ -81,4 +93,5 @@ public abstract class ProjectService {
         }
         return projects;
     }
+
 }

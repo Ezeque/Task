@@ -12,13 +12,13 @@ public abstract class TaskControllerAbstract {
         this.service = service;
     }
 
-    public abstract void PrintTask(Task task, TaskService service);
+    public abstract void PrintTask(Task task);
 
-    public abstract boolean deleteTask(Task task, TaskService service) throws SQLException;
+    public abstract boolean deleteTask(Task task);
 
-    public abstract boolean createTask(Task task, TaskService service) throws SQLException;
+    public abstract boolean createTask(Task task);
 
-    public abstract Task SearchTask(Task task, TaskService service) throws SQLException;
+    public abstract Task SearchTask(Task task);
 
-    public abstract boolean updateTask(Task task, TaskService service) throws SQLException;
+    public abstract boolean updateTask(Task task);
 }
