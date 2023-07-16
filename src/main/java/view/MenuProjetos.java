@@ -77,10 +77,26 @@ public class MenuProjetos implements Menu {
         try {
             MenuTarefas menuTarefas = new MenuTarefas(service);
             ArrayList<ConcreteTask> tarefas = controller.getAllProjectTasks(projeto);
+            int index = 0;
             if (tarefas != null) {
                 for (Task tarefa :
                         tarefas) {
-                    System.out.println("[" + tarefas.indexOf(tarefa) + "] " + tarefa.getName());
+                    System.out.println("[" + index + "] " + tarefa.getName());
+                    index++;
+                }
+                System.out.println("_________________");
+                System.out.println(index + ") Criar Nova tarefa");
+                index++;
+                System.out.println(index + ") Excluir Projeto");
+                index++;
+                System.out.println(index + ") Sair");
+                opcao = scanner.nextInt();
+                if (opcao < index - 2) {
+                    tarefas.get(opcao);
+                } else if (opcao == index - 2) {
+                    menuTarefas.criarTarefa(projeto);
+                } else if (opcao == index - 1) {
+                    this.controller.deleteProject(projeto, this.service);
                 }
             } else {
                 System.out.println("Não há tarefas neste projeto. Deseja criar uma nova tarefa? \n1) Sim \n2) Não");
@@ -88,6 +104,8 @@ public class MenuProjetos implements Menu {
                 switch (opcao) {
                     case 1:
                         menuTarefas.criarTarefa(projeto);
+                        gerenciarProjeto(projeto);
+                        break;
                 }
             }
         } catch (Exception e) {
