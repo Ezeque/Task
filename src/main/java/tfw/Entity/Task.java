@@ -5,12 +5,12 @@ import tfw.Controller.TaskControllerAbstract;
 public abstract class Task {
     private String name;
     private int id;
-    private String type;
-    private String status;
+    private String type="";
+    private String status="em andamento";
     private TaskControllerAbstract controller;
     private int userID = 0;
     private int projectID = 0;
-    private String description;
+    private String description="";
 
     public Task(){
 
@@ -24,6 +24,15 @@ public abstract class Task {
 
     }
 
+    public Task(int id, String name, String description, int projectId, int userId, String status){
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.userID = userId;
+        this.projectID = projectId;
+        this.status = status;
+
+    }
     public Task(String name, String type) {
         this.name = name;
         this.type = type;

@@ -40,7 +40,8 @@ public class TaskDAO implements TaskDAOInterface {
     public PreparedStatement buildFullStatementUpdate(PreparedStatement pst, Task task) throws SQLException {
         pst.setString(1, task.getName());
         pst.setString(2, task.getType());
-        pst.setInt(3, task.getId());
+        pst.setString(3, task.getStatus());
+        pst.setInt(4, task.getId());
         return pst;
     }
 
@@ -105,13 +106,15 @@ public class TaskDAO implements TaskDAOInterface {
 
         ResultSet res = pst.executeQuery();
         while (res.next()) {
+            int id = res.getInt("id");
             String description = res.getString("description");
             String name = res.getString("name");
             String type = res.getString("type");
             int project_id = res.getInt("projectId");
             int user_id = res.getInt("userId");
+            String status = res.getString("status");
 
-            tasks.add(new ConcreteTask(name, description, project_id, user_id));
+            tasks.add(new ConcreteTask(id, name, description, project_id, user_id, status));
         }
         if (tasks.size() > 0) {
             return tasks;
@@ -127,13 +130,15 @@ public class TaskDAO implements TaskDAOInterface {
 
         ResultSet res = pst.executeQuery();
         while (res.next()) {
+            int id = res.getInt("id");
             String description = res.getString("description");
             String name = res.getString("name");
             String type = res.getString("type");
             int project_id = res.getInt("projectId");
             int user_id = res.getInt("userId");
+            String status = res.getString("status");
 
-            tasks.add(new ConcreteTask(name, description, project_id, user_id));
+            tasks.add(new ConcreteTask(id, name, description, project_id, user_id, status));
         }
         if (tasks.size() > 0) {
             return tasks;
@@ -142,7 +147,7 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     public boolean update(Task task) throws SQLException {
-        String query = "UPDATE " + config.getTable() + " SET " + "name = ?, type = ? WHERE id = ?";
+        String query = "UPDATE " + config.getTable() + " SET " + "name = ?, type = ?, status = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatementUpdate(pst, task);

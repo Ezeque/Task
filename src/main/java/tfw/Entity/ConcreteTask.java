@@ -17,6 +17,9 @@ public class ConcreteTask extends Task {
         super(name, description, projectId, userId);
     }
 
+    public ConcreteTask(int id, String name, String description, int projectId, int userId, String status){
+        super(id, name, description, projectId, userId, status);
+    }
 
     public ConcreteTask(int id, String name, String type, int userId) {
         super(id, name, type, userId);

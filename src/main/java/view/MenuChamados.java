@@ -70,6 +70,7 @@ public class MenuChamados implements Menu{
         int funcionarioId = this.viewFuncionariosSetor(setorId);
 
         Chamado chamado = new Chamado(nome, descricao, setorId, funcionarioId);
+        chamado.setStatus("em andamento");
         if(controller.createTask(chamado)){
             System.out.println("Chamado criado com sucesso!");
             return true;
@@ -79,6 +80,11 @@ public class MenuChamados implements Menu{
             return false;
         }
 
+    }
+
+    public boolean markAsCompleted(Chamado chamado){
+
+        return true;
     }
 
     public int viewSetores(){
@@ -135,14 +141,26 @@ public class MenuChamados implements Menu{
         System.out.println("\t\t\t[Meus Chamados]");
 
         for(int i=0; i<chamados.size(); i++){
-            System.out.println(i + ") " + chamados.get(i).getName());
+            if(chamados.get(i).getStatus().equals("em andamento")) System.out.println(i + ") [] " + chamados.get(i).getName());
+            else if(chamados.get(i).getStatus().equals("finalizado")) System.out.println(i + ") [x] " + chamados.get(i).getName());
         }
         System.out.println(chamados.size() + ") Sair");
 
         int opcao = scanner.nextInt();
 
         if(opcao < chamados.size()){
-            chamados.get(opcao).printChamado();
+            Chamado chamado = chamados.get(opcao);
+            chamado.printChamado();
+            System.out.println("Marcar chamado como concluido? (s/n)");
+            scanner.nextLine();
+            String resposta = scanner.nextLine();
+            if(resposta.equals("s")){
+                chamado.setStatus("finalizado");
+                if(controller.updateTask(chamado)){
+                    System.out.println("Tarefa concluida!");
+                }
+            }
+
         }
         System.out.println();
     }
@@ -161,7 +179,8 @@ public class MenuChamados implements Menu{
         System.out.println("\t\t\t[Chamados]");
 
         for(int i=0; i<chamados.size(); i++){
-            System.out.println(i + ") " + chamados.get(i).getName());
+            if(chamados.get(i).getStatus().equals("em andamento")) System.out.println(i + ") [] " + chamados.get(i).getName());
+            if(chamados.get(i).getStatus().equals("finalizado")) System.out.println(i + ") [x] " + chamados.get(i).getName());
         }
         System.out.println(chamados.size() + ") Sair");
 
