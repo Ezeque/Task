@@ -16,6 +16,7 @@ import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.Project;
 import tfw.Entity.User;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class MenuChamados implements Menu{
@@ -36,7 +37,7 @@ public class MenuChamados implements Menu{
     public void show(Funcionario funcionario){
         boolean sair = false;
         while(!sair){
-            System.out.println("1) Criar Chamado \n2) Meus Chamados \n3) Todos os Chamados) \n4) Sair");
+            System.out.println("1) Criar Chamado \n2) Meus Chamados \n3) Todos os Chamados \n4) Sair");
             int opcao = scanner.nextInt();
             switch(opcao){
                 case 1:
@@ -62,23 +63,55 @@ public class MenuChamados implements Menu{
         String nome = scanner.nextLine();
         System.out.println("Digite a descrição do Chamado: ");
         String descricao = scanner.nextLine();
-        System.out.println("Digite o nome do Setor responsável: ");
-        String setorNome = scanner.nextLine();
-        System.out.println("Digite o nome do Funcionário responsável");
-        String funcionarioNome = scanner.nextLine();
+        System.out.println("Selecione o Setor responsável: ");
+        int setorId = this.viewSetores();
+        System.out.println("Selecione um Funcionário responsável");
+        int funcionarioId = this.viewFuncionariosSetor(setorId);
 
-        Setor setor = new Setor(setorNome);
-        Project project = setorController.getProjectByName(setor);
-        setor = setorController.projectToSetor(project);
-
-        Funcionario funcionario = new Funcionario();
-        funcionario.setName(funcionarioNome);
-        User user = funcionarioController.getUserByName(funcionario);
-        funcionario = funcionarioController.userToFuncionario(user);
-
-        Chamado chamado = new Chamado(nome, descricao, setor.getId(), funcionario.getId());
+        Chamado chamado = new Chamado(nome, descricao, setorId, funcionarioId);
         controller.createTask(chamado);
 
         return true;
+    }
+
+    public int viewSetores(){
+        ArrayList<Setor> setores = new ArrayList<Setor>();
+        ArrayList<Project> projetos = new ArrayList<Project>();
+        projetos = setorController.getAllProjects();
+        setores = setorController.projectsToSetores(projetos);
+
+        if(setores.size() == 0){
+            System.out.println("Nenhum setor foi criado.");
+            return -1;
+        }
+        System.out.println("\t\t\t[Setores]");
+        for(int i=0; i<setores.size(); i++){
+            System.out.println(i + ") " + setores.get(i).getName());
+        }
+
+        int opcao = scanner.nextInt();
+        return setores.get(opcao).getId();
+    }
+
+    public int viewFuncionariosSetor(int setor_id){
+        ArrayList<User> users = new ArrayList<>();
+        ArrayList<Funcionario> funcionarios = new ArrayList<>();
+        users = funcionarioController.getAllUsersByProjectId(setor_id);
+        funcionarios = funcionarioController.usersToFuncionarios(users);
+
+        if(funcionarios.size() == 0){
+            System.out.println("Não há funcionários neste setor!");
+            return -1;
+        }
+
+        System.out.println("\t\t\t[Funcionários]");
+
+        for(int i=0; i<funcionarios.size(); i++){
+            System.out.println(i + ") " + funcionarios.get(i).getName());
+        }
+
+        int opcao = scanner.nextInt();
+        return funcionarios.get(opcao).getId();
+
     }
 }

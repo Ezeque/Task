@@ -16,7 +16,7 @@ public abstract class Task {
 
     }
 
-    public Task(String nome, String description, int projectId, int userId){
+    public Task(String name, String description, int projectId, int userId){
         this.name = name;
         this.description = description;
         this.userID = userId;
