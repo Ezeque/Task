@@ -48,7 +48,7 @@ public class MenuChamados implements Menu{
                     this.viewMeusChamados(funcionario);
                     break;
                 case 3:
-                    //chamar funcao de exibir todos os chamados
+                    this.viewChamados();
                     break;
                 case 4:
                     sair = true;
@@ -145,5 +145,37 @@ public class MenuChamados implements Menu{
             chamados.get(opcao).printChamado();
         }
         System.out.println();
+    }
+
+    public void viewChamados(){
+        ArrayList<Task> tasks =  new ArrayList<>();
+        ArrayList<Chamado> chamados = new ArrayList<>();
+        tasks = controller.getAllTasks();
+
+        if(tasks == null){
+            System.out.println("Não há chamados cadastrados!");
+            return;
+        }
+        chamados = controller.tasksToChamados(tasks);
+
+        System.out.println("\t\t\t[Chamados]");
+
+        for(int i=0; i<chamados.size(); i++){
+            System.out.println(i + ") " + chamados.get(i).getName());
+        }
+        System.out.println(chamados.size() + ") Sair");
+
+        int opcao = scanner.nextInt();
+
+        if(opcao < chamados.size()){
+            chamados.get(opcao).printChamado();
+            Funcionario responsavel = new Funcionario();
+            responsavel.setId(chamados.get(opcao).getUserID());
+            User user = funcionarioController.getUserById(responsavel);
+            responsavel = funcionarioController.userToFuncionario(user);
+            System.out.println("Responsável: " + responsavel.getName());
+        }
+        System.out.println();
+
     }
 }

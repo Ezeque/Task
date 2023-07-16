@@ -119,6 +119,28 @@ public class TaskDAO implements TaskDAOInterface {
         return null;
     }
 
+    public ArrayList<Task> getAllTasks() throws SQLException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        String query = "SELECT * FROM " + config.getTable();
+        PreparedStatement pst;
+        pst = con.prepareStatement(query);
+
+        ResultSet res = pst.executeQuery();
+        while (res.next()) {
+            String description = res.getString("description");
+            String name = res.getString("name");
+            String type = res.getString("type");
+            int project_id = res.getInt("projectId");
+            int user_id = res.getInt("userId");
+
+            tasks.add(new ConcreteTask(name, description, project_id, user_id));
+        }
+        if (tasks.size() > 0) {
+            return tasks;
+        }
+        return null;
+    }
+
     public boolean update(Task task) throws SQLException {
         String query = "UPDATE " + config.getTable() + " SET " + "name = ?, type = ? WHERE id = ?";
         PreparedStatement pst;

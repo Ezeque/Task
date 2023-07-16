@@ -37,6 +37,10 @@ public class TaskController extends TaskControllerAbstract {
         return service.searchAllTasks(user);
     }
 
+    public ArrayList<Task> getAllTasks(){
+        return service.getAllTasks();
+    }
+
     @Override
     public boolean updateTask(Task task){
         return service.update(task);

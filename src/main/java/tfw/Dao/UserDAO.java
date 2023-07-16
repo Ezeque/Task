@@ -71,7 +71,7 @@ public class UserDAO implements UserDaoInterface {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            User returnUser = buildUser(user, rs);
+            User returnUser = new ConcreteUser(rs.getString("name"), rs.getString("name"), rs.getString("password"), rs.getInt("id"));
             if (returnUser.getId() == user.getId()) {
                 return returnUser;
             }

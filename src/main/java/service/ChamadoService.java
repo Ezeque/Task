@@ -11,6 +11,11 @@ public class ChamadoService extends TaskService {
         super(config);
     }
 
+    @Override
+    public boolean validateGetAllTask(){
+        return true;
+    }
+
 
     @Override
     public boolean validateCreation(Task task) {

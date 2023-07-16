@@ -61,7 +61,20 @@ public abstract class TaskService {
         return tasks;
     }
 
+    public ArrayList<Task> getAllTasks(){
+        TaskDAO dao = new TaskDAO(this.dbConfig);
+        ArrayList<Task> tasks = new ArrayList<>();
+        if (validateGetAllTask()) {
+            try{
+                tasks = dao.getAllTasks();
+            }catch(SQLException e){
+                System.out.println(e);
+            }
+        }
+        return tasks;
+    }
     protected abstract boolean validateAllTaskSearch(User user);
+    protected abstract boolean validateGetAllTask();
 
     public boolean update(Task task){
         TaskDAO dao = new TaskDAO(this.dbConfig);

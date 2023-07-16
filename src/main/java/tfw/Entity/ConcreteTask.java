@@ -14,7 +14,7 @@ public class ConcreteTask extends Task {
     }
 
     public ConcreteTask(String name, String description, int projectId, int userId){
-        super(name, description, userId, projectId);
+        super(name, description, projectId, userId);
     }
 
 

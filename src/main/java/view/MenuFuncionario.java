@@ -20,7 +20,7 @@ public class MenuFuncionario implements Menu {
                     this.menu.viewMeusChamados(funcionario);
                     break;
                 case 2:
-                    //chamar menu Perfil
+                    menu.viewChamados();
                     break;
                 case 3:
                     sair = true;
