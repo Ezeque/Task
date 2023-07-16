@@ -25,6 +25,8 @@ public class TaskDAO implements TaskDAOInterface {
         task.setName(rs.getString("name"));
         task.setId(rs.getInt("id"));
         task.setType(rs.getString("type"));
+        task.setDescription(rs.getString("description"));
+
         return task;
     }
 
@@ -34,6 +36,7 @@ public class TaskDAO implements TaskDAOInterface {
         pst.setInt(3, task.getId());
         pst.setInt(4, task.getUserID());
         pst.setInt(5, task.getProjectID());
+        pst.setString(6, task.getDescription());
         return pst;
     }
 
@@ -41,6 +44,7 @@ public class TaskDAO implements TaskDAOInterface {
         pst.setString(1, task.getName());
         pst.setString(2, task.getType());
         pst.setInt(3, task.getId());
+        pst.setString(4, task.getDescription());
         return pst;
     }
 
@@ -55,7 +59,7 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     public boolean create(Task task) throws SQLException {
-        String query = "INSERT INTO " + config.getTable() + " (name, type, id, userId, project_id) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO " + config.getTable() + " (name, type, id, userId, project_id, description) VALUES (?,?,?,?,?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, task);
@@ -113,7 +117,10 @@ public class TaskDAO implements TaskDAOInterface {
             int id = res.getInt("id");
             String name = res.getString("name");
             String type = res.getString("type");
-            tasks.add(new ConcreteTask(id, name, type));
+            String description = res.getString("description");
+            ConcreteTask task = new ConcreteTask(id, name, type);
+            task.setDescription(description);
+            tasks.add(task);
         }
         if (tasks.size() > 0) {
             return tasks;
@@ -122,7 +129,7 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     public boolean update(Task task) throws SQLException {
-        String query = "UPDATE " + config.getTable() + " SET " + "name = ?, type = ? WHERE id = ?";
+        String query = "UPDATE " + config.getTable() + " SET " + "name = ?, type = ?, description = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatementUpdate(pst, task);
@@ -149,7 +156,10 @@ public class TaskDAO implements TaskDAOInterface {
             int id = res.getInt("id");
             String name = res.getString("name");
             String type = res.getString("type");
-            tasks.add(new ConcreteTask(id, name, type));
+            String description = res.getString("description");
+            ConcreteTask task = new ConcreteTask(id, name, type);
+            task.setDescription(description);
+            tasks.add(task);
         }
         if (tasks.size() > 0) {
             return tasks;

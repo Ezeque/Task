@@ -9,6 +9,7 @@ public abstract class Task {
     private TaskControllerAbstract controller;
     private int userID = 0;
     private int projectID = 0;
+    private String description;
 
     public Task(String name, String type) {
         this.name = name;
@@ -88,5 +89,13 @@ public abstract class Task {
 
     public void setProjectID(int projectID) {
         this.projectID = projectID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
