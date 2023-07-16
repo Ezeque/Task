@@ -14,6 +14,7 @@ import service.FuncionarioService;
 import service.SetorService;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.Project;
+import tfw.Entity.Task;
 import tfw.Entity.User;
 
 import java.util.ArrayList;
@@ -44,7 +45,7 @@ public class MenuChamados implements Menu{
                     this.createChamado();
                     break;
                 case 2:
-                    //chamar funcao de exibir todos os chamados do usuario
+                    this.viewMeusChamados(funcionario);
                     break;
                 case 3:
                     //chamar funcao de exibir todos os chamados
@@ -69,9 +70,15 @@ public class MenuChamados implements Menu{
         int funcionarioId = this.viewFuncionariosSetor(setorId);
 
         Chamado chamado = new Chamado(nome, descricao, setorId, funcionarioId);
-        controller.createTask(chamado);
+        if(controller.createTask(chamado)){
+            System.out.println("Chamado criado com sucesso!");
+            return true;
+        }
+        else{
+            System.out.println("Não foi possível criar o chamado!");
+            return false;
+        }
 
-        return true;
     }
 
     public int viewSetores(){
@@ -113,5 +120,30 @@ public class MenuChamados implements Menu{
         int opcao = scanner.nextInt();
         return funcionarios.get(opcao).getId();
 
+    }
+
+    public void viewMeusChamados(Funcionario funcionario){
+        ArrayList<Task> tasks =  new ArrayList<>();
+        ArrayList<Chamado> chamados = new ArrayList<>();
+        tasks = controller.getAllUserTasks(funcionario);
+        if(tasks == null){
+            System.out.println("Não há chamados para você.");
+            return;
+        }
+        chamados = controller.tasksToChamados(tasks);
+
+        System.out.println("\t\t\t[Meus Chamados]");
+
+        for(int i=0; i<chamados.size(); i++){
+            System.out.println(i + ") " + chamados.get(i).getName());
+        }
+        System.out.println(chamados.size() + ") Sair");
+
+        int opcao = scanner.nextInt();
+
+        if(opcao < chamados.size()){
+            chamados.get(opcao).printChamado();
+        }
+        System.out.println();
     }
 }

@@ -33,6 +33,7 @@ public class TaskDAO implements TaskDAOInterface {
         pst.setInt(3, task.getId());
         pst.setInt(4, task.getProjectID());
         pst.setInt(5, task.getUserID());
+        pst.setString(6, task.getDescription());
         return pst;
     }
 
@@ -49,7 +50,7 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     public boolean create(Task task) throws SQLException {
-        String query = "INSERT INTO " + config.getTable() + " (name, type, id, projectId, userId) VALUES (?,?,?,?,?)";
+        String query = "INSERT INTO " + config.getTable() + " (name, type, id, projectId, userId, description) VALUES (?,?,?,?,?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, task);
@@ -95,8 +96,8 @@ public class TaskDAO implements TaskDAOInterface {
         return null;
     }
 
-    public ArrayList<ConcreteTask> getTasksByUser(User user) throws SQLException {
-        ArrayList<ConcreteTask> tasks = new ArrayList<ConcreteTask>();
+    public ArrayList<Task> getTasksByUser(User user) throws SQLException {
+        ArrayList<Task> tasks = new ArrayList<>();
         String query = "SELECT * FROM " + config.getTable() + " WHERE userId = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
@@ -104,10 +105,13 @@ public class TaskDAO implements TaskDAOInterface {
 
         ResultSet res = pst.executeQuery();
         while (res.next()) {
-            int id = res.getInt("id");
+            String description = res.getString("description");
             String name = res.getString("name");
             String type = res.getString("type");
-            tasks.add(new ConcreteTask(id, name, type));
+            int project_id = res.getInt("projectId");
+            int user_id = res.getInt("userId");
+
+            tasks.add(new ConcreteTask(name, description, project_id, user_id));
         }
         if (tasks.size() > 0) {
             return tasks;

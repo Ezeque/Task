@@ -58,7 +58,7 @@ public abstract class Task {
         this.description = description;
     }
 
-    public String getDescription(String description){
+    public String getDescription(){
         return this.description;
     }
     public void setStatus(String status){

@@ -48,9 +48,9 @@ public abstract class TaskService {
         return null;
     }
 
-    public ArrayList<ConcreteTask> searchAllTasks(User user){
+    public ArrayList<Task> searchAllTasks(User user){
         TaskDAO dao = new TaskDAO(this.dbConfig);
-        ArrayList<ConcreteTask> tasks = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         if (validateAllTaskSearch(user)) {
             try{
                 tasks = dao.getTasksByUser(user);

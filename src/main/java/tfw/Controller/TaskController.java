@@ -33,7 +33,7 @@ public class TaskController extends TaskControllerAbstract {
         return service.search(task);
     }
 
-    public ArrayList<ConcreteTask> getAllUserTasks(User user){
+    public ArrayList<Task> getAllUserTasks(User user){
         return service.searchAllTasks(user);
     }
 

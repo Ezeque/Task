@@ -13,4 +13,9 @@ public class Chamado extends Task {
         super();
     }
 
+    public void printChamado(){
+        System.out.println("Nome: " + this.getName());
+        System.out.println("Descrição: " + this.getDescription());
+    }
+
 }
