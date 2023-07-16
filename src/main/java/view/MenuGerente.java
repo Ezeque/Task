@@ -10,9 +10,9 @@ public class MenuGerente implements Menu {
     public void show(Funcionario funcionario) {
         boolean sair = false;
         Menu menu;
+        System.out.println("Bem vindo(a) " + funcionario.getName() + "!\n");
         while(!sair){
-            System.out.println("Bem vindo(a) " + funcionario.getName() + "!\n");
-            System.out.println("1) Setores \n2) Perfil \n3) Funcionarios \n4) Chamados \n5) Sair");
+            System.out.println("1) Setores \n2) Funcionarios \n3) Chamados \n4) Sair");
             int opcao = scanner.nextInt();
             switch (opcao) {
                 case 1:
@@ -20,17 +20,15 @@ public class MenuGerente implements Menu {
                     menu.show(funcionario);
                     break;
                 case 2:
-                    //chamar Menu Funcionario
-                    break;
-                case 3:
                     //chamar menu usuarios
                     break;
-                case 4:
-                    //chamar menu chamados
+                case 3:
+                    menu = new MenuChamados();
+                    menu.show(funcionario);
                     break;
-                case 5:
+                case 4:
                     sair = true;
-//                System.exit(0);
+                    break;
             }
         }
 

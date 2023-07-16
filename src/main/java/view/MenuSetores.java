@@ -71,18 +71,18 @@ public class MenuSetores implements Menu{
         boolean sair = false;
 
         while(!sair){
-            System.out.println("1) Adicionar Chamado \n2) Adicionar Funcionario \n3) Visualizar Funcionários do Setor \n4) Sair");
+            System.out.println("1) Adicionar Funcionario \n2) Visualizar Funcionários do Setor \n3) Visualizar Chamados do Setor \n4) Sair");
 
             int opcao = scanner.nextInt();
             switch (opcao){
                 case 1:
-                    this.addChamado(setor);
-                    break;
-                case 2:
                     this.addFuncionario(setor);
                     break;
-                case 3:
+                case 2:
                     this.viewFuncionariosSetor(setor);
+                    break;
+                case 3:
+                    //chamar funcao de visualizar chamados de um setor
                     break;
                 case 4:
                     sair = true;
@@ -91,16 +91,13 @@ public class MenuSetores implements Menu{
         }
     }
 
-    public void addChamado(Setor setor){
-
-    }
 
     public void viewFuncionariosSetor(Setor setor){
         ArrayList<User> users = new ArrayList<>();
         ArrayList<Funcionario> funcionarios = new ArrayList<>();
         users = funcController.getAllUsersByProjectId(setor.getId());
         funcionarios = funcController.usersToFuncionarios(users);
-        
+
         if(funcionarios.size() == 0){
             System.out.println("Não há funcionários neste setor!");
             return;
