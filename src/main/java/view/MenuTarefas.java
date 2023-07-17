@@ -28,6 +28,7 @@ public class MenuTarefas {
         System.out.println("Insira a Descrição da Tarefa:");
         String descricao = scanner.nextLine();
         task.setDescription(descricao);
+        task.setStatus("andamento");
         try {
             controller.createTask(task, service);
         } catch (Exception e) {

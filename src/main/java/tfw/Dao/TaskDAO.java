@@ -26,6 +26,7 @@ public class TaskDAO implements TaskDAOInterface {
         task.setId(rs.getInt("id"));
         task.setType(rs.getString("type"));
         task.setDescription(rs.getString("description"));
+        task.setDescription(rs.getString("status"));
 
         return task;
     }
@@ -37,6 +38,7 @@ public class TaskDAO implements TaskDAOInterface {
         pst.setInt(4, task.getUserID());
         pst.setInt(5, task.getProjectID());
         pst.setString(6, task.getDescription());
+        pst.setString(7, task.getStatus());
         return pst;
     }
 
@@ -59,7 +61,7 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     public boolean create(Task task) throws SQLException {
-        String query = "INSERT INTO " + config.getTable() + " (name, type, id, userId, project_id, description) VALUES (?,?,?,?,?,?)";
+        String query = "INSERT INTO " + config.getTable() + " (name, type, id, userId, project_id, description, status) VALUES (?,?,?,?,?,?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, task);
@@ -129,7 +131,7 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     public boolean update(Task task) throws SQLException {
-        String query = "UPDATE " + config.getTable() + " SET " + "name = ?, type = ?, description = ? WHERE id = ?";
+        String query = "UPDATE " + config.getTable() + " SET " + "name = ?, type = ?, description = ?, status = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatementUpdate(pst, task);
