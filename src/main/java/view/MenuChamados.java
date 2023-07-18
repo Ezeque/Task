@@ -82,11 +82,6 @@ public class MenuChamados implements Menu{
 
     }
 
-    public boolean markAsCompleted(Chamado chamado){
-
-        return true;
-    }
-
     public int viewSetores(){
         ArrayList<Setor> setores = new ArrayList<Setor>();
         ArrayList<Project> projetos = new ArrayList<Project>();

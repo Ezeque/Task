@@ -54,15 +54,15 @@ public class MenuSetores implements Menu{
     }
 
     public void createSetor(){
-        System.out.println("Digite o nome do projeto: ");
+        System.out.println("Digite o nome do setor: ");
         scanner.nextLine();
         String nome = scanner.nextLine();
         Setor setor = new Setor(nome);
         if(controller.createProject(setor)){
-            System.out.println("Projeto criado com sucesso!");
+            System.out.println("Setor criado com sucesso!");
         }
         else{
-            System.out.println("Não foi possível criar o projeto!");
+            System.out.println("Não foi possível criar o setor!");
         }
 
     }
