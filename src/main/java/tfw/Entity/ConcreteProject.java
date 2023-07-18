@@ -13,7 +13,7 @@ ConcreteProject extends Project {
     }
 
     @Override
-    public Map<String, Object> setMetrics() {
+    public Map<String, Integer> setMetrics() {
         return null;
     }
 }

@@ -22,10 +22,6 @@ public abstract class Project {
         this.userId = userId;
     }
 
-    public Project() {
-
-    }
-
     public int getId() {
         return id;
     }
@@ -43,5 +39,5 @@ public abstract class Project {
     }
 
     //RETURNS AN OBJECT CONTAINING THE METRICS USED TO MAKE A REPORT
-    public abstract Map<String, Object> setMetrics();
+    public abstract Map<String, Integer> setMetrics();
 }

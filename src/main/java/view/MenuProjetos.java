@@ -90,14 +90,20 @@ public class MenuProjetos implements Menu {
                 index++;
                 System.out.println(index + ") Excluir Projeto");
                 index++;
+                System.out.println(index + ") Gerar relatório do Projeto");
+                index++;
                 System.out.println(index + ") Sair");
                 opcao = scanner.nextInt();
-                if (opcao < index - 2) {
+                if (opcao < index - 4) {
                     Task tarefa = tarefas.get(opcao);
                     menuTarefas.gerenciarTarefa(tarefa);
                     gerenciarProjeto(projeto);
-                } else if (opcao == index - 2) {
+                } else if (opcao == index - 3) {
                     menuTarefas.criarTarefa(projeto);
+                    gerenciarProjeto(projeto);
+                    show(usuario);
+                } else if (opcao == index - 2) {
+                    this.controller.deleteProject(projeto, this.service);
                     gerenciarProjeto(projeto);
                     show(usuario);
                 } else if (opcao == index - 1) {
