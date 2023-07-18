@@ -28,7 +28,6 @@ public class MenuTarefas {
         System.out.println("Insira a Descrição da Tarefa:");
         String descricao = scanner.nextLine();
         task.setDescription(descricao);
-        task.setStatus("andamento");
         try {
             controller.createTask(task, service);
         } catch (Exception e) {
@@ -42,10 +41,57 @@ public class MenuTarefas {
         System.out.println("TAREFA: " + tarefa.getName());
         System.out.println("DESCRICAO: " + tarefa.getDescription());
         System.out.println("[1] Editar");
-        System.out.println("[2] Marcar Como Concluída");
+        if (tarefa.getStatus().equals("ongoing")) System.out.println("[2] Marcar Como Concluída");
+        else System.out.println("[2] Marcar Como Não Concluída");
         System.out.println("[3] Adicionar Participante");
         System.out.println("[4] Sair");
         opcao = scanner.nextInt();
+        switch (opcao) {
+            case 1 -> editarTarefa(tarefa);
+            case 2 -> atualizarStatus(tarefa);
+        }
 
+    }
+
+    public void atualizarStatus(Task tarefa) {
+        if (tarefa.getStatus().equals("ongoing")) {
+            tarefa.setStatus("finished");
+        } else if (tarefa.getStatus().equals("finished")) {
+            tarefa.setStatus("ongoing");
+        }
+        try {
+            controller.updateTask(tarefa, service);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
+    public void editarTarefa(Task tarefa) {
+        Scanner scanner = new Scanner(System.in);
+        int opcao;
+        System.out.println("1) Editar Nome \n2) Editar Descrição \n3) Voltar");
+        opcao = scanner.nextInt();
+        switch (opcao) {
+            case 1:
+                System.out.println("Insira um novo Nome:");
+                scanner.nextLine();
+                String nome = scanner.nextLine();
+                tarefa.setName(nome);
+                break;
+            case 2:
+                System.out.println("Insira uma nova Descrição:");
+                scanner.nextLine();
+                String descricao = scanner.nextLine();
+                tarefa.setDescription(descricao);
+                break;
+            case 3:
+                gerenciarTarefa(tarefa);
+                break;
+        }
+        try {
+            controller.updateTask(tarefa, service);
+        } catch (Exception e) {
+            System.out.println("Não foi possível editar a tarefa.");
+        }
     }
 }

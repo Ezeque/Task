@@ -17,17 +17,17 @@ public class TarefaService extends TaskService {
 
     @Override
     public boolean validateSearch(Task task) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean validateUpdate(Task task) {
-        return false;
+        return true;
     }
 
     @Override
     public boolean validateDeletion(Task task) {
-        return false;
+        return true;
     }
 
     @Override

@@ -45,9 +45,9 @@ public class TaskDAO implements TaskDAOInterface {
     public PreparedStatement buildFullStatementUpdate(PreparedStatement pst, Task task) throws SQLException {
         pst.setString(1, task.getName());
         pst.setString(2, task.getType());
-        pst.setInt(3, task.getId());
-        pst.setString(4, task.getDescription());
-        pst.setString(5, task.getStatus());
+        pst.setString(3, task.getDescription());
+        pst.setString(4, task.getStatus());
+        pst.setInt(5, task.getId());
         return pst;
     }
 
@@ -163,6 +163,7 @@ public class TaskDAO implements TaskDAOInterface {
             String status = res.getString("status");
             ConcreteTask task = new ConcreteTask(id, name, type);
             task.setDescription(description);
+            task.setStatus(status);
             tasks.add(task);
         }
         if (tasks.size() > 0) {

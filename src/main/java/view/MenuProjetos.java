@@ -81,7 +81,8 @@ public class MenuProjetos implements Menu {
             if (tarefas != null) {
                 for (Task tarefa :
                         tarefas) {
-                    System.out.println("[" + index + "] " + tarefa.getName() + " [" + tarefa.getStatus() + "]");
+                    System.out.println("[" + index + "] " + tarefa.getName() + " ["
+                            + (tarefa.getStatus().equals("ongoing") ? " " : "X") + "]");
                     index++;
                 }
                 System.out.println("_________________");
