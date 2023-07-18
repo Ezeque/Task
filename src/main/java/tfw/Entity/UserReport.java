@@ -1,30 +1,36 @@
 package tfw.Entity;
 
+import java.util.Map;
+
 public abstract class UserReport {
-        private int id;
-        private int user_id;
+    private int id;
+    private int user_id;
 
-        public UserReport(){
+    String structure;
 
-        }
+    public UserReport() {
 
-        public UserReport(int user_id){
-            this.user_id = user_id;
-        }
-
-    public void setId(int id){
-        this.id = id;
     }
 
-    public void setUserId(int user_id){
+    public abstract void setStructure(Map<String, Integer> metrics);
+
+    public UserReport(int user_id) {
         this.user_id = user_id;
     }
 
-    public int getId(){
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setUserId(int user_id) {
+        this.user_id = user_id;
+    }
+
+    public int getId() {
         return this.id;
     }
 
-    public int getUserId(){
+    public int getUserId() {
         return this.user_id;
     }
 
