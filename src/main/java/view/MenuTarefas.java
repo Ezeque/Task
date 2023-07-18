@@ -43,13 +43,19 @@ public class MenuTarefas {
         System.out.println("[1] Editar");
         if (tarefa.getStatus().equals("ongoing")) System.out.println("[2] Marcar Como Concluída");
         else System.out.println("[2] Marcar Como Não Concluída");
-        System.out.println("[3] Adicionar Participante");
+        System.out.println("[3] Excluir tarefa");
         System.out.println("[4] Sair");
         opcao = scanner.nextInt();
-        switch (opcao) {
-            case 1 -> editarTarefa(tarefa);
-            case 2 -> atualizarStatus(tarefa);
+        try {
+            switch (opcao) {
+                case 1 -> editarTarefa(tarefa);
+                case 2 -> atualizarStatus(tarefa);
+                case 3 -> controller.deleteTask(tarefa, service);
+            }
+        } catch (Exception e) {
+            System.out.println("Houve um erro ao processar a tarefa.");
         }
+
 
     }
 
