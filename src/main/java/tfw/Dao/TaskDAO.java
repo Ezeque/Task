@@ -47,6 +47,7 @@ public class TaskDAO implements TaskDAOInterface {
         pst.setString(2, task.getType());
         pst.setInt(3, task.getId());
         pst.setString(4, task.getDescription());
+        pst.setString(5, task.getStatus());
         return pst;
     }
 
@@ -159,6 +160,7 @@ public class TaskDAO implements TaskDAOInterface {
             String name = res.getString("name");
             String type = res.getString("type");
             String description = res.getString("description");
+            String status = res.getString("status");
             ConcreteTask task = new ConcreteTask(id, name, type);
             task.setDescription(description);
             tasks.add(task);
