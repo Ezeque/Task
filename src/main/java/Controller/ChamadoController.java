@@ -20,6 +20,7 @@ public class ChamadoController extends TaskController {
         chamado.setProjectID(task.getProjectID());
         chamado.setUserID(task.getUserID());
         chamado.setDescription(task.getDescription());
+        chamado.setStatus(task.getStatus());
 
         return chamado;
     }
