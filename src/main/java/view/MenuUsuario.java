@@ -34,7 +34,7 @@ public class MenuUsuario implements Menu {
     }
 
     private void gerarRelatorio(Usuario usuario) {
-
+        
     }
 
     private void editarUsuario(Usuario usuario) {

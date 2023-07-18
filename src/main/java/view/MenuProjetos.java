@@ -110,6 +110,8 @@ public class MenuProjetos implements Menu {
                     this.controller.deleteProject(projeto, this.service);
                     gerenciarProjeto(projeto);
                     show(usuario);
+                } else if (opcao >= index) {
+                    show(usuario);
                 }
             } else {
                 System.out.println("Não há tarefas neste projeto. Deseja criar uma nova tarefa? \n1) Sim \n2) Não");
