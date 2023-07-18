@@ -81,7 +81,7 @@ public class UserDAO implements UserDaoInterface {
     @Override
     public boolean update(User user) throws SQLException {
         Connection con = config.connect();
-        String query = "UPDATE user SET " + config.getTable() + " = ?, email = ?, password = ? WHERE id = ?";
+        String query = "UPDATE " + config.getTable() + " SET " + "name = ?, email = ?, password = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatementUpdate(pst, user);

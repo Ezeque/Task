@@ -32,7 +32,7 @@ public class Projeto extends ConcreteProject {
             map.put("NumTarefas", tarefas.size());
             return map;
         } catch (Exception e) {
-            System.out.println("Erro ao Recperar métricas");
+            System.out.println("Erro ao Recuperar métricas");
         }
         return null;
     }

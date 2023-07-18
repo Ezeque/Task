@@ -94,7 +94,7 @@ public class MenuProjetos implements Menu {
                 index++;
                 System.out.println(index + ") Sair");
                 opcao = scanner.nextInt();
-                if (opcao < index - 4) {
+                if (opcao < index - 3) {
                     Task tarefa = tarefas.get(opcao);
                     menuTarefas.gerenciarTarefa(tarefa);
                     gerenciarProjeto(projeto);

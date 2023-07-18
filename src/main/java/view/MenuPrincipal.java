@@ -10,7 +10,7 @@ public class MenuPrincipal implements Menu {
         Scanner scanner = new Scanner(System.in);
         Menu menu;
         System.out.println(usuario.getName() + "\n");
-        System.out.println("1) Projetos \n2) Perfil \n3) Sair");
+        System.out.println("1) Projetos \n2) Perfil de Usuário \n3) Sair");
         int opcao = scanner.nextInt();
         switch (opcao) {
             case 1:

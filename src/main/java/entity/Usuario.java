@@ -1,7 +1,15 @@
 package entity;
 
+import database.DBConfigUsuario;
+import service.TarefaService;
+import tfw.Controller.TaskController;
+import tfw.Database.DatabaseConfiguration;
+import tfw.Entity.ConcreteTask;
 import tfw.Entity.User;
+import tfw.Service.TaskService;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public class Usuario extends User {
@@ -23,6 +31,17 @@ public class Usuario extends User {
 
     @Override
     public Map<String, Integer> setMetrics() {
+        DatabaseConfiguration config = new DBConfigUsuario();
+        TaskService service = new TarefaService(config);
+        TaskController controller = new TaskController(service);
+        Usuario user = new Usuario(this.getId(), this.getName(), this.getEmail(), this.getPassword());
+        try {
+            ArrayList<ConcreteTask> tarefas = controller.getAllUserTasks(user);
+            Map<String, Integer> map = new HashMap<String, Integer>();
+            map.put("qntTarefas", tarefas.size());
+        } catch (Exception e) {
+            System.out.println("Erro ao processar métricas");
+        }
         return null;
     }
 }
