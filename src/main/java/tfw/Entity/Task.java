@@ -10,7 +10,7 @@ public abstract class Task {
     private int userID = 0;
     private int projectID = 0;
     private String description;
-    private String status;
+    private String status = "ongoing";
 
     public Task(String name, String type) {
         this.name = name;
