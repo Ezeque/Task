@@ -1,12 +1,16 @@
 package tfw.Controller;
 
+
+import tfw.Entity.ConcreteTask;
+import tfw.Entity.Project;
 import tfw.Entity.Task;
 import tfw.Entity.User;
 import Service.TaskService;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class TaskController extends TaskControllerAbstract {
+public class TaskController extends tfw.Controller.TaskControllerAbstract {
     public TaskController(TaskService service) {
         super(service);
     }
@@ -35,8 +39,13 @@ public class TaskController extends TaskControllerAbstract {
         return service.searchAllTasks(user);
     }
 
-    public ArrayList<Task> getAllTasks(){
+
+    public ArrayList<Task> getAllTasks() {
         return service.getAllTasks();
+    }
+
+    public ArrayList<ConcreteTask> getAllProjectTasks(Project project) throws SQLException {
+        return service.searchAllProjectTasks(project);
     }
 
     @Override

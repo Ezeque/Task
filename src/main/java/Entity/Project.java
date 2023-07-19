@@ -7,12 +7,14 @@ import java.util.Map;
 public abstract class Project {
     private String name;
     private int id;
+
     protected int userId;
     private ProjectControllerAbstract controller;
 
-    public Project(int id, String name) {
+    public Project(int id, String name, int userId) {
         this.id = id;
         this.name = name;
+        this.userId = userId;
     }
 
     public Project(int id, String name, int userId) {
@@ -28,10 +30,6 @@ public abstract class Project {
 
     public Project(String name) {
         this.name = name;
-    }
-
-    public Project() {
-
     }
 
     public int getId() {
@@ -51,5 +49,9 @@ public abstract class Project {
     }
 
     //RETURNS AN OBJECT CONTAINING THE METRICS USED TO MAKE A REPORT
-    public abstract Map<String, Object> setMetrics();
+    public abstract Map<String, Integer> setMetrics();
+
+    public int getUserId() {
+        return userId;
+    }
 }

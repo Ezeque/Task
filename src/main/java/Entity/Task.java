@@ -6,11 +6,12 @@ public abstract class Task {
     private String name;
     private int id;
     private String type="";
-    private String status="em andamento";
     private TaskControllerAbstract controller;
     private int userID = 0;
     private int projectID = 0;
     private String description="";
+    private String status = "ongoing";
+
 
     public Task(){
 
@@ -55,6 +56,22 @@ public abstract class Task {
         this.name = name;
         this.type = type;
         this.userID = userId;
+    }
+
+    public Task(String name, int userID) {
+        this.name = name;
+        this.userID = projectID;
+    }
+
+    public Task(int projectID, String name) {
+        this.name = name;
+        this.projectID = projectID;
+    }
+
+    public Task(int projectID, String name, int user_Id) {
+        this.name = name;
+        this.projectID = projectID;
+        this.userID = user_Id;
     }
 
     public Task(String name, String type, int userId) {
@@ -116,5 +133,21 @@ public abstract class Task {
 
     public void setProjectID(int projectID) {
         this.projectID = projectID;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 }

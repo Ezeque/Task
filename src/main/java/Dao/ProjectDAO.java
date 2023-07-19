@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class ProjectDAO implements ProjectDAOInterface {
+public class ProjectDAO implements tfw.Dao.ProjectDAOInterface {
     protected Connection con;
     protected DatabaseConfiguration config;
 
@@ -79,6 +79,7 @@ public class ProjectDAO implements ProjectDAOInterface {
         return null;
     }
 
+
     public Project getProjectByName(Project project) throws SQLException {
         String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
@@ -94,6 +95,23 @@ public class ProjectDAO implements ProjectDAOInterface {
         }
         return null;
     }
+
+    public ArrayList<Project> getUserProjects(Usuario user) throws SQLException {
+        ArrayList<Project> projetos = new ArrayList<Project>();
+        String query = "SELECT * FROM " + config.getTable() + " WHERE userId = ?";
+        PreparedStatement ps;
+        ps = con.prepareStatement(query);
+        ps.setInt(1, user.getId());
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            Project returnProject = new ConcreteProject(rs.getInt("id"), rs.getString("name"), rs.getInt("userId"));
+            projetos.add(returnProject);
+        }
+        return projetos;
+    }
+
+
     public boolean update(Project project) throws SQLException {
         String query = "UPDATE " + config.getTable() + " SET  name = ? WHERE id = ?";
         PreparedStatement pst;
