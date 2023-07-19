@@ -1,4 +1,4 @@
-package tfw.Service;
+package Service;
 
 public class InvalidEmailException extends Exception {
     public InvalidEmailException(int code) {

@@ -1,9 +1,8 @@
 package tfw.Controller;
 
 import tfw.Entity.Project;
-import tfw.Service.ProjectService;
+import Service.ProjectService;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public abstract class ProjectControllerAbstract {

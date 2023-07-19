@@ -1,11 +1,9 @@
 package tfw.Controller;
 
-import tfw.Entity.ConcreteTask;
 import tfw.Entity.Task;
 import tfw.Entity.User;
-import tfw.Service.TaskService;
+import Service.TaskService;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TaskController extends TaskControllerAbstract {

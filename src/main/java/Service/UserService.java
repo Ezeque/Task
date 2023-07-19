@@ -1,11 +1,8 @@
-package tfw.Service;
+package Service;
 
-import tfw.Dao.ProjectDAO;
-import tfw.Dao.ProjectDAOInterface;
 import tfw.Dao.UserDAO;
 import tfw.Dao.UserDaoInterface;
 import tfw.Database.DatabaseConfiguration;
-import tfw.Entity.Project;
 import tfw.Entity.User;
 
 import java.sql.SQLException;

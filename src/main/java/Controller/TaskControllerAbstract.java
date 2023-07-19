@@ -1,9 +1,7 @@
 package tfw.Controller;
 
 import tfw.Entity.Task;
-import tfw.Service.TaskService;
-
-import java.sql.SQLException;
+import Service.TaskService;
 
 public abstract class TaskControllerAbstract {
     protected TaskService service;

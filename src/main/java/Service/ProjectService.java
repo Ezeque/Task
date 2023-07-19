@@ -1,4 +1,4 @@
-package tfw.Service;
+package Service;
 
 import tfw.Dao.ProjectDAO;
 import tfw.Dao.ProjectDAOInterface;

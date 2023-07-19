@@ -1,8 +1,7 @@
-package tfw.Service;
+package Service;
 
 import tfw.Dao.TaskDAO;
 import tfw.Database.DatabaseConfiguration;
-import tfw.Entity.ConcreteTask;
 import tfw.Entity.Task;
 import tfw.Entity.User;
 
