@@ -6,9 +6,15 @@ public abstract class UserReport {
     private int id;
     private int user_id;
 
-    String structure;
+
+    protected String structure;
 
     public UserReport() {
+
+    }
+
+    public void show() {
+        System.out.println(this.structure);
 
     }
 

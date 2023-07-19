@@ -10,11 +10,12 @@ public abstract class UserReportService {
 
     private UserReportDAO dao;
 
-    public DatabaseConfiguration config;
+
+    protected DatabaseConfiguration dbconfig;
 
     public UserReportService(DatabaseConfiguration dbconfig) {
-        this.config = dbconfig;
-        this.dao = new UserReportDAO(this.config);
+        this.dbconfig = dbconfig;
+        this.dao = new UserReportDAO(this.dbconfig);
     }
 
     public abstract boolean validateCreation(UserReport report);
@@ -50,11 +51,26 @@ public abstract class UserReportService {
         return report;
     }
 
+
     public UserReport getReportByUserId(UserReport report, int user_id) {
 
         if (validateSearch(report)) {
             try {
                 report = dao.getReportByUserId(report, user_id);
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        return report;
+    }
+              
+
+    public UserReport getReportByUserId(UserReport report) {
+
+        if (validateSearch(report)) {
+            try {
+                report = dao.getReportByUserId(report);
+
             } catch (SQLException e) {
                 System.out.println(e);
             }
@@ -89,4 +105,5 @@ public abstract class UserReportService {
 
         return success;
     }
+
 }

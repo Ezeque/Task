@@ -3,12 +3,12 @@ package tfw.Controller;
 import tfw.Entity.Project;
 import tfw.Service.ProjectService;
 
-import java.sql.SQLException;
+import java.util.ArrayList;
 
-public class ProjectController extends ProjectControllerAbstract {
+public class ProjectController extends tfw.Controller.ProjectControllerAbstract {
 
-    public ProjectController() {
-        super();
+    public ProjectController(ProjectService service) {
+        super(service);
     }
 
     @Override
@@ -17,22 +17,33 @@ public class ProjectController extends ProjectControllerAbstract {
     }
 
     @Override
-    public boolean deleteProject(Project project, ProjectService service) throws SQLException {
+    public boolean deleteProject(Project project){
         return service.delete(project);
     }
 
     @Override
-    public boolean createProject(Project project, ProjectService service) throws SQLException {
+    public boolean createProject(Project project){
         return service.create(project);
     }
 
     @Override
-    public Project SearchProject(Project project, ProjectService service) throws SQLException {
+    public Project SearchProject(Project project){
         return service.search(project);
     }
 
     @Override
-    public boolean updateProject(Project project, ProjectService service) throws SQLException {
+    public Project getProjectByName(Project project){
+        return service.getProjectByName(project);
+    }
+
+    @Override
+    public boolean updateProject(Project project){
         return service.update(project);
     }
+
+    @Override
+    public ArrayList<Project> getAllProjects(){
+        return service.getAllProjecs();
+    }
+
 }

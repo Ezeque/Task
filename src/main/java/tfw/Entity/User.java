@@ -9,11 +9,30 @@ public abstract class User {
     private String password;
     private int id;
 
+    protected int id_setor;
+    public User(){
+
+    }
+
     public User(String name, String email, String password, int id) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.id = id;
+    }
+
+    public User(String name, String email, String password, int id, int id_setor) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.id = id;
+        this.id_setor = id_setor;
+    }
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
     }
 
     public User(int id, String email) {
@@ -44,6 +63,14 @@ public abstract class User {
         this.id = id;
     }
 
+
+    public void setIdSetor(int id_setor){
+        this.id_setor = id_setor;
+    }
+
+    public int getIdSetor(){
+        return this.id_setor;
+    }
     public String getName() {
         return this.name;
     }

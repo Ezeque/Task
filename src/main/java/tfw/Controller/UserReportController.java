@@ -6,7 +6,7 @@ import tfw.Service.UserReportService;
 
 public class UserReportController extends UserReportControllerAbstract {
 
-    UserReportService service;
+    protected UserReportService service;
 
     public UserReportController(UserReportService service) {
         this.service = service;

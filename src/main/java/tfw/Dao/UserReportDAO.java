@@ -13,7 +13,6 @@ public class UserReportDAO implements UserReportDAOInterface {
     protected DatabaseConfiguration config;
 
     public UserReportDAO(DatabaseConfiguration config) {
-
         this.config = config;
         this.con = config.connect();
     }
@@ -63,7 +62,9 @@ public class UserReportDAO implements UserReportDAOInterface {
         return null;
     }
 
+
     public UserReport getReportByUserId(UserReport report, int user_id) throws SQLException {
+
         String query = "SELECT * FROM " + config.getTable();
         PreparedStatement ps;
         ps = con.prepareStatement(query);
@@ -80,6 +81,27 @@ public class UserReportDAO implements UserReportDAOInterface {
 
         return null;
     }
+
+    public UserReport getReportByUserId(UserReport report) throws SQLException {
+
+        String query = "SELECT * FROM " + config.getTable();
+        PreparedStatement ps;
+        ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        while (rs.next()) {
+            UserReport returnReport = buildReport(report, rs);
+
+
+            if (returnReport.getUserId() == report.getUserId()) {
+                return returnReport;
+            }
+
+        }
+
+        return null;
+    }
+
 
     //    UPDATE DATA IN DATABASE
     public boolean update(UserReport report) throws SQLException {
