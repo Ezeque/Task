@@ -26,7 +26,7 @@ public class TaskDAO implements TaskDAOInterface {
         task.setId(rs.getInt("id"));
         task.setType(rs.getString("type"));
         task.setDescription(rs.getString("description"));
-        task.setDescription(rs.getString("status"));
+        task.setStatus(rs.getString("status"));
 
         return task;
     }
