@@ -10,6 +10,7 @@ public abstract class UserReportService {
 
     private UserReportDAO dao;
 
+
     protected DatabaseConfiguration dbconfig;
 
     public UserReportService(DatabaseConfiguration dbconfig) {
@@ -50,11 +51,26 @@ public abstract class UserReportService {
         return report;
     }
 
+
+    public UserReport getReportByUserId(UserReport report, int user_id) {
+
+        if (validateSearch(report)) {
+            try {
+                report = dao.getReportByUserId(report, user_id);
+            } catch (SQLException e) {
+                System.out.println(e);
+            }
+        }
+        return report;
+    }
+              
+
     public UserReport getReportByUserId(UserReport report) {
 
         if (validateSearch(report)) {
             try {
                 report = dao.getReportByUserId(report);
+
             } catch (SQLException e) {
                 System.out.println(e);
             }

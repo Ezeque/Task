@@ -63,6 +63,7 @@ public abstract class User {
         this.id = id;
     }
 
+
     public void setIdSetor(int id_setor){
         this.id_setor = id_setor;
     }

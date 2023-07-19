@@ -6,6 +6,7 @@ public abstract class UserReport {
     private int id;
     private int user_id;
 
+
     protected String structure;
 
     public UserReport() {
@@ -14,6 +15,7 @@ public abstract class UserReport {
 
     public void show() {
         System.out.println(this.structure);
+
     }
 
     public abstract void setStructure(Map<String, Integer> metrics);

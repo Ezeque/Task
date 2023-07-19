@@ -86,7 +86,9 @@ public abstract class UserService {
         if (validateSearchByName(user)) {
             try {
                 UserDAO dao = new UserDAO(this.dbconfig);
+
                 user = dao.getUserByName(user);
+
             } catch (SQLException e) {
                 System.out.println(e);
             }

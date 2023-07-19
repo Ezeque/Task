@@ -11,7 +11,11 @@ public interface UserReportDAOInterface {
     //    GETS DATA IN DATABASE
     public UserReport getReportById(UserReport report) throws SQLException;
 
+
     public UserReport getReportByUserId(UserReport report) throws SQLException;
+
+    public UserReport getReportByUserId(UserReport report, int user_id) throws SQLException;
+
 
     //    UPDATE DATA IN DATABASE
     public boolean update(UserReport report) throws SQLException;
