@@ -1,7 +1,7 @@
 package tfw.Controller;
 
 import tfw.Entity.Task;
-import Service.TaskService;
+import tfw.Service.TaskService;
 
 public abstract class TaskControllerAbstract {
     protected TaskService service;

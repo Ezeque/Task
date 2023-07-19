@@ -1,32 +1,23 @@
-package Service;
+package tfw.Service;
 
-import entity.RelatorioFuncionario;
-import tfw.Dao.UserReportDAO;
-import tfw.Database.DatabaseConfiguration;
-import tfw.Entity.UserReport;
+import tfw.Dao.ProjectReportDAO;
+import tfw.Entity.ProjectReport;
 
 import java.sql.SQLException;
 
-public abstract class UserReportService {
 
-    private UserReportDAO dao;
+public abstract class ProjectReportService {
+    private ProjectReportDAO dao = new ProjectReportDAO();
 
-    protected DatabaseConfiguration dbconfig;
+    public abstract boolean validateCreation(ProjectReport report);
 
-    public UserReportService(DatabaseConfiguration dbconfig) {
-        this.dbconfig = dbconfig;
-        this.dao = new UserReportDAO(this.dbconfig);
-    }
+    public abstract boolean validateSearch(ProjectReport report);
 
-    public abstract boolean validateCreation(UserReport report);
+    public abstract boolean validateUpdate(ProjectReport report);
 
-    public abstract boolean validateSearch(UserReport report);
+    public abstract boolean validateDeletion(ProjectReport report);
 
-    public abstract boolean validateUpdate(UserReport report);
-
-    public abstract boolean validateDeletion(UserReport report);
-
-    public boolean create(UserReport report) {
+    public boolean create(ProjectReport report) {
         boolean success = false;
         if (validateCreation(report)) {
             try {
@@ -39,7 +30,7 @@ public abstract class UserReportService {
         return success;
     }
 
-    public UserReport getReportById(UserReport report) {
+    public ProjectReport getReportById(ProjectReport report) {
 
         if (validateSearch(report)) {
             try {
@@ -51,11 +42,11 @@ public abstract class UserReportService {
         return report;
     }
 
-    public UserReport getReportByUserId(UserReport report) {
+    public ProjectReport getReportByProjectId(ProjectReport report) {
 
         if (validateSearch(report)) {
             try {
-                report = dao.getReportByUserId(report);
+                report = dao.getReportByProjectId(report);
             } catch (SQLException e) {
                 System.out.println(e);
             }
@@ -63,7 +54,7 @@ public abstract class UserReportService {
         return report;
     }
 
-    public boolean update(UserReport report) {
+    public boolean update(ProjectReport report) {
         boolean success = false;
 
         if (validateUpdate(report)) {
@@ -77,7 +68,7 @@ public abstract class UserReportService {
         return success;
     }
 
-    public boolean delete(UserReport report) {
+    public boolean delete(ProjectReport report) {
         boolean success = false;
 
         if (validateDeletion(report)) {
@@ -90,5 +81,4 @@ public abstract class UserReportService {
 
         return success;
     }
-
 }

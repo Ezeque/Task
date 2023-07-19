@@ -2,7 +2,7 @@ package tfw.Controller;
 
 
 import tfw.Entity.UserReport;
-import Service.UserReportService;
+import tfw.Service.UserReportService;
 
 public abstract class UserReportControllerAbstract {
 

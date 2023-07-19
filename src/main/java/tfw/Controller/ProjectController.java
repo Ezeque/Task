@@ -1,11 +1,11 @@
 package tfw.Controller;
 
 import tfw.Entity.Project;
-import Service.ProjectService;
+import tfw.Service.ProjectService;
 
 import java.util.ArrayList;
 
-public class ProjectController extends ProjectControllerAbstract {
+public class ProjectController extends tfw.Controller.ProjectControllerAbstract {
 
     public ProjectController(ProjectService service) {
         super(service);

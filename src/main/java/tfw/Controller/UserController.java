@@ -1,7 +1,7 @@
 package tfw.Controller;
 
 import tfw.Entity.User;
-import Service.UserService;
+import tfw.Service.UserService;
 
 import java.util.ArrayList;
 

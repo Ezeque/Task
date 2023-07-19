@@ -5,7 +5,7 @@ import tfw.Entity.ConcreteTask;
 import tfw.Entity.Project;
 import tfw.Entity.Task;
 import tfw.Entity.User;
-import Service.TaskService;
+import tfw.Service.TaskService;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
