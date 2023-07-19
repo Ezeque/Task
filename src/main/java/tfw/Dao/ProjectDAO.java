@@ -96,7 +96,7 @@ public class ProjectDAO implements tfw.Dao.ProjectDAOInterface {
         return null;
     }
 
-    public ArrayList<Project> getUserProjects(Usuario user) throws SQLException {
+    public ArrayList<Project> getUserProjects(User user) throws SQLException {
         ArrayList<Project> projetos = new ArrayList<Project>();
         String query = "SELECT * FROM " + config.getTable() + " WHERE userId = ?";
         PreparedStatement ps;

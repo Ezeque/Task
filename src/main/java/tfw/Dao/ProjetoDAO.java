@@ -1,8 +1,9 @@
-package dao;
+package tfw.Dao;
 
 import tfw.Dao.ProjectDAO;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.Project;
+import tfw.Entity.User;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -12,14 +13,14 @@ public class ProjetoDAO extends ProjectDAO {
         super(config);
     }
 
-    public PreparedStatement buildFullStatement(PreparedStatement pst, Project project, Usuario user) throws SQLException {
+    public PreparedStatement buildFullStatement(PreparedStatement pst, Project project, User user) throws SQLException {
         pst.setString(1, project.getName());
         pst.setInt(2, project.getId());
         pst.setInt(3, user.getId());
         return pst;
     }
 
-    public boolean create(Project project, Usuario user) throws SQLException {
+    public boolean create(Project project, User user) throws SQLException {
         String query = "INSERT INTO " + config.getTable() + " (name, id, userId) VALUES (?,?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
