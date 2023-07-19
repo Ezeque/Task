@@ -2,12 +2,14 @@ package tfw.Dao;
 
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.ConcreteUser;
+import tfw.Entity.Project;
 import tfw.Entity.User;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UserDAO implements UserDaoInterface {
 
@@ -69,7 +71,7 @@ public class UserDAO implements UserDaoInterface {
         ResultSet rs = ps.executeQuery();
 
         while (rs.next()) {
-            User returnUser = buildUser(user, rs);
+            User returnUser = new ConcreteUser(rs.getString("name"), rs.getString("name"), rs.getString("password"), rs.getInt("id"));
             if (returnUser.getId() == user.getId()) {
                 return returnUser;
             }
@@ -157,5 +159,36 @@ public class UserDAO implements UserDaoInterface {
             return returnUser;
         }
         return null;
+    }
+
+    public ArrayList<User> getAll() throws SQLException{
+        String query = "SELECT * FROM " + config.getTable();
+        ArrayList<User> users = new ArrayList<User>();
+        PreparedStatement ps;
+        ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()){
+            User returnUser = new ConcreteUser(rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getInt("id"), rs.getInt("id_setor"));
+            users.add(returnUser);
+        }
+
+        return users;
+    }
+
+    public ArrayList<User> getAllUsersByProjectId(int project_id) throws SQLException{
+        String query = "SELECT * FROM " + config.getTable();
+        ArrayList<User> users = new ArrayList<>();
+        PreparedStatement ps;
+        ps = con.prepareStatement(query);
+        ResultSet rs = ps.executeQuery();
+
+        while(rs.next()){
+            User returnUser = new ConcreteUser(rs.getString("name"), rs.getString("email"), rs.getString("password"), rs.getInt("id"), rs.getInt("id_setor"));
+            if(returnUser.getIdSetor() == project_id) users.add(returnUser);
+
+        }
+
+        return users;
     }
 }

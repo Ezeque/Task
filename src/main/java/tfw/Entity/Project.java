@@ -22,6 +22,10 @@ public abstract class Project {
         this.userId = userId;
     }
 
+    public Project(String name) {
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

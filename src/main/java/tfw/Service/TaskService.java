@@ -25,7 +25,7 @@ public abstract class TaskService {
 
     public abstract boolean validateDeletion(Task task);
 
-    public boolean create(Task task) throws SQLException {
+    public boolean create(Task task){
         try {
             TaskDAO dao = new TaskDAO(this.dbConfig);
             if (validateCreation(task)) {
@@ -37,36 +37,68 @@ public abstract class TaskService {
         return false;
     }
 
-    public Task search(Task task) throws SQLException {
+    public Task search(Task task){
         TaskDAO dao = new TaskDAO(this.dbConfig);
         if (validateSearch(task)) {
-            return dao.getTaskById(task);
+            try{
+                task = dao.getTaskById(task);
+            }catch(SQLException e){
+                System.out.println(e);
+            }
         }
         return null;
     }
 
-    public ArrayList<ConcreteTask> searchAllTasks(User user) throws SQLException {
+    public ArrayList<Task> searchAllTasks(User user){
         TaskDAO dao = new TaskDAO(this.dbConfig);
+        ArrayList<Task> tasks = new ArrayList<>();
         if (validateAllTaskSearch(user)) {
-            return dao.getTasksByUser(user);
+            try{
+                tasks = dao.getTasksByUser(user);
+            }catch(SQLException e){
+                System.out.println(e);
+            }
         }
-        return null;
+        return tasks;
     }
 
+    public ArrayList<Task> getAllTasks(){
+        TaskDAO dao = new TaskDAO(this.dbConfig);
+        ArrayList<Task> tasks = new ArrayList<>();
+        if (validateGetAllTask()) {
+            try{
+                tasks = dao.getAllTasks();
+            }catch(SQLException e){
+                System.out.println(e);
+            }
+        }
+        return tasks;
+    }
     protected abstract boolean validateAllTaskSearch(User user);
+    protected abstract boolean validateGetAllTask();
 
-    public boolean update(Task task) throws SQLException {
+    public boolean update(Task task){
         TaskDAO dao = new TaskDAO(this.dbConfig);
+        boolean success = false;
         if (validateUpdate(task)) {
-            return dao.update(task);
+            try{
+                success = dao.update(task);
+            }catch(SQLException e){
+                System.out.println(e);
+            }
         }
-        return false;
+        return success;
     }
 
-    public boolean delete(Task task) throws SQLException {
+    public boolean delete(Task task){
         TaskDAO dao = new TaskDAO(this.dbConfig);
+        boolean success = false;
         if (validateDeletion(task)) {
-            return dao.delete(task.getId());
+            try{
+                success =  dao.delete(task.getId());
+            }catch(SQLException e){
+                System.out.println(e);
+            }
         }
         return false;
     }

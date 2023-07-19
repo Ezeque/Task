@@ -26,7 +26,7 @@ public class TaskDAO implements TaskDAOInterface {
         task.setId(rs.getInt("id"));
         task.setType(rs.getString("type"));
         task.setDescription(rs.getString("description"));
-        task.setDescription(rs.getString("status"));
+        task.setStatus(rs.getString("status"));
 
         return task;
     }
@@ -35,8 +35,8 @@ public class TaskDAO implements TaskDAOInterface {
         pst.setString(1, task.getName());
         pst.setString(2, task.getType());
         pst.setInt(3, task.getId());
-        pst.setInt(4, task.getUserID());
-        pst.setInt(5, task.getProjectID());
+        pst.setInt(4, task.getProjectID());
+        pst.setInt(5, task.getUserID());
         pst.setString(6, task.getDescription());
         pst.setString(7, task.getStatus());
         return pst;
@@ -62,7 +62,7 @@ public class TaskDAO implements TaskDAOInterface {
     }
 
     public boolean create(Task task) throws SQLException {
-        String query = "INSERT INTO " + config.getTable() + " (name, type, id, userId, project_id, description, status) VALUES (?,?,?,?,?,?,?)";
+        String query = "INSERT INTO " + config.getTable() + " (name, type, id, projectId, userId, description, status) VALUES (?,?,?,?,?,?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, task);
@@ -108,8 +108,8 @@ public class TaskDAO implements TaskDAOInterface {
         return null;
     }
 
-    public ArrayList<ConcreteTask> getTasksByUser(User user) throws SQLException {
-        ArrayList<ConcreteTask> tasks = new ArrayList<ConcreteTask>();
+    public ArrayList<Task> getTasksByUser(User user) throws SQLException {
+        ArrayList<Task> tasks = new ArrayList<>();
         String query = "SELECT * FROM " + config.getTable() + " WHERE userId = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
@@ -118,14 +118,38 @@ public class TaskDAO implements TaskDAOInterface {
         ResultSet res = pst.executeQuery();
         while (res.next()) {
             int id = res.getInt("id");
+            String description = res.getString("description");
             String name = res.getString("name");
             String type = res.getString("type");
-            String description = res.getString("description");
+            int project_id = res.getInt("projectId");
+            int user_id = res.getInt("userId");
             String status = res.getString("status");
-            ConcreteTask task = new ConcreteTask(id, name, type);
-            task.setStatus(status);
-            task.setDescription(description);
-            tasks.add(task);
+
+            tasks.add(new ConcreteTask(id, name, description, project_id, user_id, status));
+        }
+        if (tasks.size() > 0) {
+            return tasks;
+        }
+        return null;
+    }
+
+    public ArrayList<Task> getAllTasks() throws SQLException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        String query = "SELECT * FROM " + config.getTable();
+        PreparedStatement pst;
+        pst = con.prepareStatement(query);
+
+        ResultSet res = pst.executeQuery();
+        while (res.next()) {
+            int id = res.getInt("id");
+            String description = res.getString("description");
+            String name = res.getString("name");
+            String type = res.getString("type");
+            int project_id = res.getInt("projectId");
+            int user_id = res.getInt("userId");
+            String status = res.getString("status");
+
+            tasks.add(new ConcreteTask(id, name, description, project_id, user_id, status));
         }
         if (tasks.size() > 0) {
             return tasks;

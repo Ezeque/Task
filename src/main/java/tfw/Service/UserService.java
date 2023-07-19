@@ -1,11 +1,14 @@
 package tfw.Service;
 
 import tfw.Dao.UserDAO;
+import tfw.Dao.UserDaoInterface;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.User;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
+
 
 
 public abstract class UserService {
@@ -144,5 +147,31 @@ public abstract class UserService {
             }
         }
         return null;
+    }
+
+    public ArrayList<User> getAllUsers(){
+        ArrayList<User> users = new ArrayList<User>();
+        UserDaoInterface dao = new UserDAO(dbconfig);
+
+        try{
+            users = dao.getAll();
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+
+        return users;
+    }
+
+    public ArrayList<User> getAllUsersByProjectId(int project_id){
+        ArrayList<User> users = new ArrayList<>();
+        UserDaoInterface dao = new UserDAO(dbconfig);
+
+        try{
+            users = dao.getAllUsersByProjectId(project_id);
+        }catch(SQLException e){
+            System.out.println(e);
+        }
+
+        return users;
     }
 }

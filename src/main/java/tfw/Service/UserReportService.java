@@ -10,7 +10,7 @@ public abstract class UserReportService {
 
     private UserReportDAO dao;
 
-    private DatabaseConfiguration dbconfig;
+    protected DatabaseConfiguration dbconfig;
 
     public UserReportService(DatabaseConfiguration dbconfig) {
         this.dbconfig = dbconfig;
@@ -89,4 +89,5 @@ public abstract class UserReportService {
 
         return success;
     }
+
 }

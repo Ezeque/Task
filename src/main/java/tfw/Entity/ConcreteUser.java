@@ -6,6 +6,9 @@ public class ConcreteUser extends User {
     public ConcreteUser(String name, String email, String password, int id) {
         super(name, email, password, id);
     }
+    public ConcreteUser(String name, String email, String password, int id, int id_setor) {
+        super(name, email, password, id, id_setor);
+    }
 
     public ConcreteUser(int id, String email) {
         super(id, email);

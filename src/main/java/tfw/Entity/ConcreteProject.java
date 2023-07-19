@@ -11,7 +11,6 @@ ConcreteProject extends Project {
     public ConcreteProject(int id, String name, int userId) {
         super(id, name, userId);
     }
-
     @Override
     public Map<String, Integer> setMetrics() {
         return null;

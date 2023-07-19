@@ -5,13 +5,35 @@ import tfw.Controller.TaskControllerAbstract;
 public abstract class Task {
     private String name;
     private int id;
-    private String type;
+    private String type="";
     private TaskControllerAbstract controller;
     private int userID = 0;
     private int projectID = 0;
-    private String description;
+    private String description="";
     private String status = "ongoing";
 
+
+    public Task(){
+
+    }
+
+    public Task(String name, String description, int projectId, int userId){
+        this.name = name;
+        this.description = description;
+        this.userID = userId;
+        this.projectID = projectId;
+
+    }
+
+    public Task(int id, String name, String description, int projectId, int userId, String status){
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.userID = userId;
+        this.projectID = projectId;
+        this.status = status;
+
+    }
     public Task(String name, String type) {
         this.name = name;
         this.type = type;
@@ -58,6 +80,21 @@ public abstract class Task {
         this.userID = userId;
     }
 
+    public void setDescription(String description){
+        this.description = description;
+    }
+
+    public void setStatus(String status){
+        this.status = status;
+    }
+    public String getDescription() {
+        return description;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
@@ -98,19 +135,5 @@ public abstract class Task {
         this.projectID = projectID;
     }
 
-    public String getDescription() {
-        return description;
-    }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
 }
