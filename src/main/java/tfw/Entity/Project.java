@@ -17,12 +17,6 @@ public abstract class Project {
         this.userId = userId;
     }
 
-    public Project(int id, String name, int userId) {
-        this.id = id;
-        this.name = name;
-        this.userId = userId;
-    }
-
     public Project(String name, int userId) {
         this.name = name;
         this.userId = userId;
