@@ -13,7 +13,7 @@ public class MenuFuncionario implements Menu {
         boolean sair = false;
         System.out.println("Bem vindo(a) " + funcionario.getName() + "!\n");
         while(!sair){
-            System.out.println("1) Meus Chamados \n2) Todos os Chamados \n3) Sair");
+            System.out.println("1) Meus Chamados \n2) Todos os Chamados \n3) Relatório \n4) Sair");
             int opcao = scanner.nextInt();
             switch (opcao) {
                 case 1:
@@ -23,6 +23,10 @@ public class MenuFuncionario implements Menu {
                     menu.viewChamados();
                     break;
                 case 3:
+                    Menu menuRelatorio = new MenuRelatorio();
+                    menuRelatorio.show(funcionario);
+                    break;
+                case 4:
                     sair = true;
                     break;
             }

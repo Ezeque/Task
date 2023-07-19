@@ -2,6 +2,7 @@ package entity;
 
 import tfw.Entity.User;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class Funcionario extends User {
@@ -40,7 +41,12 @@ public class Funcionario extends User {
 
     @Override
     public Map<String, Integer> setMetrics() {
-        return null;
+        Map<String, Integer> metrics = new HashMap<>();
+        metrics.put("n_chamados", 0);
+        metrics.put("n_chamados_concluidos", 0);
+        metrics.put("porcentagem_chamados_concluidos", 0);
+
+        return metrics;
     }
 
     public void printFuncionario(){

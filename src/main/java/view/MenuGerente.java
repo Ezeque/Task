@@ -12,7 +12,7 @@ public class MenuGerente implements Menu {
         Menu menu;
         System.out.println("Bem vindo(a) " + funcionario.getName() + "!\n");
         while(!sair){
-            System.out.println("1) Setores \n2) Funcionarios \n3) Chamados \n4) Sair");
+            System.out.println("1) Setores \n2) Funcionarios \n3) Chamados \n4) Relatório \n5) Sair");
             int opcao = scanner.nextInt();
             switch (opcao) {
                 case 1:
@@ -27,6 +27,9 @@ public class MenuGerente implements Menu {
                     menu.show(funcionario);
                     break;
                 case 4:
+                    menu = new MenuRelatorio();
+                    menu.show(funcionario);
+                case 5:
                     sair = true;
                     break;
             }

@@ -1,16 +1,18 @@
 package tfw.Service;
 
+import entity.RelatorioFuncionario;
 import tfw.Dao.UserReportDAO;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.UserReport;
 
 import java.sql.SQLException;
+import java.util.Map;
 
 public abstract class UserReportService {
 
     private UserReportDAO dao;
 
-    private DatabaseConfiguration dbconfig;
+    protected DatabaseConfiguration dbconfig;
 
     public UserReportService(DatabaseConfiguration dbconfig) {
         this.dbconfig = dbconfig;
@@ -89,4 +91,5 @@ public abstract class UserReportService {
 
         return success;
     }
+
 }

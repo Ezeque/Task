@@ -13,7 +13,6 @@ public class UserReportDAO implements UserReportDAOInterface {
     protected DatabaseConfiguration config;
 
     public UserReportDAO(DatabaseConfiguration config) {
-
         this.config = config;
         this.con = config.connect();
     }

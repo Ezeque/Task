@@ -5,11 +5,14 @@ import Controller.RelatorioFuncionarioController;
 import database.DBConfigFuncionario;
 import database.DBConfigRelatorioFuncionario;
 import entity.Funcionario;
+import entity.RelatorioFuncionario;
 import service.FuncionarioService;
 import service.RelatorioFuncionarioService;
 import tfw.Entity.User;
+import tfw.Entity.UserReport;
 import tfw.Service.UserService;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class Login implements MenuLogin {
@@ -102,14 +105,28 @@ public class Login implements MenuLogin {
         this.funcionarioLogado = controller.UserToFuncionario(user);
         funcionarioLogado.setStatus(controller.getStatus(user));
 
-        //chama funcao de criar relatorio de usuario
+        this.createRelatorioFuncionario();
 
         MenuGerente menu = new MenuGerente();
         menu.show(funcionarioLogado);
     }
 
-    public boolean createRelatorioFuncionario(Funcionario funcionario){
-        return true;
+    public boolean createRelatorioFuncionario(){
+        RelatorioFuncionario relatorio = new RelatorioFuncionario(funcionarioLogado.getId());
+        if(relatorioFuncController.saveRelatorio(relatorio)){
+            this.adicionarMetricas();
+            return true;
+        }
+        return false;
+    }
+
+    public boolean adicionarMetricas(){
+        RelatorioFuncionario relatorio = new RelatorioFuncionario(funcionarioLogado.getId());
+        //pega o id cadastrado no banco com o auto increment
+        UserReport report = relatorioFuncController.getReportByUserId(relatorio);
+        relatorio = relatorioFuncController.reportToRelatorio(report);
+        Map<String, Integer> metricas = funcionarioLogado.setMetrics();
+        return relatorioFuncController.adicionarMetricas(relatorio, metricas);
     }
 
     public void funcionarioSignUp(){
@@ -122,6 +139,8 @@ public class Login implements MenuLogin {
 
         this.funcionarioLogado = controller.UserToFuncionario(user);
         funcionarioLogado.setStatus(controller.getStatus(user));
+
+        this.createRelatorioFuncionario();
 
 
         MenuFuncionario menu = new MenuFuncionario();
