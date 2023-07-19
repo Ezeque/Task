@@ -40,4 +40,8 @@ public abstract class Project {
 
     //RETURNS AN OBJECT CONTAINING THE METRICS USED TO MAKE A REPORT
     public abstract Map<String, Integer> setMetrics();
+
+    public int getUserId() {
+        return userId;
+    }
 }

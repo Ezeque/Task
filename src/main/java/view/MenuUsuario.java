@@ -1,11 +1,13 @@
 package view;
 
 import database.DBConfigUsuario;
+import entity.RelatorioUsuario;
 import entity.Usuario;
 import service.UsuarioService;
 import tfw.Controller.UserController;
 import tfw.Service.UserService;
 
+import java.util.Map;
 import java.util.Scanner;
 
 public class MenuUsuario implements Menu {
@@ -31,10 +33,19 @@ public class MenuUsuario implements Menu {
             case 1 -> editarUsuario(usuario);
             case 2 -> gerarRelatorio(usuario);
         }
+        MenuPrincipal menuPrincipal = new MenuPrincipal();
+
+        menuPrincipal.show(usuario);
     }
 
     private void gerarRelatorio(Usuario usuario) {
-        
+        Scanner scanner = new Scanner(System.in);
+        Map<String, Integer> metricas = usuario.setMetrics();
+        RelatorioUsuario relatorioUsuario = new RelatorioUsuario(usuario.getId());
+        relatorioUsuario.setStructure(metricas);
+        relatorioUsuario.show();
+        System.out.println("Digite Qualquer Tecla para Continuar...");
+        scanner.next();
     }
 
     private void editarUsuario(Usuario usuario) {

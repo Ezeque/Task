@@ -104,7 +104,6 @@ public class MenuProjetos implements Menu {
                     show(usuario);
                 } else if (opcao == index - 2) {
                     this.controller.deleteProject(projeto, this.service);
-                    gerenciarProjeto(projeto);
                     show(usuario);
                 } else if (opcao == index - 1) {
                     this.controller.deleteProject(projeto, this.service);
@@ -120,6 +119,9 @@ public class MenuProjetos implements Menu {
                     case 1:
                         menuTarefas.criarTarefa(projeto);
                         gerenciarProjeto(projeto);
+                        break;
+                    default:
+                        show(usuario);
                         break;
                 }
             }

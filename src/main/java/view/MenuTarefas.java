@@ -24,7 +24,7 @@ public class MenuTarefas {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Insira o nome da tarefa:");
         String nome = scanner.nextLine();
-        ConcreteTask task = new ConcreteTask(projeto.getId(), nome);
+        ConcreteTask task = new ConcreteTask(projeto.getId(), nome, projeto.getUserId());
         System.out.println("Insira a Descrição da Tarefa:");
         String descricao = scanner.nextLine();
         task.setDescription(descricao);
