@@ -32,11 +32,33 @@ public class ProjectDAO implements tfw.Dao.ProjectDAOInterface {
         return pst;
     }
 
+    public PreparedStatement buildFullStatement(PreparedStatement pst, Project project, User user) throws SQLException {
+        pst.setString(1, project.getName());
+        pst.setInt(2, project.getId());
+        pst.setInt(3, user.getId());
+        return pst;
+    }
+
     public boolean create(Project project) throws SQLException {
         String query = "INSERT INTO " + config.getTable() + " (name, id) VALUES (?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatement(pst, project);
+
+        int res = pst.executeUpdate();
+
+        if (res == 1) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public boolean create(Project project, User user) throws SQLException {
+        String query = "INSERT INTO " + config.getTable() + " (name, id, userId) VALUES (?,?,?)";
+        PreparedStatement pst;
+        pst = con.prepareStatement(query);
+        pst = buildFullStatement(pst, project, user);
 
         int res = pst.executeUpdate();
 

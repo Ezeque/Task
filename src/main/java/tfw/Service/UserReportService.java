@@ -1,6 +1,5 @@
 package tfw.Service;
 
-import entity.RelatorioFuncionario;
 import tfw.Dao.UserReportDAO;
 import tfw.Database.DatabaseConfiguration;
 import tfw.Entity.UserReport;
