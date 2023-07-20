@@ -135,7 +135,10 @@ public class Login implements MenuLogin {
     public void funcionarioSignUp(){
         Funcionario user = usuarioSignUp();
 
-        controller.create(user);
+        if(!controller.create(user)){
+            System.out.println("O email não segue o padrão da empresa!");
+            return;
+        }
 
         user = (Funcionario) controller.getUserByName(user);
         controller.setStatus(user, 0);
