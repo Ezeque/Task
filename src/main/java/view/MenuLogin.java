@@ -82,7 +82,7 @@ public class MenuLogin implements MenuLoginInterface {
         String email = scanner.nextLine();
         System.out.println("Senha: ");
         String senha = scanner.nextLine();
-        alunoLogado = new Aluno(login, email, senha, 1);
+        alunoLogado = new Aluno(login, email, senha, 1, 1);
         controller.create(alunoLogado);
 
         //adiciona o relatorio do usuario

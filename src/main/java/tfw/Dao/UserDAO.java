@@ -39,6 +39,7 @@ public class UserDAO implements UserDaoInterface {
         pst.setString(1, user.getName());
         pst.setString(2, user.getEmail());
         pst.setString(3, user.getPassword());
+        pst.setInt(4, user.getProjectId());
         return pst;
     }
 
@@ -46,7 +47,7 @@ public class UserDAO implements UserDaoInterface {
     @Override
     public boolean create(User user) throws SQLException {
         Connection con = config.connect();
-        String query = "INSERT INTO " + config.getTable() + " (name, email, password) VALUES (?,?,?)";
+        String query = "INSERT INTO " + config.getTable() + " (name, email, password, project_id) VALUES (?,?,?,?)";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatementCreate(pst, user);

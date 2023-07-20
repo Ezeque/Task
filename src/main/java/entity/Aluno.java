@@ -13,7 +13,7 @@ public class Aluno extends User {
     }
 
     public Aluno(String name, String email, String password, int id, int planId) {
-        super(name, email, password, id);
+        super(name, email, password, id, planId);
         this.planId = planId;
     }
 

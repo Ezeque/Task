@@ -29,7 +29,7 @@ public class MenuTreino implements MenuInterface {
     @Override
     public void show(Aluno aluno) throws SQLException {
         Scanner scanner = new Scanner(System.in);
-        System.out.println(" 1) Visualizar Treino \n 2) Modificar Treino \n 3) Deletar Treino \n 4) Criar Treino");
+        System.out.println(" 1) Visualizar Treino \n 2) Modificar Treino \n 3) Deletar Treino");
         int opcao = scanner.nextInt();
         switch (opcao) {
             case 1:
@@ -40,9 +40,6 @@ public class MenuTreino implements MenuInterface {
                 break;
             case 3:
                 deletarExercicio(aluno);
-                break;
-            case 4:
-                criarTreino(aluno);
                 break;
             default:
                 System.out.println("Opção Inválida");
