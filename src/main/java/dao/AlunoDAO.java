@@ -26,7 +26,7 @@ public class AlunoDAO extends UserDAO {
     }
 
     public boolean savePlano(Aluno aluno, Plano plano) throws SQLException {
-        String query = "UPDATE " + config.getTable() + " SET " + "planId = ? WHERE id = ?";
+        String query = "UPDATE " + config.getTable() + " SET " + "project_id = ? WHERE id = ?";
         PreparedStatement pst;
         pst = con.prepareStatement(query);
         pst = buildFullStatementSavePlano(pst, aluno, plano);
@@ -84,7 +84,7 @@ public class AlunoDAO extends UserDAO {
             String nome = res.getString("name");
             String email = res.getString("email");
             String senha = res.getString("password");
-            int idPlano = res.getInt("planId");
+            int idPlano = res.getInt("project_id");
             return new Aluno(nome, email, senha, id, idPlano);
         }
         return null;

@@ -9,13 +9,21 @@ public abstract class User {
     private String password;
     private int id;
 
+    private int project_id;
+
     public User(String name, String email, String password, int id) {
         this.name = name;
         this.email = email;
         this.password = password;
         this.id = id;
     }
-
+    public User(String name, String email, String password, int id, int project_id) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.id = id;
+        this.project_id = project_id;
+    }
     public User(int id, String email) {
         this.id = id;
         this.email = email;
@@ -61,6 +69,16 @@ public abstract class User {
     }
 
     public abstract Map<String, Integer> setMetrics();
+
+    public void setProjectId(int id){
+        this.project_id = id;
+    }
+
+    public int getProjectId(){
+        return this.project_id;
+    }
+
+
 
 
 }
