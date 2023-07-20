@@ -8,7 +8,7 @@ import java.sql.Connection;
 
 public class DBConfigPlano extends DatabaseConfiguration {
     public DBConfigPlano() {
-        super("root", "V3r3@dor3sMYSQL", "plano", "planit", "mysql");
+        super("ezequiel", "", "plano", "planit", "mysql");
     }
 
     @Override

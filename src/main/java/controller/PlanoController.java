@@ -21,7 +21,7 @@ public class PlanoController extends ProjectController {
         this.service = new PlanoService(config);
     }
 
-    public Plano SearchPlanoAluno(Plano project, PlanoService service, Aluno aluno) throws SQLException {
-        return service.search(project, aluno);
+    public Plano SearchPlanoAluno(Plano project, Aluno aluno) throws SQLException {
+        return this.service.search(project, aluno);
     }
 }

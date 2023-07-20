@@ -31,7 +31,7 @@ public class MenuPlano implements MenuInterface {
         switch (opcao) {
             case 1: {
                 Plano plano = new Plano();
-                plano = controller.SearchPlanoAluno(plano, service, aluno);
+                plano = controller.SearchPlanoAluno(plano, aluno);
                 System.out.println("Plano " + plano.getName());
                 System.out.println("Valor: " + plano.getValor());
                 System.out.println("Quantidade de Dias Permitidos: " + plano.getDiasPermitidos());
@@ -42,7 +42,7 @@ public class MenuPlano implements MenuInterface {
                 planos.add(new PlanoBasico());
                 planos.add(new PlanoPlus());
                 planos.add(new PlanoPremium());
-                Plano planoAtual = controller.SearchPlanoAluno(new Plano(), service, aluno);
+                Plano planoAtual = controller.SearchPlanoAluno(new Plano(), aluno);
                 System.out.println("Qual Plano Deseja Assinar? \n");
                 for (Plano plano :
                         planos) {

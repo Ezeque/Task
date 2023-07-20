@@ -16,16 +16,26 @@ public class PlanoService extends ProjectService {
 
     @Override
     public boolean validateCreation(Project project) {
+
+        if (project.getName().length() > 0 && project.getId() > 0) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean validateSearch(Project project) {
-        return true;
+        if (project.getName().length() > 0 && project.getId() > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean validateUpdate(Project project) {
+        if (project.getName().length() > 0 && project.getId() > 0) {
+            return true;
+        }
         return false;
     }
 
