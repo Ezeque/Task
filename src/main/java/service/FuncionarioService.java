@@ -19,7 +19,10 @@ public class FuncionarioService extends UserService {
 
     @Override
     public boolean validateCreation(User user) {
-        return true;
+        if(user.getEmail().contains("supportmaster")){
+            return true;
+        }
+        return false;
     }
 
     @Override
