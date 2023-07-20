@@ -12,22 +12,34 @@ public class TarefaService extends TaskService {
 
     @Override
     public boolean validateCreation(Task task) {
-        return true;
+        if (task.getName().length() > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean validateSearch(Task task) {
-        return true;
+        if (task.getName().length() > 0 && task.getId() > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean validateUpdate(Task task) {
-        return true;
+        if (task.getName().length() > 0 && task.getId() > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean validateDeletion(Task task) {
-        return true;
+        if (task.getName().length() > 0 && task.getId() > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override

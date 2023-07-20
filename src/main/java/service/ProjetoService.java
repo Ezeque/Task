@@ -15,17 +15,26 @@ public class ProjetoService extends ProjectService {
 
     @Override
     public boolean validateCreation(Project project) {
-        return true;
+        if (project.getName().length() > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean validateSearch(Project project) {
-        return true;
+        if (project.getName().length() > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean validateUpdate(Project project) {
-        return true;
+        if (project.getName().length() > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override

@@ -12,17 +12,27 @@ public class UsuarioService extends UserService {
 
     @Override
     public boolean validateCreation(User user) {
-        return true;
+
+        if (user.getName().length() > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean validateSearch(User user) {
-        return true;
+        if (user.getName().length() > 0 && user.getId() > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
     public boolean validateSearchByName(User user) {
-        return true;
+        if (user.getName().length() > 0) {
+            return true;
+        }
+        return false;
     }
 
     @Override
